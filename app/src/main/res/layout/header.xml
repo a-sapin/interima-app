@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/notification"
+            android:layout_width="59dp"
+            android:layout_height="62dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/login_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/notification_push" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="120dp"
+            android:layout_height="62dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="1dp"
+            android:text="@string/connection"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="16dp"
+            android:layout_toStartOf="@id/notification"
+            android:text="@string/hello"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="-13dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/search"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_search" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/filter_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filter"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filter_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

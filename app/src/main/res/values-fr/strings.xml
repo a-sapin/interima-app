@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Interima</string>
+    <string name="search">Rechercher des annonces...</string>
+    <string name="hello">Bonjour</string>
+    <string name="connection">Connexion</string>
+    <string name="filter">Filtres</string>
+</resources>

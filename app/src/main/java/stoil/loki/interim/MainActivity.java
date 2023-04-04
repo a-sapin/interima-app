@@ -8,9 +8,12 @@ import androidx.core.content.ContextCompat;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private ArrayList<Offer> offers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +29,8 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
+
+
+
     }
 }

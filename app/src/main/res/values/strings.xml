@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Interima</string>
+    <string name="search">Search a Job</string>
+    <string name="hello">Hello</string>
+    <string name="connection">Connection</string>
+    <string name="filter">Filters</string>
 </resources>

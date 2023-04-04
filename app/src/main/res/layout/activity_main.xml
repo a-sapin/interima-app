@@ -6,13 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/header" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="409dp"
+        android:layout_height="551dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="179dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
