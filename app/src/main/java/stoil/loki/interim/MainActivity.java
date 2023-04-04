@@ -7,13 +7,14 @@ import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-    private ArrayList<Offer> offers;
+    private ArrayList<Offer> offers = new ArrayList<Offer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
                     MY_PERMISSIONS_REQUEST_LOCATION);
         }
 
+        for(int i = 0; i < 10; i++) {
+            offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
+        }
 
+        ListView listView = findViewById(R.id.offersList);
+        OfferAdapter adapter = new OfferAdapter(this, offers);
+        listView.setAdapter(adapter);
 
     }
 }

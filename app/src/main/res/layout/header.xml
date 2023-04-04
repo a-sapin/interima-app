@@ -1,5 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/top_layout"
     android:layout_width="match_parent"
@@ -20,7 +20,8 @@
             android:layout_marginEnd="16dp"
             android:layout_toStartOf="@+id/login_button"
             android:scaleType="fitCenter"
-            android:src="@drawable/notification_push" />
+            android:src="@drawable/notification_push"
+            tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/login_button"
@@ -31,7 +32,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginEnd="1dp"
             android:text="@string/connection"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/user_name"
@@ -40,7 +41,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="60dp"
-            android:layout_marginRight="16dp"
             android:layout_toStartOf="@id/notification"
             android:text="@string/hello"
             android:textSize="18sp"
@@ -58,7 +58,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="66dp"
             android:layout_marginTop="-13dp"
             android:orientation="vertical"
             android:padding="16dp">
@@ -67,7 +67,9 @@
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/search"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@+id/search"
+                android:autofillHints=""
                 android:hint="@string/search"
                 android:inputType="text"
                 android:minHeight="48dp"
@@ -79,11 +81,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginEnd="6dp"
-                android:layout_marginRight="6dp"
                 android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_search" />
+                android:src="@android:drawable/ic_menu_search"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -91,13 +92,7 @@
             android:id="@+id/filter_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/filter"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/filter_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:text="@string/filter" />
 
     </LinearLayout>
 
