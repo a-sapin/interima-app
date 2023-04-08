@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.geolocalisation);
         setContentView(R.layout.activity_main);
 
         //Requête de la permission COARSE LOCATION
