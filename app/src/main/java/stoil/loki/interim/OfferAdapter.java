@@ -20,7 +20,7 @@ public class OfferAdapter extends ArrayAdapter<Offer> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.annonce_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.offer_item, parent, false);
         }
 
         Offer annonce = annonces.get(position);
