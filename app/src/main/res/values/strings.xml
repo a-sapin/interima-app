@@ -4,4 +4,6 @@
     <string name="hello">Hello</string>
     <string name="connection">Connection</string>
     <string name="filter">Filters</string>
+    <string name="geo_dialog">Pour que notre application fonctionne optimalement, nous avons besoin de vos données de géolocalisation. Celles-ci ne seront pas partagées à des tiers et seront uniquement utilisées pour vous proposer des offres et des annonces pertinentes pour vous, par ordre de proximité.</string>
+    <string name="geo_subdialog">Vous pourrez modifier cette option à tout moment depuis les paramètres.</string>
 </resources>
