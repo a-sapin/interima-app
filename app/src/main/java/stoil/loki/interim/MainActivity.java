@@ -5,14 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+class ViewHolder {
+    TextView title;
+    TextView company;
+    Button applyButton;
+}
+
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
@@ -40,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Permission granted already", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     @Override
@@ -62,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.offersList);
         OfferAdapter adapter = new OfferAdapter(this, offers);
+        Log.d("MainActivity", "List item created");
         listView.setAdapter(adapter);
 
     }
