@@ -5,116 +5,146 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="411dp"
-        android:layout_height="62dp"
-        android:background="@color/teal_700"
-        android:text="Notification"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="330dp"
-        android:layout_height="46dp"
-        android:text="Titre notification"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/langues" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="225dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="60dp"
-        android:text="Envoyée le :"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="225dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="Par : "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="142dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/gens"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="274dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="48dp"
-        android:text="Contenu"
-        android:textAlignment="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="377dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="24dp"
-        android:text="Contenu du message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:text="Supprimer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        app:layout_constraintVertical_bias="0.511" />
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Répondre"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button13"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="411dp"
+                android:layout_height="62dp"
+                android:background="@color/teal_700"
+                android:text="Notification"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="330dp"
+                android:layout_height="46dp"
+                android:text="Titre notification"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:srcCompat="@drawable/langues" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="225dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="60dp"
+                android:text="Envoyée le :"
+                app:layout_constraintEnd_toEndOf="@+id/textView5"
+                app:layout_constraintHorizontal_bias="0.937"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="225dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Par : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="142dp"
+                android:layout_height="135dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:srcCompat="@drawable/gens"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="274dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="48dp"
+                android:text="Contenu"
+                android:textAlignment="center"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <ScrollView
+                android:id="@+id/scrollViewC"
+                android:layout_width="384dp"
+                android:layout_height="342dp"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Contenu du message"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:text="Supprimer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollViewC"
+                app:layout_constraintVertical_bias="0.511" />
+
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Répondre"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button13"
+                app:layout_constraintTop_toBottomOf="@+id/scrollViewC" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
