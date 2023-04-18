@@ -70,9 +70,23 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                 } else {
                     holder.bookmark.setImageDrawable(marque);
                     // ajouter le bookmark dans la bdd
-                    
+
                 }
 
+            }
+        });
+
+        holder.translation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // demander la langue pour la traduction etc
+            }
+        });
+
+        holder.dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // autres options
             }
         });
 
