@@ -25,6 +25,10 @@
         <activity android:name=".FullOffer"/>
         <activity android:name=".SignIn"/>
         <activity android:name=".Notifications"/>
+        <activity android:name=".SignUpCo"/>
+        <activity android:name=".SignUp"/>
+        <activity android:name=".WhoAreYou"/>
+        <activity android:name=".MdP"/>
     </application>
 
 </manifest>

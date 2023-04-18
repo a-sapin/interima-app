@@ -7,28 +7,30 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignIn extends AppCompatActivity {
+public class SignUpCo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in_uti);
+        setContentView(R.layout.sign_up_co);
 
-        Button sign_in = findViewById(R.id.button9);
-        Button sign_up = findViewById(R.id.button15);
+        Button sign_in = findViewById(R.id.button11);
+        Button next = findViewById(R.id.button10);
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // faire la verification et ensuite vers le changement sur toutes les pages ou la connexion est necessaire
-
+                Intent intent = new Intent(view.getContext(), SignIn.class);
+                view.getContext().startActivity(intent);
             }
         });
 
-        sign_up.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WhoAreYou.class);
+                Intent intent = new Intent(view.getContext(), MdP.class);
+                // passer les donnees pour l inscription
+
                 view.getContext().startActivity(intent);
             }
         });
