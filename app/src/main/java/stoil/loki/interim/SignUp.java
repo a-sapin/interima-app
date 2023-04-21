@@ -14,8 +14,8 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        Button next = findViewById(R.id.button10);
         Button connect = findViewById(R.id.button11);
+        Button next = findViewById(R.id.button10);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

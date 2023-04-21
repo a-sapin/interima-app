@@ -28,7 +28,7 @@ public class SignUpCo extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MdP.class);
+                Intent intent = new Intent(view.getContext(), GridAbonnement.class);
                 // passer les donnees pour l inscription
 
                 view.getContext().startActivity(intent);

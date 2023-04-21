@@ -29,6 +29,8 @@
         <activity android:name=".SignUp"/>
         <activity android:name=".WhoAreYou"/>
         <activity android:name=".MdP"/>
+        <activity android:name=".GridAbonnement"/>
+        <activity android:name=".GridAbView"/>
     </application>
 
 </manifest>

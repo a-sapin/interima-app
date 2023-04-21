@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GridAbView">
+
+    <ImageView
+        android:id="@+id/selectedImage"
+        android:layout_width="267dp"
+        android:layout_height="276dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="44dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/look_for_a_job"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <ScrollView
+        android:id="@+id/scrollViewd"
+        android:layout_width="411dp"
+        android:layout_height="227dp"
+        android:layout_marginTop="32dp"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/selectedImage"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="description de l'abonnement"
+            android:textSize="16sp" />
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Sélectionner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewd"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="398dp"
+        android:layout_height="43dp"
+        android:text="Titre"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/bruno_ace_regular"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
