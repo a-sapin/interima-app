@@ -2,7 +2,10 @@ package stoil.loki.interim;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +26,15 @@ public class FullOffer extends AppCompatActivity {
 
         TextView description = findViewById(R.id.textView8);
         description.setText(text_example);
+
+        Button apply = findViewById(R.id.button);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ChooseApply.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
 
     }

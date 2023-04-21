@@ -31,6 +31,8 @@
         <activity android:name=".MdP"/>
         <activity android:name=".GridAbonnement"/>
         <activity android:name=".GridAbView"/>
+        <activity android:name=".Apply"/>
+        <activity android:name=".ChooseApply"/>
     </application>
 
 </manifest>
