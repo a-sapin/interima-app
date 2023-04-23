@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -41,60 +43,56 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.geolocalisation);
         setContentView(R.layout.activity_main);
 
-        //Requête de la permission COARSE LOCATION
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED)
-        {
-            //Toast.makeText(this, "Permission not granted yet", Toast.LENGTH_SHORT).show();
-            // Permission is not granted
-            // Request the permission
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-
-
-        }
-        else //Permission granted
-        {
-            Toast.makeText(this, "Permission granted already", Toast.LENGTH_SHORT).show();
-        }
-
-        for (int i = 0; i < 10; i++) {
-            offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
-        }
-
-        RecyclerView recyclerView = findViewById(R.id.offersList);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        OfferAdapter adapter = new OfferAdapter(offers);
-        recyclerView.setAdapter(adapter);
-
-        // sign in button
-        Button sign_in = findViewById(R.id.login_button);
-        sign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SignIn.class);
-                view.getContext().startActivity(intent);
+        File file = new File(getFilesDir(), "first_time_launch.txt");
+        if (!file.exists()) {
+            // This is the first launch
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        });
-
-        // notifications button
-
-        ImageButton notifications = findViewById(R.id.notification);
-        notifications.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Notifications.class);
-                view.getContext().startActivity(intent);
+            Intent intent = new Intent(this, Geolocalisation.class);
+            startActivity(intent);
+            finish(); //Kill the activity to avoid force backout
+        }
+        else //This isn't the first launch
+        {
+            file.delete();
+            for (int i = 0; i < 10; i++) {
+                offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
             }
-        });
 
-        // search bar
+            RecyclerView recyclerView = findViewById(R.id.offersList);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            OfferAdapter adapter = new OfferAdapter(offers);
+            recyclerView.setAdapter(adapter);
 
+            // sign in button
+            Button sign_in = findViewById(R.id.login_button);
+            sign_in.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), SignIn.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
+
+            // notifications button
+
+            ImageButton notifications = findViewById(R.id.notification);
+            notifications.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), Notifications.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
+
+            // search bar
+        }
     }
 
     @Override
