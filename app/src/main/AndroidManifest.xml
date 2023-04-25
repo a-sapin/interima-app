@@ -22,6 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Geolocalisation"/>
+        <activity android:name=".FullOffer"/>
+        <activity android:name=".SignIn"/>
+        <activity android:name=".Notifications"/>
+        <activity android:name=".SignUpCo"/>
+        <activity android:name=".SignUp"/>
+        <activity android:name=".WhoAreYou"/>
+        <activity android:name=".MdP"/>
+        <activity android:name=".GridAbonnement"/>
+        <activity android:name=".GridAbView"/>
+        <activity android:name=".Apply"/>
+        <activity android:name=".ChooseApply"/>
     </application>
 
 </manifest>

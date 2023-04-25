@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/patternOffer"
+    android:id="@+id/patternNotification"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linear1"
+        tools:ignore="MissingConstraints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            tools:ignore="MissingConstraints"
             android:layout_width="293dp"
             android:layout_height="132dp"
             android:orientation="vertical"
-            android:padding="16dp"
-            tools:ignore="MissingConstraints">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="261dp"
                 android:layout_height="wrap_content"
-                android:text="Titre annonce"
+                android:text="Titre notification"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -35,7 +36,7 @@
                 android:layout_width="261dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="source: "
+                android:text="aperçu notification ..."
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -47,24 +48,8 @@
                     android:id="@+id/apply_button"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
-                    android:text="Candidater"
+                    android:text="Répondre"
                     android:textSize="10dp" />
-
-                <ImageButton
-                    android:id="@+id/bookmark"
-                    android:layout_width="55dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="3dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/marque_page_vide" />
-
-                <ImageButton
-                    android:id="@+id/language_button"
-                    android:layout_width="54dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="3dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/langues" />
 
                 <ImageButton
                     android:id="@+id/dot"

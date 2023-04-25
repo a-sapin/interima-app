@@ -1,6 +1,8 @@
 package stoil.loki.interim;
 
-public class Offer {
+import java.io.Serializable;
+
+public class Offer implements Serializable {
     private int id;
     private String title;
     private String url;
@@ -9,6 +11,12 @@ public class Offer {
         this.id = id;
         this.title = title;
         this.url = url;
+    }
+
+    public Offer() {
+        this.id = 0;
+        this.title = "titre de l'annonce";
+        this.url = "url de l'annonce";
     }
 
     public int getId() {
