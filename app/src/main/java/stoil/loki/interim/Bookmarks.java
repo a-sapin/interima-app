@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Notifications extends AppCompatActivity {
+public class Bookmarks extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notifications);
+        setContentView(R.layout.bookmarks);
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,7 +54,5 @@ public class Notifications extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }

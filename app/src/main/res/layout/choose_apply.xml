@@ -11,6 +11,7 @@
         android:layout_height="62dp"
         android:background="@color/teal_700"
         android:text="Candidater"
+        android:gravity="center"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -72,5 +73,18 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <include
+        android:id="@+id/menu"
+        layout="@layout/footer_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

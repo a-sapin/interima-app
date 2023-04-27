@@ -4,14 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="@color/teal_700"
+        android:gravity="center"
+        android:text="Annonce complète pour :"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:nestedScrollingEnabled="true">
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <CheckBox
                 android:id="@+id/checkBox4"
@@ -44,19 +63,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="411dp"
-                android:layout_height="62dp"
-                android:background="@color/teal_700"
-                android:text="Annonce complète pour :"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="330dp"
                 android:layout_height="46dp"
@@ -64,23 +70,25 @@
                 android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/imageButton"
-                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintHorizontal_bias="0.782"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="51dp"
                 android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/langues" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="359dp"
                 android:layout_height="35dp"
+                android:layout_marginTop="15dp"
                 android:text="source :"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +101,7 @@
                 android:layout_width="225dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:text="Postée le :"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +112,7 @@
                 android:layout_width="225dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="5dp"
                 android:text="Par : "
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,12 +147,13 @@
                 android:id="@+id/textView7"
                 android:layout_width="274dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:text="Description"
+                android:textAlignment="center"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -152,18 +161,19 @@
                 android:id="@+id/scrollViewd"
                 android:layout_width="392dp"
                 android:layout_height="110dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp"
                 android:nestedScrollingEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="description de l'annonce" />
+                    android:text="description de l'annonce"
+                    android:textSize="16sp" />
 
             </ScrollView>
 
@@ -172,6 +182,7 @@
                 android:layout_width="252dp"
                 android:layout_height="35dp"
                 android:text="Période : "
+                android:layout_marginTop="15dp"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.081"
@@ -183,6 +194,7 @@
                 android:layout_width="252dp"
                 android:layout_height="35dp"
                 android:text="Rénumération : "
+                android:layout_marginTop="5dp"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.081"
@@ -193,21 +205,21 @@
                 android:id="@+id/button2"
                 android:layout_width="141dp"
                 android:layout_height="48dp"
-                app:srcCompat="@drawable/marque_page_vide"
-                android:scaleType="fitCenter"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
+                android:scaleType="fitCenter"
                 app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:srcCompat="@drawable/marque_page_vide" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="131dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:text="Candidater"
-                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -216,12 +228,12 @@
                 android:layout_width="112dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/partager"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.272"
                 app:layout_constraintStart_toEndOf="@+id/button2"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:srcCompat="@drawable/partager" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -260,5 +272,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include
+        android:id="@+id/menu"
+        layout="@layout/footer_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
