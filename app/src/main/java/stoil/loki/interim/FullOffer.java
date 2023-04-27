@@ -1,13 +1,22 @@
 package stoil.loki.interim;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class FullOffer extends AppCompatActivity {
 
@@ -36,6 +45,55 @@ public class FullOffer extends AppCompatActivity {
             }
         });
 
+        ImageButton bookmark = findViewById(R.id.button2);
+        bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // ajout/retirer bookmark de la bdd + changement de l image du bouton
+
+                Drawable imageDrawable = bookmark.getDrawable();
+
+                Resources resources = getResources();
+                Drawable marque = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
+                Drawable marque_vide = ResourcesCompat.getDrawable(resources, R.drawable.marque_page_vide, null);
+
+                if(imageDrawable.getConstantState().equals(marque.getConstantState())) {
+                    bookmark.setImageDrawable(marque_vide);
+                    // retirer le bookmark de la bdd
+
+                } else {
+                    bookmark.setImageDrawable(marque);
+                    // ajouter le bookmark dans la bdd
+
+                }
+            }
+        });
+
+        ImageButton share = findViewById(R.id.button3);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
+            @Override
+            public void onClick(View view) {
+                // Initializing the popup menu and giving the reference as current context
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), share);
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.setForceShowIcon(true);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+                        Toast.makeText(getApplicationContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+            }
+        });
 
     }
+
 }

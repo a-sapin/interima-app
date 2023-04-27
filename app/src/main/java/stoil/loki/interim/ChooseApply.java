@@ -23,7 +23,7 @@ public class ChooseApply extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // changer la classe a lancer pour le choix de la candidature a donne
-                Intent intent = new Intent(view.getContext(), SignIn.class);
+                Intent intent = new Intent(view.getContext(), ApplyReuseDisplay.class);
                 view.getContext().startActivity(intent);
             }
         });
