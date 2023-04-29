@@ -70,8 +70,13 @@ public class ChooseApply extends AppCompatActivity {
                         // si connecter donner la page du profil
                         // sinon on demande la co ou inscription
 
-                        Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                        startActivity(intentp);
+                        if(true) {
+                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                            startActivity(intentp);
+                        } else {
+                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
+                            startActivity(intentp);
+                        }
                         return true;
 
                     default:

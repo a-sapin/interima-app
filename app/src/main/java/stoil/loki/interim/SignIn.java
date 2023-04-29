@@ -68,10 +68,10 @@ public class SignIn extends AppCompatActivity {
                         if(true) {
                             Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                             startActivity(intentp);
+                        } else {
+                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
+                            startActivity(intentp);
                         }
-
-                        Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                        startActivity(intentp);
                         return true;
 
                     default:
