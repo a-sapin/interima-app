@@ -19,13 +19,14 @@ import java.util.ArrayList;
 
 public class ProfilDisplay extends AppCompatActivity {
 
-    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+    RecyclerView.LayoutManager layoutManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connected_see_profil);
 
         ArrayList<ItemProfil> profils = new ArrayList<>();
+        layoutManager = new LinearLayoutManager(this);
 
         int id = 0;
         Resources resources = getApplicationContext().getResources();
@@ -65,7 +66,7 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.support, null);
         profils.add(new ItemProfil(id, "Centre d'aide", ic));
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
+        ic = ResourcesCompat.getDrawable(resources, R.drawable.avis, null);
         profils.add(new ItemProfil(id, "Avis", ic));
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
