@@ -55,6 +55,12 @@ public class Notifications extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.notifs).setChecked(true);
     }
 }

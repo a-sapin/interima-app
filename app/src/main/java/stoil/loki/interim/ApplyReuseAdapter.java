@@ -1,5 +1,7 @@
 package stoil.loki.interim;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +38,8 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
         holder.select_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), FullOffer.class);
-                // selectionner l annonce et envoyé la candidature
+                Intent intent = new Intent(view.getContext(), Apply.class);
+                // recuperer les donnees de la candidature et preremplir une candidature
                 view.getContext().startActivity(intent);
             }
         });
@@ -46,6 +48,9 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
             @Override
             public void onClick(View view) {
                 // voir la candidature
+                Intent intent = new Intent(view.getContext(), ApplyReuse.class);
+                // passer les données pour les afficher dans une candidature
+                view.getContext().startActivity(intent);
             }
         });
 

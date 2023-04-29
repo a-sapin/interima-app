@@ -65,6 +65,10 @@ public class SignIn extends AppCompatActivity {
                     case R.id.profil:
                         // si connecter donner la page du profil
                         // sinon on demande la co ou inscription
+                        if(true) {
+                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                            startActivity(intentp);
+                        }
 
                         Intent intentp = new Intent(getApplicationContext(), SignIn.class);
                         startActivity(intentp);
@@ -75,6 +79,12 @@ public class SignIn extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
     }
 }

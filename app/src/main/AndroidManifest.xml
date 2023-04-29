@@ -36,6 +36,8 @@
         <activity android:name=".ChooseApply"/>
         <activity android:name=".ApplyReuseDisplay"/>
         <activity android:name=".Bookmarks"/>
+        <activity android:name=".ApplyReuse"/>
+        <activity android:name=".ProfilDisplay"/>
     </application>
 
 </manifest>

@@ -103,9 +103,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         case R.id.profil:
                             // si connecter donner la page du profil
                             // sinon on demande la co ou inscription
+                            if(true) {
+                                Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                                startActivity(intentp);
+                            } else {
+                                Intent intentp = new Intent(MainActivity.this, SignIn.class);
+                                startActivity(intentp);
+                            }
 
-                            Intent intentp = new Intent(MainActivity.this, SignIn.class);
-                            startActivity(intentp);
                             return true;
 
                         default:
@@ -132,5 +137,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             // Handle other permissions here if needed
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.home).setChecked(true);
     }
 }

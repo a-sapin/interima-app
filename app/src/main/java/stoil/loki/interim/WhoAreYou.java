@@ -59,6 +59,7 @@ public class WhoAreYou extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Gérez la redirection ici
+
                 switch (item.getItemId()) {
                     case R.id.home:
                         // Redirigez vers l'écran d'accueil
