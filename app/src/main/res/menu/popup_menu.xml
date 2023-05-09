@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/share_facebook"
+        android:title="Facebook"
+        android:icon="@drawable/facebook"/>
+    <item
+        android:id="@+id/share_twitter"
+        android:title="Twitter"
+        android:icon="@drawable/twitter"/>
+    <item
+        android:id="@+id/share_sms"
+        android:title="SMS"
+        android:icon="@drawable/sms"/>
+    <!-- Ajoutez d'autres options de partage ici -->
+</menu>

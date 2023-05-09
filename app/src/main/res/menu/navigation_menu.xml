@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/loger"
+        android:title="Accueil" />
+
+    <item
+        android:id="@+id/favoris"
+        android:icon="@drawable/recherche"
+        android:title="Recherche" />
+
+    <item
+        android:id="@+id/recherche"
+        android:icon="@drawable/marque_page"
+        android:title="Favoris" />
+
+    <item
+        android:id="@+id/notifs"
+        android:icon="@drawable/notification_push"
+        android:title="Notifs" />
+
+    <item
+        android:id="@+id/profil"
+        android:icon="@drawable/profil"
+        android:title="Profil" />
+
+</menu>

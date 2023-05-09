@@ -1,6 +1,8 @@
 package stoil.loki.interim;
 
 import android.Manifest;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -13,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,6 +30,8 @@ import java.util.ArrayList;
 
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 class ViewHolder {
     TextView title;
@@ -70,24 +75,47 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             OfferAdapter adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);
 
-            // sign in button
-            Button sign_in = findViewById(R.id.login_button);
-            sign_in.setOnClickListener(new View.OnClickListener() {
+            BottomNavigationView menu = findViewById(R.id.navigation);
+            menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), SignIn.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    // Gérez la redirection ici
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            // Redirigez vers l'écran d'accueil
 
-            // notifications button
+                            Intent intenth = new Intent(MainActivity.this, MainActivity.class);
+                            startActivity(intenth);
+                            return true;
 
-            ImageButton notifications = findViewById(R.id.notification);
-            notifications.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), Notifications.class);
-                    view.getContext().startActivity(intent);
+                        case R.id.favoris:
+
+                            return true;
+                        case R.id.recherche:
+
+                            return true;
+                        case R.id.notifs:
+
+                            Intent intentn = new Intent(MainActivity.this, Notifications.class);
+                            startActivity(intentn);
+                            return true;
+
+                        case R.id.profil:
+                            // si connecter donner la page du profil
+                            // sinon on demande la co ou inscription
+                            if(true) {
+                                Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                                startActivity(intentp);
+                            } else {
+                                Intent intentp = new Intent(MainActivity.this, SignIn.class);
+                                startActivity(intentp);
+                            }
+
+                            return true;
+
+                        default:
+                            return false;
+                    }
                 }
             });
 
@@ -109,5 +137,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             // Handle other permissions here if needed
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.home).setChecked(true);
     }
 }

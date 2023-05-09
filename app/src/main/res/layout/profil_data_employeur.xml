@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="@color/teal_700"
+        android:gravity="center"
+        android:text="Profil Employeur"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Nom Entreprise : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Nom d'un service/département : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Nom d'un sous service/ sous département : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Siret : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/nomView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:ems="10"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView38"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nomServiceView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84dp"
+                android:ems="10"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView39"
+                app:layout_constraintTop_toBottomOf="@+id/nomView" />
+
+            <TextView
+                android:id="@+id/nomSousServiceView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="92dp"
+                android:ems="10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/nomServiceView" />
+
+            <TextView
+                android:id="@+id/siretView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/nomSousServiceView" />
+
+            <Button
+                android:id="@+id/modifProfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="Modifier Profil"
+                android:layout_marginTop="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+            <Button
+                android:id="@+id/modifMdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="Modifier MdP"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.592"
+                app:layout_constraintStart_toEndOf="@+id/modifProfil"
+                app:layout_constraintTop_toBottomOf="@+id/paiement" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Nom 1 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/name1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="52dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView50"
+                app:layout_constraintTop_toBottomOf="@+id/siretView" />
+
+            <TextView
+                android:id="@+id/email1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Email 1 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <TextView
+                android:id="@+id/email_1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="48dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.276"
+                app:layout_constraintStart_toEndOf="@+id/email1"
+                app:layout_constraintTop_toBottomOf="@+id/name1" />
+
+            <TextView
+                android:id="@+id/textView54"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Téléphone 1 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email1" />
+
+            <TextView
+                android:id="@+id/phone1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="52dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.276"
+                app:layout_constraintStart_toEndOf="@+id/textView54"
+                app:layout_constraintTop_toBottomOf="@+id/email_1" />
+
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                android:text="Nom 2 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                android:text="Email 2 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                android:text="Téléphone 2 : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Adresse : "
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Liens : "
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Abonnement : "
+                android:layout_marginTop="170dp"
+                android:layout_marginStart="28dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="28dp"
+                android:text="Type de paiement : "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+            <TextView
+                android:id="@+id/name2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView51"
+                app:layout_constraintTop_toBottomOf="@+id/phone1" />
+
+            <TextView
+                android:id="@+id/email2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView53"
+                app:layout_constraintTop_toBottomOf="@+id/name2" />
+
+            <TextView
+                android:id="@+id/phone2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/email2" />
+
+            <TextView
+                android:id="@+id/adress"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView56"
+                app:layout_constraintTop_toBottomOf="@+id/phone2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/links"
+                android:layout_width="260dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="56dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.653"
+                app:layout_constraintStart_toEndOf="@+id/textView57"
+                app:layout_constraintTop_toBottomOf="@+id/adress" />
+
+            <TextView
+                android:id="@+id/abo"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView58"
+                app:layout_constraintTop_toBottomOf="@+id/links" />
+
+            <TextView
+                android:id="@+id/paiement"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.405"
+                app:layout_constraintStart_toEndOf="@+id/textView59"
+                app:layout_constraintTop_toBottomOf="@+id/abo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/menu"
+        layout="@layout/footer_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
