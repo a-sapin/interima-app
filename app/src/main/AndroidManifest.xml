@@ -38,6 +38,8 @@
         <activity android:name=".Bookmarks"/>
         <activity android:name=".ApplyReuse"/>
         <activity android:name=".ProfilDisplay"/>
+        <activity android:name=".ProfileModifUti"/>
+        <activity android:name=".ProfileModifAg"/>
     </application>
 
 </manifest>

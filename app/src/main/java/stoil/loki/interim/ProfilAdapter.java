@@ -64,6 +64,7 @@ public class ProfilAdapter extends RecyclerView.Adapter<ProfilAdapter.ViewHolder
                 public void onClick(View v) {
                     // Ouvrir une nouvelle activité ou fragment pour afficher plus d'informations
                     Context context = v.getContext();
+
                     Intent intent = new Intent(context, MainActivity.class);
                     intent.putExtra("item_id", itemProfil.get(getAdapterPosition()).getId());
                     context.startActivity(intent);

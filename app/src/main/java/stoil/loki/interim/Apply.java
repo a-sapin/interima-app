@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,7 @@ public class Apply extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apply);
 
-        Button apply = findViewById(R.id.button18);
+        Button apply = findViewById(R.id.modifProfil);
 
         // verifier que tous les champs sont remplis avant de transmettre le apply
         // mettre un Toast avec le fait que tous les champs ne sont pas remplis par exemple

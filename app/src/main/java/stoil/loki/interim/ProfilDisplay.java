@@ -45,11 +45,17 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
         profils.add(new ItemProfil(id, "Mes candidatures", ic));
 
+        ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
+        profils.add(new ItemProfil(id, "Etat de mes candidatures", ic));
+
         ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
         profils.add(new ItemProfil(id, "Mes lettres de motivation", ic));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.cv, null);
         profils.add(new ItemProfil(id, "Mes CV", ic));
+
+        ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
+        profils.add(new ItemProfil(id, "Aide à la candidature", ic));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
         profils.add(new ItemProfil(id, "Forum", ic));
@@ -119,6 +125,12 @@ public class ProfilDisplay extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
     }
 }
