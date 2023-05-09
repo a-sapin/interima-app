@@ -31,7 +31,10 @@ public class Bookmarks extends AppCompatActivity {
 
                     case R.id.favoris:
 
+                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                        startActivity(intentf);
                         return true;
+
                     case R.id.recherche:
 
                         return true;
@@ -65,7 +68,7 @@ public class Bookmarks extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
-        menu.getMenu().findItem(R.id.bookmark).setChecked(true);
+        menu.getMenu().findItem(R.id.favoris).setChecked(true);
     }
 
 }

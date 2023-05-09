@@ -7,12 +7,12 @@
         android:title="Accueil" />
 
     <item
-        android:id="@+id/favoris"
+        android:id="@+id/recherche"
         android:icon="@drawable/recherche"
         android:title="Recherche" />
 
     <item
-        android:id="@+id/recherche"
+        android:id="@+id/favoris"
         android:icon="@drawable/marque_page"
         android:title="Favoris" />
 

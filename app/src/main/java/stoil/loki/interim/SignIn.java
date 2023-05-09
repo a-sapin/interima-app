@@ -51,7 +51,8 @@ public class SignIn extends AppCompatActivity {
                         return true;
 
                     case R.id.favoris:
-
+                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                        startActivity(intentf);
                         return true;
                     case R.id.recherche:
 
