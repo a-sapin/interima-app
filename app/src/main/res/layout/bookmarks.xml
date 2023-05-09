@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="411sp"
+        android:layout_width="match_parent"
         android:layout_height="62sp"
         android:background="@color/teal_700"
         android:text="Favoris"
