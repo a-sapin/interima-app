@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,7 +25,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -50,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        File file = new File(getFilesDir(), "first_time_launch.txt");
+        File file = new File(getFilesDir().toString()+"/first_time_launch.txt");
+        System.out.println(getFilesDir());
         if (!file.exists()) {
             // This is the first launch
             try {
-                file.createNewFile();
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(this.getBaseContext().openFileOutput("first_time_launch.txt", Context.MODE_PRIVATE));
+                outputStreamWriter.write("notified");
+                outputStreamWriter.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -64,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         }
         else //This isn't the first launch
         {
-            file.delete();
             for (int i = 0; i < 10; i++) {
                 offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
             }
