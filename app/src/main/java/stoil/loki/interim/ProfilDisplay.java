@@ -31,16 +31,13 @@ public class ProfilDisplay extends AppCompatActivity {
         int id = 0;
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
-        profils.add(new ItemProfil(id, "Profil", ic, ProfileModifAg.class));
+        profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
-        profils.add(new ItemProfil(id, "Favoris", ic, Bookmarks.class));
+        profils.add(new ItemProfil(id, "Mes favoris", ic, Bookmarks.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
         profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.notification_push, null);
-        profils.add(new ItemProfil(id, "Notifications", ic, Notifications.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
         profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyReuseDisplay.class));
@@ -52,7 +49,7 @@ public class ProfilDisplay extends AppCompatActivity {
         profils.add(new ItemProfil(id, "Mes CV", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
-        profils.add(new ItemProfil(id, "Aide à la candidature", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
         profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));

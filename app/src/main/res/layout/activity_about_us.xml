@@ -17,9 +17,6 @@
         android:text="A propos de nous : l'équipe PSOME"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
 </LinearLayout>
