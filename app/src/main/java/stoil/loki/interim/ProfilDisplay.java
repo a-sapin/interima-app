@@ -31,7 +31,7 @@ public class ProfilDisplay extends AppCompatActivity {
         int id = 0;
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
-        profils.add(new ItemProfil(id, "Profil", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Profil", ic, ProfileModifAg.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
         profils.add(new ItemProfil(id, "Favoris", ic, Bookmarks.class));
@@ -43,10 +43,7 @@ public class ProfilDisplay extends AppCompatActivity {
         profils.add(new ItemProfil(id, "Notifications", ic, Notifications.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Mes candidatures", ic, ChooseApply.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Etat de mes candidatures", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyReuseDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
         profils.add(new ItemProfil(id, "Mes lettres de motivation", ic, MainActivity.class));
@@ -57,23 +54,8 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
         profils.add(new ItemProfil(id, "Aide à la candidature", ic, MainActivity.class));
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
-        profils.add(new ItemProfil(id, "Forum", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.settings, null);
-        profils.add(new ItemProfil(id, "Paramètres", ic, MainActivity.class));
-
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
-        profils.add(new ItemProfil(id, "A propos de nous", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.document_legal, null);
-        profils.add(new ItemProfil(id, "Informations légales", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.support, null);
-        profils.add(new ItemProfil(id, "Centre d'aide", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.avis, null);
-        profils.add(new ItemProfil(id, "Avis", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
         list_profil.setLayoutManager(layoutManager);
