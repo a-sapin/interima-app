@@ -31,49 +31,49 @@ public class ProfilDisplay extends AppCompatActivity {
         int id = 0;
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
-        profils.add(new ItemProfil(id, "Profil", ic));
+        profils.add(new ItemProfil(id, "Profil", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
-        profils.add(new ItemProfil(id, "Favoris", ic));
+        profils.add(new ItemProfil(id, "Favoris", ic, Bookmarks.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
-        profils.add(new ItemProfil(id, "Mes recherches", ic));
+        profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.notification_push, null);
-        profils.add(new ItemProfil(id, "Notifications", ic));
+        profils.add(new ItemProfil(id, "Notifications", ic, Notifications.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Mes candidatures", ic));
+        profils.add(new ItemProfil(id, "Mes candidatures", ic, ChooseApply.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Etat de mes candidatures", ic));
+        profils.add(new ItemProfil(id, "Etat de mes candidatures", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
-        profils.add(new ItemProfil(id, "Mes lettres de motivation", ic));
+        profils.add(new ItemProfil(id, "Mes lettres de motivation", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.cv, null);
-        profils.add(new ItemProfil(id, "Mes CV", ic));
+        profils.add(new ItemProfil(id, "Mes CV", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
-        profils.add(new ItemProfil(id, "Aide à la candidature", ic));
+        profils.add(new ItemProfil(id, "Aide à la candidature", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
-        profils.add(new ItemProfil(id, "Forum", ic));
+        profils.add(new ItemProfil(id, "Forum", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.settings, null);
-        profils.add(new ItemProfil(id, "Paramètres", ic));
+        profils.add(new ItemProfil(id, "Paramètres", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
-        profils.add(new ItemProfil(id, "A propos de nous", ic));
+        profils.add(new ItemProfil(id, "A propos de nous", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.document_legal, null);
-        profils.add(new ItemProfil(id, "Informations légales", ic));
+        profils.add(new ItemProfil(id, "Informations légales", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.support, null);
-        profils.add(new ItemProfil(id, "Centre d'aide", ic));
+        profils.add(new ItemProfil(id, "Centre d'aide", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.avis, null);
-        profils.add(new ItemProfil(id, "Avis", ic));
+        profils.add(new ItemProfil(id, "Avis", ic, MainActivity.class));
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
         list_profil.setLayoutManager(layoutManager);
@@ -113,8 +113,9 @@ public class ProfilDisplay extends AppCompatActivity {
                         // sinon on demande la co ou inscription
 
                         if(true) {
-                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                            startActivity(intentp);
+                            // On est déjà dans ProfilDisplay
+                            //Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                            //startActivity(intentp);
                         } else {
                             Intent intentp = new Intent(getApplicationContext(), SignIn.class);
                             startActivity(intentp);

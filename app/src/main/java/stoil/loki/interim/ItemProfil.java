@@ -13,11 +13,13 @@ public class ItemProfil implements Serializable {
     private String title;
 
     private Drawable icon;
+    private Class intent;
 
-    public ItemProfil(int id, String title, Drawable icon) {
+    public ItemProfil(int id, String title, Drawable icon, Class intent) {
         this.id = id;
         this.title = title;
         this.icon = icon;
+        this.intent = intent;
     }
 
     public ItemProfil(Context context) {
@@ -26,6 +28,7 @@ public class ItemProfil implements Serializable {
         Resources resources = context.getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.ic_launcher_foreground, null);
         this.icon = ic;
+        this.intent = MainActivity.class;
     }
 
     public int getId() {
@@ -39,5 +42,7 @@ public class ItemProfil implements Serializable {
     public Drawable getIcon(){
         return icon;
     }
+
+    public Class getIntentClass() {return intent;}
 
 }

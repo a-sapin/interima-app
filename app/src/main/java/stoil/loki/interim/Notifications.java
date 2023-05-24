@@ -37,9 +37,9 @@ public class Notifications extends AppCompatActivity {
 
                         return true;
                     case R.id.notifs:
-
-                        Intent intentn = new Intent(getApplicationContext(), Notifications.class);
-                        startActivity(intentn);
+                        // On est déjà dans notifications
+                        //Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                        //startActivity(intentn);
                         return true;
 
                     case R.id.profil:

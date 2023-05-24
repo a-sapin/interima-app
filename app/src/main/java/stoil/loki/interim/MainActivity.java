@@ -87,23 +87,18 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     // Gérez la redirection ici
                     switch (item.getItemId()) {
                         case R.id.home:
-
-                            Intent intenth = new Intent(MainActivity.this, MainActivity.class);
-                            startActivity(intenth);
+                            //Nous sommes déjà à l'accueil.
                             return true;
 
                         case R.id.recherche:
-
                             return true;
 
                         case R.id.favoris:
-
                             Intent intentb = new Intent(MainActivity.this, Bookmarks.class);
                             startActivity(intentb);
                             return true;
 
                         case R.id.notifs:
-
                             Intent intentn = new Intent(MainActivity.this, Notifications.class);
                             startActivity(intentn);
                             return true;
@@ -118,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                                 Intent intentp = new Intent(MainActivity.this, SignIn.class);
                                 startActivity(intentp);
                             }
-
                             return true;
 
                         default:

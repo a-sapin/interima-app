@@ -70,8 +70,9 @@ public class SignIn extends AppCompatActivity {
                             Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                             startActivity(intentp);
                         } else {
-                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                            startActivity(intentp);
+                            //On est déjà sur la page de connexion
+                            //Intent intentp = new Intent(getApplicationContext(), SignIn.class);
+                            //startActivity(intentp);
                         }
                         return true;
 
