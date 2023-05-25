@@ -1,4 +1,12 @@
+DROP USER IF EXISTS 'dev_user'@'%';
+
+CREATE USER 'dev_user'@'%' IDENTIFIED BY 'dev_user_password' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0;
+
+GRANT ALL PRIVILEGES ON * . * TO 'dev_user'@'%' WITH GRANT OPTION;
+
 CREATE DATABASE IF NOT EXISTS interima;
+
+USE interima;
 
 CREATE TABLE IF NOT EXISTS utilisateur (
   id int NOT NULL AUTO_INCREMENT,
@@ -221,7 +229,7 @@ INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salair
 INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description) values ('7', 'Ingénieur Cloud', '2023-04-22', '2023-05-15', '2023-06-15', '2023-08-31', 'https://www.clapgemini.com/fr-fr/jobs/ie27I4gBiNZTbKC6tY6z/', '70.0', '43.60890589149053', '3.907832384028275', 'https://fr.seaicons.com/wp-content/uploads/2015/06/cloud-icon2.png', 'Placeholder description 6');
 
 -- Candidatures
-INSERT INTO candidature (idUti, lienCV, lienLM, commentaires) values ('1', 'dummy', 'dummy', 'Cette offre est parfaite pour moi!');
+INSERT INTO candidature (idUti, lienCV, lienLM, commentaires, statut) values ('1', 'dummy', 'dummy', 'Cette offre est parfaite pour moi!', 'EN ATTENTE');
 
 -- Candidatures d'offre
 INSERT INTO candidatureoffre (idOffre, idCandidature) values ('1', '1');

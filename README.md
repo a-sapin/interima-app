@@ -1,5 +1,6 @@
 # Application Intérim Hai811i
-
+ip = interima.ddns.net
+port = 3306
 
 
 ## Getting started
