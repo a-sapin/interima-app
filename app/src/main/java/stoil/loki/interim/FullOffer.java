@@ -1,8 +1,10 @@
 package stoil.loki.interim;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,6 +28,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class FullOffer extends AppCompatActivity {
 
     private Offer offer;
+    private static final int PERMISSION_REQUEST_CODE = 1993;
+
+    // Handle the permission request result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:"));
+                String smsbody = "Partagé via Interima: TITRE, DUREE, " +
+                        "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                sendIntent.putExtra("sms_body", smsbody);
+                startActivity(sendIntent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
+                        "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,21 +103,31 @@ public class FullOffer extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
-                // Initializing the popup menu and giving the reference as current context
                 PopupMenu popupMenu = new PopupMenu(view.getContext(), share);
-
-                // Inflating popup menu from popup_menu.xml file
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setForceShowIcon(true);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        // Toast message on menu item clicked
-                        Toast.makeText(getApplicationContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        switch(menuItem.getItemId()) {
+                            case R.id.share_sms:
+                                if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                                    sendIntent.setData(Uri.parse("sms:"));
+                                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
+                                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                                    sendIntent.putExtra("sms_body", smsbody);
+                                    startActivity(sendIntent);
+                                } else {
+                                    ActivityCompat.requestPermissions(FullOffer.this, new String[]{android.Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_CODE);
+                                }
+                                break;
+                            default:
+                                Toast.makeText(getApplicationContext(), "Partage via " + menuItem.getTitle() + " à venir", Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                     }
                 });
-                // Showing the popup menu
                 popupMenu.show();
             }
         });
