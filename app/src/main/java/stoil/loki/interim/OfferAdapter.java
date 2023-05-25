@@ -1,5 +1,6 @@
 package stoil.loki.interim;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -106,7 +107,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                                     sendIntent.putExtra("sms_body", smsbody);
                                     view.getContext().startActivity(sendIntent);
                                 } else {
-                                    ActivityCompat.requestPermissions(ViewHolder.this, new String[]{android.Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_CODE);
+                                    ActivityCompat.requestPermissions((Activity) view.getContext(), new String[]{android.Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_CODE);
                                 }
                                 break;
                             default:
