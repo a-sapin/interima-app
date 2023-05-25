@@ -1,16 +1,25 @@
 package stoil.loki.interim;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +28,7 @@ import java.util.List;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> {
     private List<Offer> annonces;
+    private static final int PERMISSION_REQUEST_CODE = 1993;
 
     public OfferAdapter(ArrayList<Offer> annonces) {
         this.annonces = annonces;
@@ -77,9 +87,35 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         });
 
         holder.dot.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
-                // autres options
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), holder.dot);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.setForceShowIcon(true);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch(menuItem.getItemId()) {
+                            case R.id.share_sms:
+                                if (ContextCompat.checkSelfPermission(view.getContext(), android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                                    sendIntent.setData(Uri.parse("sms:"));
+                                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
+                                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                                    sendIntent.putExtra("sms_body", smsbody);
+                                    view.getContext().startActivity(sendIntent);
+                                } else {
+                                    ActivityCompat.requestPermissions(ViewHolder.this, new String[]{android.Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_CODE);
+                                }
+                                break;
+                            default:
+                                Toast.makeText(view.getContext(), "Partage via " + menuItem.getTitle() + " à venir", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
             }
         });
 
