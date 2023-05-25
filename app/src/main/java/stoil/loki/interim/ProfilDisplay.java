@@ -41,13 +41,10 @@ public class ProfilDisplay extends AppCompatActivity {
         profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyReuseDisplay.class));
+        profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyListDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
-        profils.add(new ItemProfil(id, "Mes lettres de motivation", ic, MainActivity.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.cv, null);
-        profils.add(new ItemProfil(id, "Mes CV", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Mes CV & lettres de motivation", ic, MainActivity.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
         profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));

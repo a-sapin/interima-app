@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Interima"
         tools:targetApi="31">
         <activity
+            android:name=".ApplyListAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ApplyList"
+            android:exported="false" />
+        <activity
+            android:name=".ApplyListDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".RecherchePage"
+            android:exported="false" />
+        <activity
             android:name=".ApplyHelp"
             android:exported="false" />
         <activity
