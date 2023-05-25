@@ -7,10 +7,18 @@ public class Offer implements Serializable {
     private String title;
     private String url;
 
+    float geolat;
+    float geolong;
+
+
     public Offer(int id, String title, String url) {
         this.id = id;
         this.title = title;
         this.url = url;
+
+        //DEFAULT VALUES, THIS ISN'T FINAL /!\
+        this.geolat = (float) 48.856614;
+        this.geolong = (float) 2.3522219;
     }
 
     public Offer() {
