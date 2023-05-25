@@ -19,24 +19,141 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvAH1"
+    <ScrollView
+        android:id="@+id/scrollViewd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16sp" />
+        android:nestedScrollingEnabled="true">
 
-    <ImageView android:id="@+id/ivAH1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:src="@drawable/applyhelp1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvAH2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tvAH1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <ImageView android:id="@+id/ivAH1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/applyhelp1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tvAH2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <ImageView android:id="@+id/ivAH2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/applyhelp2" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tvAH3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <ImageView android:id="@+id/ivAH3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/applyhelp3" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tvAH4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <ImageView android:id="@+id/ivAH4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/applyhelp4" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tvAH5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <ImageView android:id="@+id/ivAH5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/applyhelp5" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tvAH6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

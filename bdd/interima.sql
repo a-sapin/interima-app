@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS candidature (
   lienCV varchar(255) NOT NULL,
   lienLM varchar(255) NOT NULL,
   commentaires varchar(2047),
+  statut varchar(255) NOT NULL,
   PRIMARY KEY (id),
   KEY Candidature_FK (idUti),
   CONSTRAINT Candidature_FK FOREIGN KEY (idUti) REFERENCES chercheuremploi (id) ON DELETE CASCADE ON UPDATE CASCADE
