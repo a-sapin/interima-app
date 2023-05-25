@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -124,8 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:text="Modifier Profil"
                 android:layout_marginTop="50dp"
+                android:text="Modifier Profil"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView59" />
@@ -211,8 +212,8 @@
                 android:id="@+id/textView51"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
                 android:text="Nom 2 : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView54" />
@@ -221,8 +222,8 @@
                 android:id="@+id/textView53"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
                 android:text="Email 2 : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView51" />
@@ -231,8 +232,8 @@
                 android:id="@+id/textView55"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
                 android:text="Téléphone 2 : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView53" />
@@ -241,9 +242,9 @@
                 android:id="@+id/textView56"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Adresse : "
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Adresse : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
@@ -251,9 +252,9 @@
                 android:id="@+id/textView57"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Liens : "
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
+                android:text="Liens : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
@@ -261,9 +262,9 @@
                 android:id="@+id/textView58"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Abonnement : "
-                android:layout_marginTop="170dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="170dp"
+                android:text="Abonnement : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
@@ -271,8 +272,8 @@
                 android:id="@+id/textView59"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="28dp"
+                android:layout_marginTop="50dp"
                 android:text="Type de paiement : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView58" />

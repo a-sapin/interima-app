@@ -53,7 +53,7 @@ public class Geolocalisation extends AppCompatActivity implements Serializable {
             //Requête de la permission COARSE LOCATION
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission not granted yet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission non accordée", Toast.LENGTH_SHORT).show();
                 //Permission is not granted
                 // Request the permission
                 ActivityCompat.requestPermissions(this,
@@ -63,7 +63,7 @@ public class Geolocalisation extends AppCompatActivity implements Serializable {
 
             } else //Permission granted
             {
-                Toast.makeText(this, "Permission granted already", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission déjà accordée", Toast.LENGTH_SHORT).show();
             }
         }
 

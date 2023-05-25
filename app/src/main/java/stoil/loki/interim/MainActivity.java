@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ class ViewHolder {
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private static final int PERMISSION_REQUEST_CODE = 1993;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
@@ -136,7 +138,18 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     // Location permission denied
                 }
                 break;
-            // Handle other permissions here if needed
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                    sendIntent.setData(Uri.parse("sms:"));
+                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
+                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                    sendIntent.putExtra("sms_body", smsbody);
+                    startActivity(sendIntent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
+                            "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
+                }
         }
 
     }
