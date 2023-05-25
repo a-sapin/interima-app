@@ -29,6 +29,7 @@ public class ProfilDisplay extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
 
         int id = 0;
+
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
         profils.add(new ItemProfil(id, "Profil", ic, MainActivity.class));
