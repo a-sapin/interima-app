@@ -46,6 +46,7 @@ class ViewHolder {
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+
     private static final int PERMISSION_REQUEST_CODE = 1993;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
