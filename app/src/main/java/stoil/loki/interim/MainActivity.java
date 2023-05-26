@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,12 +46,17 @@ class ViewHolder {
     Button applyButton;
 }
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable, LocationListener {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private static final int PERMISSION_REQUEST_CODE = 1993;
+    private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
+    //Location Variables//
+    double curLong=2.349014;
+    double curLat=48.864716;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,29 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             OfferAdapter adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);
+
+
+                //LOCATION MANAGER
+                // Get the location manager
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                // Check for location permission
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED &&
+                        ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                                PackageManager.PERMISSION_GRANTED) {
+                    // Do something if perm isnt granted
+                    //#############################################
+                    return;
+                }
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
+
+
+
+
+
+
 
             BottomNavigationView menu = findViewById(R.id.navigation);
             menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,6 +154,27 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 }
             });
 
+            // Display Lat and Long
+
+            // NOTE : THERES A SIGNIFICANT PROBLEM WITH THIS APPROACH //
+
+            Thread thread1 = new Thread(() -> {
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                System.err.println("Device currently standing at Lo: "+curLong+" La:"+curLat);
+            });
+
+            thread1.start();
+
+
+
+
+
+
             // search bar
         }
     }
@@ -160,4 +212,33 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.home).setChecked(true);
     }
+
+    //Location Listener BS here
+            @Override
+            public void onLocationChanged(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                System.err.println("OnLocationChanged() called");
+
+                // Use the latitude and longitude values as needed
+                // Example: Log the values
+                System.out.println("Latitude: " + latitude);
+                System.out.println("Longitude: " + longitude);
+
+                this.curLat=latitude;
+                this.curLong=longitude;
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
 }
