@@ -36,7 +36,8 @@ public class Bookmarks extends AppCompatActivity {
                         return true;
 
                     case R.id.recherche:
-
+                        Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                        startActivity(intents);
                         return true;
                     case R.id.notifs:
 

@@ -151,7 +151,8 @@ public class FullOffer extends AppCompatActivity {
                         startActivity(intentf);
                         return true;
                     case R.id.recherche:
-
+                        Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                        startActivity(intents);
                         return true;
                     case R.id.notifs:
 

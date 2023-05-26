@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                             return true;
 
                         case R.id.recherche:
+                            Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                            startActivity(intents);
                             return true;
 
                         case R.id.favoris:

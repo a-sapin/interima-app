@@ -51,9 +51,10 @@ public class Apply extends AppCompatActivity {
                         Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
                         startActivity(intentf);
                         return true;
-                        
-                    case R.id.recherche:
 
+                    case R.id.recherche:
+                        Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                        startActivity(intents);
                         return true;
                     case R.id.notifs:
 
