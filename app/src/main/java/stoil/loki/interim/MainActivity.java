@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,24 +48,27 @@ class ViewHolder {
     Button applyButton;
 }
 
+// TODO: Océane fais en sorte que les valeurs de GEOLAT et GEOLONG dans la classe Offre correspondent à la BDD
+
 public class MainActivity extends AppCompatActivity implements Serializable, LocationListener {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private static final int PERMISSION_REQUEST_CODE = 1993;
     private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
+    OfferAdapter adapter;
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
     //Location Variables//
-    double curLong=2.349014;
-    double curLat=48.864716;
+    double curLong = 2.349014;
+    double curLat = 48.864716;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        File file = new File(getFilesDir().toString()+"/first_time_launch.txt");
+        File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
         System.out.println(getFilesDir());
         if (!file.exists()) {
             // This is the first launch
@@ -77,8 +82,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             Intent intent = new Intent(this, Geolocalisation.class);
             startActivity(intent);
             finish(); //Kill the activity to avoid force backout
-        }
-        else //This isn't the first launch
+        } else //This isn't the first launch
         {
             for (int i = 0; i < 10; i++) {
                 offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
@@ -87,30 +91,26 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             RecyclerView recyclerView = findViewById(R.id.offersList);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-            OfferAdapter adapter = new OfferAdapter(offers);
+            this.adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);
 
 
-                //LOCATION MANAGER
-                // Get the location manager
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            //LOCATION MANAGER
+            // Get the location manager
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                // Check for location permission
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                        PackageManager.PERMISSION_GRANTED &&
-                        ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                                PackageManager.PERMISSION_GRANTED) {
-                    // Do something if perm isnt granted
-                    //#############################################
-                    return;
-                }
-
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
+            // Check for location permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                // Do something if perm isnt granted
+                //#############################################
+                return;
+            }
 
 
-
-
-
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
 
 
             BottomNavigationView menu = findViewById(R.id.navigation);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                         case R.id.profil:
                             // si connecter donner la page du profil
                             // sinon on demande la co ou inscription
-                            if(true) {
+                            if (true) {
                                 Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                                 startActivity(intentp);
                             } else {
@@ -165,14 +165,10 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                     throw new RuntimeException(e);
                 }
 
-                System.err.println("Device currently standing at Lo: "+curLong+" La:"+curLat);
+                System.err.println("Device currently standing at Lo: " + curLong + " La:" + curLat);
             });
 
             thread1.start();
-
-
-
-
 
 
             // search bar
@@ -214,20 +210,34 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
     }
 
     //Location Listener BS here
-            @Override
-            public void onLocationChanged(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
+    @Override
+    public void onLocationChanged(Location location) {
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
 
-                System.err.println("OnLocationChanged() called");
+        System.err.println("OnLocationChanged() called");
 
-                // Use the latitude and longitude values as needed
-                // Example: Log the values
-                System.out.println("Latitude: " + latitude);
-                System.out.println("Longitude: " + longitude);
+        // Use the latitude and longitude values as needed
+        // Example: Log the values
+        System.out.println("Latitude: " + latitude);
+        System.out.println("Longitude: " + longitude);
 
-                this.curLat=latitude;
-                this.curLong=longitude;
+        this.curLat = latitude;
+        this.curLong = longitude;
+
+        sortOffers(); //THIS TRIGGERS THE SORTING BASED ON GEOLOCALISATION//
+
+        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this); */
             }
 
             @Override
@@ -240,5 +250,25 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
             @Override
             public void onProviderDisabled(String provider) {
+            }
+
+
+            public void sortOffers()
+            {
+                for (Offer off : offers) {
+                    off.calculateDiff((float) curLong, (float) curLat);
+                }
+
+                Collections.sort(offers, new Comparator<Offer>() {
+                    @Override
+                    public int compare(Offer o1, Offer o2) {
+                        // Compare based on DIST from User
+                        return Double.compare(o1.getDistFromUser(), o2.getDistFromUser());
+                    }});
+                //This calculates the distance
+
+                //offers.clear();
+                System.out.println("Elements in list offers : "+offers.size());
+                adapter.notifyDataSetChanged();
             }
 }
