@@ -44,7 +44,7 @@ public class ProfilDisplay extends AppCompatActivity {
         profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyListDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
-        profils.add(new ItemProfil(id, "Mes CV & lettres de motivation", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Mes CV & lettres de motivation", ic, CVLMDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
         profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));
