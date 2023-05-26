@@ -52,6 +52,9 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
         profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));
 
+        ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
+        profils.add(new ItemProfil(id, "Se connecter", ic, SignIn.class));
+
         RecyclerView list_profil = findViewById(R.id.list_profil);
         list_profil.setLayoutManager(layoutManager);
         list_profil.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));

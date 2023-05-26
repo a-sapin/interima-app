@@ -49,6 +49,7 @@ class ViewHolder {
 public class MainActivity extends AppCompatActivity implements Serializable, LocationListener {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+
     private static final int PERMISSION_REQUEST_CODE = 1993;
     private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();

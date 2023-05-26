@@ -3,6 +3,8 @@ package stoil.loki.interim;
 import java.io.Serializable;
 
 public class Offer implements Serializable {
+
+
     private int id;
     private String title;
     private String url;
