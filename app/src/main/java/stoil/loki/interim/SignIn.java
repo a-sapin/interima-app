@@ -1,6 +1,8 @@
 package stoil.loki.interim;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -11,15 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +27,8 @@ public class SignIn extends AppCompatActivity {
 
     private static EditText email, pw;
     private static String role;
+
+    private String res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("SignIn.java", "bouton co");
                 connexion();
+
+                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this );
             }
         });
 
@@ -142,7 +146,7 @@ public class SignIn extends AppCompatActivity {
 
     private void connexion() {
         Log.d("SignIn.java", "debut connexion");
-        DatabaseConnexion dbCo = new DatabaseConnexion();
+        DatabaseConnexion<SignIn, SignIn> dbCo = new DatabaseConnexion<>(this, SignIn.this);
         dbCo.setContext(getApplicationContext());
 
         String SQL;
@@ -168,7 +172,54 @@ public class SignIn extends AppCompatActivity {
         dbCo.setRequete(SQL);
         dbCo.execute("");
 
-
-
     }
+
+    public void onQueryResult(String result) {
+        // Traitez le résultat de la requête ici
+        Log.d("SignIn", "Résultat de la requête : " + result);
+        res = result;
+
+        if (res != "" && pw.getText().toString().equals(res)) {
+            // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
+            Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
+            // recuperation de l id de l utilisateur et de son role
+            // on passe la creation du token au SessionManager
+            Log.d("SignIn", "Debut sessionManager ");
+            SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
+
+            Log.d("SignIn", "fin sessionManager ");
+            // token fait + connexion ok donc on peut revenir sur l activité principale
+            // quand la requete aura une reponse elle se terminera automatiquement
+        }
+    }
+
+    public void stopAfterQuery(String result) {
+        Log.d("SignIn.java", "recuperation id = " + result);
+
+        ArrayList<String> value = getInfoToken();
+
+        Log.d("SharedPreferences", "Valeur role : " + value.get(0) + " valeur id : " + value.get(1));
+
+        finish();
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
+    }
+
 }

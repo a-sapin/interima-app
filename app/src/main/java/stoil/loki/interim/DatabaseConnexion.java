@@ -2,23 +2,41 @@ package stoil.loki.interim;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
-public class DatabaseConnexion extends AsyncTask<String, Void, String> {
+public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
 
     private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima";
     private static final String user = "dev_user";
     private static final String password = "dev_user_password";
 
+    private ResultHandler resultHandler;
+
     private String requete;
 
     private Context context;
+
+    private String res = "";
+
+    private T callingActivity;
+
+    private U otherActivity;
+
+    public DatabaseConnexion(T callingActivity, U otherActivity) {
+        this.callingActivity = callingActivity;
+        this.otherActivity = otherActivity;
+    }
+
+
+    public String getRes() {
+        return this.res;
+    }
 
     public void setRequete(String SQL) {
         this.requete = SQL;
@@ -39,28 +57,29 @@ public class DatabaseConnexion extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast.makeText(context, "Please wait...", Toast.LENGTH_SHORT)
-                .show();
-
+        Toast.makeText(context, "En cours ... ", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected String doInBackground(String... params) {
-        String res = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url, user, password);
-            System.out.println("Databaseection success");
+            Connection coDb = DriverManager.getConnection(url, user, password);
 
-            String result = "Database Connection Successful\n";
-            Statement st = con.createStatement();
+            Log.d("DatabaseConnexion.java", "Connexion ok");
+
+            Statement st = coDb.createStatement();
+            Log.d("DatabaseConnexion.java", "requete : " + this.requete);
+
             ResultSet rs = st.executeQuery(this.requete);
-            ResultSetMetaData rsmd = rs.getMetaData();
+//            ResultSetMetaData rsmd = rs.getMetaData();
 
             while (rs.next()) {
-                result += rs.getString(1).toString() + "\n";
+                res += rs.getString(1).toString() + "\n";
             }
-            res = result;
+
+            rs.close();
+            st.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,6 +91,16 @@ public class DatabaseConnexion extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        if (callingActivity != null) {
 
+            if (callingActivity instanceof SignIn) {
+                ((SignIn) callingActivity).onQueryResult(result);
+            } else if (callingActivity instanceof SessionManager) {
+                ((SessionManager) callingActivity).onQueryResult(result);
+                ((SignIn) otherActivity).stopAfterQuery(result);
+            }
+        }
+        res = result;
     }
 }
