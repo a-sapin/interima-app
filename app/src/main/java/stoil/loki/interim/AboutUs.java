@@ -1,11 +1,16 @@
 package stoil.loki.interim;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AboutUs extends AppCompatActivity {
 
@@ -14,11 +19,7 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        LinearLayout mainlayout = (LinearLayout) findViewById(R.id.aboutus);
-
-        LinearLayout.LayoutParams tvlayout = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        TextView tv1 = new TextView(this);
+        TextView tv1 = (TextView) findViewById(R.id.tv1);
         tv1.setText("L'équipe PSOME (Puccio Sapin Ongaro Mobile Engineering) est une équipe " +
                 "constituée d'Océane ONGARO, de Lorenzo PUCCIO et d'Arthur SAPIN dans le cadre de " +
                 "l'unité d'enseignement HAI811I - Développement et programmation pour supports " +
@@ -31,9 +32,53 @@ public class AboutUs extends AppCompatActivity {
                 "publie l'annonce. Interima propose à ses utilisateurs de rechercher une annonce " +
                 "avec une liste de mots clés, puis de filtrer ses résultats par domaine.");
 
-        tv1.setTextSize(16);
-        tv1.setLayoutParams(tvlayout);
-        mainlayout.addView(tv1);
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Gérez la redirection ici
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        // Redirigez vers l'écran d'accueil
+
+                        Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intenth);
+                        return true;
+
+                    case R.id.favoris:
+
+                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                        startActivity(intentf);
+                        return true;
+
+                    case R.id.recherche:
+                        Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                        startActivity(intents);
+                        return true;
+                    case R.id.notifs:
+
+                        Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                        startActivity(intentn);
+                        return true;
+
+                    case R.id.profil:
+                        // si connecter donner la page du profil
+                        // sinon on demande la co ou inscription
+
+                        if(true) {
+                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                            startActivity(intentp);
+                        } else {
+                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
+                            startActivity(intentp);
+                        }
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        });
 
     }
 }
