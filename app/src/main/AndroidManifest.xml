@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Interima"
         tools:targetApi="31">
         <activity
+            android:name=".Historique"
+            android:exported="false" />
+        <activity
             android:name=".CVLMDisplay"
             android:exported="false" />
         <activity
