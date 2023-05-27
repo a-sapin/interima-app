@@ -179,25 +179,27 @@ public class SignIn extends AppCompatActivity {
         // Traitez le résultat de la requête ici
         Log.d("SignIn", "Résultat de la requête : " + result + " pw = " + pw.getText().toString() + " res = " + pw.getText().toString().trim().equals(result.trim()));
         res = result;
-        String[] passwords = result.split("\\r?\\n");
+        if (result.contains("\n")) {
+            String[] passwords = result.split("\\r?\\n");
 
-        for (String password : passwords) {
-            Log.d("SignIn", "pw = " + password);
-            if (pw.getText().toString().trim().equals(password.trim())) {
-                // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
-                Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
-                // recuperation de l id de l utilisateur et de son role
-                // on passe la creation du token au SessionManager
-                Log.d("SignIn", "Debut sessionManager ");
-                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
+            for (String password : passwords) {
+                Log.d("SignIn", "pw = " + password);
+                if (pw.getText().toString().trim().equals(password.trim())) {
+                    // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
+                    Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
+                    // recuperation de l id de l utilisateur et de son role
+                    // on passe la creation du token au SessionManager
+                    Log.d("SignIn", "Debut sessionManager ");
+                    SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
 
-                Log.d("SignIn", "fin sessionManager ");
-                // token fait + connexion ok donc on peut revenir sur l activité principale
-                // quand la requete aura une reponse elle se terminera automatiquement
+                    Log.d("SignIn", "fin sessionManager ");
+                    // token fait + connexion ok donc on peut revenir sur l activité principale
+                    // quand la requete aura une reponse elle se terminera automatiquement
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }
 
