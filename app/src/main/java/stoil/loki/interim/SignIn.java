@@ -153,10 +153,10 @@ public class SignIn extends AppCompatActivity {
         String SQL;
 
         if (role.equals("Gestionnaire")){
-            SQL = "SELECT mdp FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email.getText().toString()+"');";
+            SQL = "SELECT mdp FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email.getText().toString()+"');";
 
         } else if (role.equals("Chercheur d'emploi")) {
-            SQL = "SELECT mdp FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.chercheuremploi WHERE email = '"+email.getText().toString()+"');";
+            SQL = "SELECT mdp FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.chercheuremploi WHERE email = '"+email.getText().toString()+"');";
 
         } else if (role.equals("Employeur")) {
             SQL = "SELECT mdp FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.employeur WHERE emailC1 = '"+email.getText().toString()+"');";
@@ -179,25 +179,29 @@ public class SignIn extends AppCompatActivity {
         // Traitez le résultat de la requête ici
         Log.d("SignIn", "Résultat de la requête : " + result + " pw = " + pw.getText().toString() + " res = " + pw.getText().toString().trim().equals(result.trim()));
         res = result;
+        String[] passwords = result.split("\\r?\\n");
 
-        if (pw.getText().toString().trim().equals(result.trim())) {
-            // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
-            Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
-            // recuperation de l id de l utilisateur et de son role
-            // on passe la creation du token au SessionManager
-            Log.d("SignIn", "Debut sessionManager ");
-            SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
+        for (String password : passwords) {
+            Log.d("SignIn", "pw = " + password);
+            if (pw.getText().toString().trim().equals(password.trim())) {
+                // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
+                Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
+                // recuperation de l id de l utilisateur et de son role
+                // on passe la creation du token au SessionManager
+                Log.d("SignIn", "Debut sessionManager ");
+                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
 
-            Log.d("SignIn", "fin sessionManager ");
-            // token fait + connexion ok donc on peut revenir sur l activité principale
-            // quand la requete aura une reponse elle se terminera automatiquement
+                Log.d("SignIn", "fin sessionManager ");
+                // token fait + connexion ok donc on peut revenir sur l activité principale
+                // quand la requete aura une reponse elle se terminera automatiquement
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Mdp ou email incorrect", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
+
+        Toast.makeText(getApplicationContext(), "Mdp ou email incorrect", Toast.LENGTH_SHORT).show();
     }
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);

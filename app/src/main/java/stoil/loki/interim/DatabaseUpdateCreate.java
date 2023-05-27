@@ -24,8 +24,11 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
     private T callingActivity;
 
-    public DatabaseUpdateCreate(T callingActivity) {
+    private boolean query2;
+
+    public DatabaseUpdateCreate(T callingActivity, boolean query2) {
         this.callingActivity = callingActivity;
+        this.query2 = query2;
     }
 
     public void setRequete(String SQL) {
@@ -77,7 +80,7 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
         } catch (Exception e) {
             e.printStackTrace();
-            res = "probleme";
+            res = "0";
         }
 
         return res;
@@ -89,8 +92,8 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
 
         if (callingActivity != null) {
-            Log.d("DatabaseUpdateCreate.java", "callingActivity class: " + callingActivity.getClass().getSimpleName());
-            if (callingActivity instanceof MdP) {
+            Log.d("DatabaseUpdateCreate.java", "callingActivity class: " + callingActivity.getClass().getSimpleName() + "result = " + result);
+            if (callingActivity instanceof MdP && query2 == true) {
                 Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
                 ((MdP) callingActivity).dataAddQuery(Integer.parseInt(result));
             }
