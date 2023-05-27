@@ -29,7 +29,7 @@ public class ApplyReuse extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Apply.class);
-                // passer les données pour les afficher dans une candidature
+
                 view.getContext().startActivity(intent);
             }
         });
