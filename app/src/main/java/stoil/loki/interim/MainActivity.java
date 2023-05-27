@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
             //LOCATION MANAGER
             // Get the location manager
-//            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//
-//            // Check for location permission
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            // Check for location permission
 //            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
 //                    PackageManager.PERMISSION_GRANTED &&
 //                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 //                //#############################################
 //                return;
 //            }
-//
-//
+
+
 //            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
 
 
@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Log.d("Mainactivity.java", "bouton menu");
                     // Gérez la redirection ici
                     switch (item.getItemId()) {
                         case R.id.home:
@@ -128,19 +127,16 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
                         case R.id.recherche:
                             Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
-                            Log.d("Mainactivity.java", "recherche");
                             startActivity(intents);
                             return true;
 
                         case R.id.favoris:
                             Intent intentb = new Intent(MainActivity.this, Bookmarks.class);
-                            Log.d("Mainactivity.java", "favoris");
                             startActivity(intentb);
                             return true;
 
                         case R.id.notifs:
                             Intent intentn = new Intent(MainActivity.this, Notifications.class);
-                            Log.d("Mainactivity.java", "notifs");
                             startActivity(intentn);
                             return true;
 
@@ -149,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                             // sinon on demande la co ou inscription
                             if (true) {
                                 Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                                Log.d("Mainactivity.java", "profils");
                                 startActivity(intentp);
                             } else {
                                 Intent intentp = new Intent(MainActivity.this, SignIn.class);
@@ -183,7 +178,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             // search bar
         }
 
-        Toast.makeText(getApplicationContext(), "shared id = : " + getInfoTokenID() + "role = " + getInfoTokenRole(), Toast.LENGTH_SHORT).show();
+        // test du token sur autre activite
+//        Toast.makeText(getApplicationContext(), "shared id = : " + getInfoTokenID() + "role = " + getInfoTokenRole(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
