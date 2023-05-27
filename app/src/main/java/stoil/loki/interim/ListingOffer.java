@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class ListingOffer<T> extends AsyncTask<String, Void, String> {
 
-    private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima";
+    private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima?user=root&useUnicode=true&characterEncoding=utf8";
     private static final String user = "dev_user";
     private static final String password = "dev_user_password";
 
