@@ -49,15 +49,18 @@ public class Geolocalisation extends AppCompatActivity implements Serializable {
                 }
             });
 
+        // TESTING THE PERMISSIONS //
+            boolean coarseLocationPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+            boolean fineLocationPermissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
             //Requête de la permission COARSE LOCATION
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (!coarseLocationPermissionGranted || !fineLocationPermissionGranted) {
                 Toast.makeText(this, "Permission non accordée", Toast.LENGTH_SHORT).show();
                 //Permission is not granted
+
                 // Request the permission
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
