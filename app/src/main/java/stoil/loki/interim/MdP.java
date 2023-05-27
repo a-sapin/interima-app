@@ -43,7 +43,7 @@ public class MdP extends AppCompatActivity {
                     // faire la demande de code de verification
 
                     Log.d("MdP.java", "debut connexion");
-                    DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this);
+                    DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, true);
                     dbCo.setContext(getApplicationContext());
 
                     Intent intent = getIntent();
@@ -129,7 +129,7 @@ public class MdP extends AppCompatActivity {
         if (role.equals("chercheuremploi")) {
 
             Log.d("MdP.java", "debut connexion pour query 2");
-            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this);
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
             dbCo.setContext(getApplicationContext());
 
             String nom = intent.getStringExtra("nom");
@@ -140,13 +140,17 @@ public class MdP extends AppCompatActivity {
             String city = intent.getStringExtra("city");
             String dateNai = intent.getStringExtra("dateNai");
 
-            String SQL = "INSERT INTO interima.chercheuremploi (idUti, nom, prenom, email, nationalite, tel, ville) values ('"+id+"', '"+nom+"', '"+prenom+"', '"+email+"'', '"+nat+"', '"+tel+"', '"+city+"');";
+            String SQL = "INSERT INTO interima.chercheuremploi (idUti, nom, prenom, email, nationalite, tel, ville) values ('"+id+"', '"+nom+"', '"+prenom+"', '"+email+"', '"+nat+"', '"+tel+"', '"+city+"');";
 
             Log.d("MdP.java", "Requete :" + SQL);
 
             dbCo.setRequete(SQL);
             dbCo.execute("");
         }
+
+        Intent home = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(home);
+        finish();
     }
 
     public ArrayList<String> getInfoToken() {
