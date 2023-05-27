@@ -16,8 +16,8 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="293dp"
-            android:layout_height="132dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
             tools:ignore="MissingConstraints">
@@ -39,8 +39,8 @@
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:layout_width="265dp"
-                android:layout_height="47dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
                 <Button

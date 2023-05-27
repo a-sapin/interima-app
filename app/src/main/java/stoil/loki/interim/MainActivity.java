@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.setProperty("file.encoding", "UTF-8");
+
+        ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
+        dbCo.setContext(getApplicationContext());
+        dbCo.execute("");
 
         File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
         System.out.println(getFilesDir());
@@ -186,6 +191,16 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
         // test du token sur autre activite
 //        Toast.makeText(getApplicationContext(), "shared id = : " + getInfoTokenID() + "role = " + getInfoTokenRole(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void onQueryResult(ArrayList<Offer> offersQ) {
+        this.offers = offersQ;
+
+        RecyclerView recyclerView = findViewById(R.id.offersList);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        this.adapter = new OfferAdapter(offers);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -1,16 +1,27 @@
 package stoil.loki.interim;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Offer implements Serializable {
 
 
     private int id;
+    private int idEmp;
     private String title;
+    private Date datePublication;
+    private Date dateFermeture;
+    private Date dateDebut;
+    private Date dateFin;
     private String url;
 
+    private float salaire;
     float geolat;
     float geolong;
+
+    private String lienImg;
+
+    private String description;
 
     double distFromUser;
 
@@ -24,6 +35,22 @@ public class Offer implements Serializable {
         this.geolat = (float) 48.856614;
         this.geolong = (float) 2.3522219;
         this.distFromUser = 0;
+    }
+
+    public Offer(int id, int idEmp, String title, Date datePublication, Date dateFermeture, Date dateDebut, Date dateFin, String url, float salaire, float geolat, float geolong, String lienImg, String description) {
+        this.id = id;
+        this.idEmp = idEmp;
+        this.title = title;
+        this.datePublication = datePublication;
+        this.dateFermeture = dateFermeture;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.url = url;
+        this.salaire = salaire;
+        this.geolat = geolat;
+        this.geolong = geolong;
+        this.lienImg = lienImg;
+        this.description = description;
     }
 
     public Offer() {
@@ -84,5 +111,37 @@ public class Offer implements Serializable {
 
     public void setGeolong(float geolong) {
         this.geolong = geolong;
+    }
+
+    public int getIdEmp() {
+        return this.idEmp;
+    }
+
+    public Date getDatePublication() {
+        return this.datePublication;
+    }
+
+    public Date getDateFermeture(){
+        return this.dateFermeture;
+    }
+
+    public Date getDateDebut() {
+        return this.dateDebut;
+    }
+
+    public Date getDateFin(){
+        return this.dateFin;
+    }
+
+    public float getSalaire(){
+        return this.salaire;
+    }
+
+    public String getLienImg(){
+        return this.lienImg;
+    }
+
+    public String getDescription(){
+        return this.description;
     }
 }
