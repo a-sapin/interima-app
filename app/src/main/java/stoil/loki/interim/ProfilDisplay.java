@@ -33,12 +33,13 @@ public class ProfilDisplay extends AppCompatActivity {
         int id = 0;
 
         String userrole = this.getInfoTokenRole();
+        System.out.println(userrole);
 
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
         profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
 
-        if((userrole != null) && (userrole=="Employeur" || userrole=="AgenceInterim")) {
+        if(userrole.equals("Employeur")) {
             ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
             profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
         }
