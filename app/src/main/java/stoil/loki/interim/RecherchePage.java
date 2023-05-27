@@ -123,4 +123,11 @@ public class RecherchePage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.recherche).setChecked(true);
+    }
+
 }

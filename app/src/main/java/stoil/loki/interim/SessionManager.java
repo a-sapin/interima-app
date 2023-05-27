@@ -69,8 +69,9 @@ public class SessionManager<T extends Activity, U extends Activity> {
     }
 
     public void clearToken() {
-        editor.remove(KEY_ROLE);
-        editor.remove(KEY_ID);
-        editor.apply();
+        SharedPreferences.Editor editor = context.getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
+        editor.remove("role");
+        editor.remove("id");
+        return;
     }
 }

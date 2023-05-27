@@ -59,14 +59,6 @@
                     android:src="@drawable/marque_page_vide" />
 
                 <ImageButton
-                    android:id="@+id/language_button"
-                    android:layout_width="54dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="3dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/langues" />
-
-                <ImageButton
                     android:id="@+id/dot"
                     android:layout_width="45dp"
                     android:layout_height="35dp"

@@ -8,7 +8,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -50,8 +52,13 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
         holder.see_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ApplyList.class);
-                view.getContext().startActivity(intent);
+                if(holder.getInfoTokenID(view) != "ChercheurEmploi" && holder.getInfoTokenID(view) != null) {
+                    Intent intent = new Intent(view.getContext(), ApplyListAg.class);
+                    view.getContext().startActivity(intent);
+                } else {
+                    Intent intent = new Intent(view.getContext(), ApplyList.class);
+                    view.getContext().startActivity(intent);
+                }
             }
         });
 
@@ -107,6 +114,25 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
             status = view.findViewById(R.id.status);
             see_button = view.findViewById(R.id.see_button);
             dot = view.findViewById(R.id.dot);
+        }
+
+        public ArrayList<String> getInfoToken(View view) {
+            SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+            ArrayList<String> value = new ArrayList<>();
+            value.add(sharedPreferences.getString("role", null));
+            value.add(sharedPreferences.getString("id", null));
+
+            return value;
+        }
+
+        public String getInfoTokenID(View view) {
+            ArrayList<String> info = getInfoToken(view);
+            return info.get(1);
+        }
+
+        public String getInfoTokenRole(View view) {
+            ArrayList<String> info = getInfoToken(view);
+            return info.get(0);
         }
     }
 }

@@ -80,13 +80,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
             }
         });
 
-        holder.translation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // demander la langue pour la traduction etc
-            }
-        });
-
         holder.dot.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
@@ -141,7 +134,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
             descriptionTextView = view.findViewById(R.id.description);
             applyButton = view.findViewById(R.id.apply_button);
             bookmark = view.findViewById(R.id.bookmark);
-            translation = view.findViewById(R.id.language_button);
             dot = view.findViewById(R.id.dot);
         }
     }

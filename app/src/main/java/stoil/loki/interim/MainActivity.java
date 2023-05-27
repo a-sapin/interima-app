@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                             // si connecter donner la page du profil
                             // sinon on demande la co ou inscription
                             if (true) {
+                                // ((MainActivity) menu.getContext()).getInfoTokenID() != null
                                 Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                                 Log.d("Mainactivity.java", "profils");
                                 startActivity(intentp);

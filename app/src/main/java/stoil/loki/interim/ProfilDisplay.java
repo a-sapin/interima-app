@@ -1,6 +1,8 @@
 package stoil.loki.interim;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -30,12 +32,11 @@ public class ProfilDisplay extends AppCompatActivity {
 
         int id = 0;
 
+        String userrole = this.getInfoTokenRole();
+
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
         profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
-        profils.add(new ItemProfil(id, "Mes favoris", ic, Bookmarks.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
         profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
@@ -115,5 +116,24 @@ public class ProfilDisplay extends AppCompatActivity {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 }
