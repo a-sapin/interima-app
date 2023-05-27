@@ -27,38 +27,47 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="12dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name:"
-                android:textSize="16sp" />
+                android:text="Titre:"
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter name" />
+                android:hint="Intitulé de l'emploi" />
         </LinearLayout>
 
-        <!-- Surname Layout -->
+        <!-- Date Debut Layout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:padding="12dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Surname:"
-                android:textSize="16sp" />
+                android:text="Début:"
+                android:layout_marginEnd="10dp"/>
 
-            <EditText
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/myButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter surname" />
+                android:text="Choisir Date"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DATE NON CHOISIE"
+                android:textColor="#FF0000"
+                android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
         <!-- Profession Layout -->
@@ -66,18 +75,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:padding="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profession:"
-                android:textSize="16sp" />
+                android:text="Fin:"
+                android:layout_marginEnd="26dp"/>
 
-            <EditText
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/myButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter profession" />
+                android:text="Choisir Date"
+                android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DATE NON CHOISIE"
+                android:textColor="#FF0000"
+                android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
     </LinearLayout>
