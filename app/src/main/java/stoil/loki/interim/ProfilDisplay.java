@@ -38,6 +38,11 @@ public class ProfilDisplay extends AppCompatActivity {
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
         profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
 
+        if((userrole != null) && (userrole=="Employeur" || userrole=="AgenceInterim")) {
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
+            profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
+        }
+
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
         profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
 
