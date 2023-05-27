@@ -1,6 +1,8 @@
 package stoil.loki.interim;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -52,8 +54,18 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
         profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
-        profils.add(new ItemProfil(id, "Se connecter", ic, SignIn.class));
+        if(getInfoTokenID() == null) {
+
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.sidentifier, null);
+            profils.add(new ItemProfil(id, "Se connecter", ic, SignIn.class));
+
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.signup, null);
+            profils.add(new ItemProfil(id, "S'inscrire", ic, WhoAreYou.class));
+
+        } else {
+            // mettre la page de deconnection
+
+        }
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
         list_profil.setLayoutManager(layoutManager);
@@ -115,5 +127,24 @@ public class ProfilDisplay extends AppCompatActivity {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 }
