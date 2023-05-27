@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +43,22 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Offer offer = annonces.get(position);
-        holder.titleTextView.setText(offer.getTitle());
-        holder.descriptionTextView.setText(offer.getUrl());
+        holder.titleTextView.setText(encodeString(offer.getTitle()));
+        holder.descriptionTextView.setText(encodeString(offer.getUrl()));
+
         holder.applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

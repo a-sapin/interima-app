@@ -27,6 +27,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class FullOffer extends AppCompatActivity {
@@ -54,6 +55,16 @@ public class FullOffer extends AppCompatActivity {
         }
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.full_offer);
@@ -61,12 +72,33 @@ public class FullOffer extends AppCompatActivity {
         Intent intent = getIntent();
         offer = (Offer) intent.getSerializableExtra("offer");
 
-        String text_example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor tellus eget risus pharetra, vel consequat nunc tempor. Integer ac neque arcu. Maecenas malesuada erat eu ultrices eleifend. Aenean a semper leo, sit amet lobortis est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ornare dolor eu metus consequat ullamcorper. Sed porta sit amet sapien id euismod. Aliquam hendrerit convallis ante, in feugiat enim pharetra eu. Proin vitae libero nulla. Aliquam quis rutrum velit. Suspendisse potenti. In hac habitasse platea dictumst. Sed scelerisque ex ac mauris consectetur, at ultrices felis iaculis. Sed mattis ante a odio mollis malesuada.\n" +
-                "\n" +
-                "Nunc vestibulum turpis et mi rutrum, sit amet feugiat dolor pulvinar. Sed ut fringilla turpis. Sed ut est quis nisl facilisis dapibus. Quisque ut laoreet eros. Donec pretium nibh eget massa consequat, euismod pellentesque ipsum gravida. Sed varius, libero ut pretium aliquet, elit elit commodo justo, ut aliquam nulla sapien a augue. Quisque ut suscipit mauris. Vivamus mollis augue eget tortor feugiat malesuada. Vivamus feugiat augue a lacinia tempor.";
+//        String text_example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam auctor tellus eget risus pharetra, vel consequat nunc tempor. Integer ac neque arcu. Maecenas malesuada erat eu ultrices eleifend. Aenean a semper leo, sit amet lobortis est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ornare dolor eu metus consequat ullamcorper. Sed porta sit amet sapien id euismod. Aliquam hendrerit convallis ante, in feugiat enim pharetra eu. Proin vitae libero nulla. Aliquam quis rutrum velit. Suspendisse potenti. In hac habitasse platea dictumst. Sed scelerisque ex ac mauris consectetur, at ultrices felis iaculis. Sed mattis ante a odio mollis malesuada.\n" +
+//                "\n" +
+//                "Nunc vestibulum turpis et mi rutrum, sit amet feugiat dolor pulvinar. Sed ut fringilla turpis. Sed ut est quis nisl facilisis dapibus. Quisque ut laoreet eros. Donec pretium nibh eget massa consequat, euismod pellentesque ipsum gravida. Sed varius, libero ut pretium aliquet, elit elit commodo justo, ut aliquam nulla sapien a augue. Quisque ut suscipit mauris. Vivamus mollis augue eget tortor feugiat malesuada. Vivamus feugiat augue a lacinia tempor.";
 
         TextView description = findViewById(R.id.textView8);
-        description.setText(text_example);
+        description.setText(encodeString(offer.getDescription()));
+
+        TextView titre = findViewById(R.id.textView2);
+        titre.setText(encodeString(offer.getTitle()));
+
+        TextView source = findViewById(R.id.textView3);
+        source.setText(encodeString(source.getText().toString()+offer.getUrl()));
+
+        TextView datePoste = findViewById(R.id.textView4);
+        datePoste.setText(datePoste.getText().toString()+offer.getDatePublication());
+
+        TextView periode = findViewById(R.id.textView9);
+        String textPeriode = "De " + offer.getDateDebut() + " à " + offer.getDateFin();
+        periode.setText(textPeriode);
+
+        TextView renumeration = findViewById(R.id.textView10);
+        String textRemu = "Rénumération : " + offer.getSalaire();
+        renumeration.setText(textRemu);
+
+        TextView fin = findViewById(R.id.textView5);
+        String textfin = "Fin : " + offer.getDateFermeture();
+        fin.setText(textfin);
 
         Button apply = findViewById(R.id.button);
         apply.setOnClickListener(new View.OnClickListener() {
