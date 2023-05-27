@@ -35,6 +35,7 @@ public class WhoAreYou extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SignUpCo.class);
+                intent.putExtra("role","employeur");
                 view.getContext().startActivity(intent);
             }
         });
@@ -43,6 +44,7 @@ public class WhoAreYou extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SignUpCo.class);
+                intent.putExtra("role","agenceinterim");
                 view.getContext().startActivity(intent);
             }
         });

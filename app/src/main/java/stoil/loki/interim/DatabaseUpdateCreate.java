@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
+public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
     private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima";
     private static final String user = "dev_user";
@@ -18,22 +18,14 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
 
     private String requete;
 
-    private Context context;
+    private String res;
 
-    private String res = "";
+    private Context context;
 
     private T callingActivity;
 
-    private U otherActivity;
-
-    public DatabaseConnexion(T callingActivity, U otherActivity) {
+    public DatabaseUpdateCreate(T callingActivity) {
         this.callingActivity = callingActivity;
-        this.otherActivity = otherActivity;
-    }
-
-
-    public String getRes() {
-        return this.res;
     }
 
     public void setRequete(String SQL) {
@@ -55,7 +47,7 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        Toast.makeText(context, "Connexion ... ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "En cours ... ", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -64,24 +56,28 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
             Class.forName("com.mysql.jdbc.Driver");
             Connection coDb = DriverManager.getConnection(url, user, password);
 
-            Log.d("DatabaseConnexion.java", "Connexion ok");
+            Log.d("DatabaseUpdateCreate.java", "Connexion ok");
 
             Statement st = coDb.createStatement();
-            Log.d("DatabaseConnexion.java", "requete : " + this.requete);
+            Log.d("DatabaseUpdateCreate.java", "requete : " + this.requete);
 
-            ResultSet rs = st.executeQuery(this.requete);
-//            ResultSetMetaData rsmd = rs.getMetaData();
+            int rs = st.executeUpdate(this.requete, Statement.RETURN_GENERATED_KEYS);
 
-            while (rs.next()) {
-                res += rs.getString(1).toString() + "\n";
+            if (rs > 0) {
+                ResultSet generatedKeys = st.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int insertedId = generatedKeys.getInt(1);
+                    res = String.valueOf(insertedId);
+                    Log.d("DatabaseUpdateCreate.java", "id ligne = " + res);
+                }
             }
 
-            rs.close();
             st.close();
+            coDb.close();
 
         } catch (Exception e) {
             e.printStackTrace();
-            res = e.toString();
+            res = "probleme";
         }
 
         return res;
@@ -90,14 +86,16 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if (callingActivity != null) {
 
-            if (callingActivity instanceof SignIn) {
-                ((SignIn) callingActivity).onQueryResult(result);
-            } else if (callingActivity instanceof SessionManager) {
-                ((SessionManager) callingActivity).onQueryResult(result);
+
+        if (callingActivity != null) {
+            Log.d("DatabaseUpdateCreate.java", "callingActivity class: " + callingActivity.getClass().getSimpleName());
+            if (callingActivity instanceof MdP) {
+                Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
+                ((MdP) callingActivity).dataAddQuery(Integer.parseInt(result));
             }
         }
+
         res = result;
     }
 }

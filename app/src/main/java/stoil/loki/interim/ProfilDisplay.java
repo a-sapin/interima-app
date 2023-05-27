@@ -53,8 +53,18 @@ public class ProfilDisplay extends AppCompatActivity {
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
         profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
-        profils.add(new ItemProfil(id, "Se connecter", ic, SignIn.class));
+        if(getInfoTokenID() == null) {
+
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.sidentifier, null);
+            profils.add(new ItemProfil(id, "Se connecter", ic, SignIn.class));
+
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.signup, null);
+            profils.add(new ItemProfil(id, "S'inscrire", ic, WhoAreYou.class));
+
+        } else {
+            // mettre la page de deconnection
+
+        }
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
         list_profil.setLayoutManager(layoutManager);

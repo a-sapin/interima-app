@@ -40,6 +40,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
+                android:hint="Email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.537"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -93,8 +94,11 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="32dp"
                 android:ems="10"
+                android:hint="jj/mm/aaaa"
                 android:inputType="date"
                 android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -107,7 +111,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="Prénom"
+                android:hint="Prénom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -116,9 +120,11 @@
                 android:layout_width="222dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.81"
+                app:layout_constraintStart_toEndOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="174dp" />
+                tools:ignore="MissingConstraints" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName4"
@@ -128,7 +134,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="Ville"
+                android:hint="Ville"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.792"
                 app:layout_constraintStart_toEndOf="@+id/textView20"
@@ -174,6 +180,7 @@
                 android:layout_marginTop="32dp"
                 android:ems="10"
                 android:inputType="phone"
+                android:hint="Téléphone"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.59"
@@ -188,7 +195,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="Nom"
+                android:hint="Nom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.736"
                 app:layout_constraintStart_toEndOf="@+id/textView15"

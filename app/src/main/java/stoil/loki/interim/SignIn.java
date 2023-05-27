@@ -27,7 +27,7 @@ public class SignIn extends AppCompatActivity {
 
     private static EditText email, pw;
     private static String role;
-
+    private DatabaseConnexion<SignIn, SignIn> dbCo;
     private String res;
 
     @Override
@@ -73,7 +73,7 @@ public class SignIn extends AppCompatActivity {
                 Log.d("SignIn.java", "bouton co");
                 connexion();
 
-                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this );
+//                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this );
             }
         });
 
@@ -147,7 +147,7 @@ public class SignIn extends AppCompatActivity {
 
     private void connexion() {
         Log.d("SignIn.java", "debut connexion");
-        DatabaseConnexion<SignIn, SignIn> dbCo = new DatabaseConnexion<>(this, SignIn.this);
+        dbCo = new DatabaseConnexion<>(this, SignIn.this);
         dbCo.setContext(getApplicationContext());
 
         String SQL;
@@ -177,10 +177,10 @@ public class SignIn extends AppCompatActivity {
 
     public void onQueryResult(String result) {
         // Traitez le résultat de la requête ici
-        Log.d("SignIn", "Résultat de la requête : " + result);
+        Log.d("SignIn", "Résultat de la requête : " + result + " pw = " + pw.getText().toString() + " res = " + pw.getText().toString().trim().equals(result.trim()));
         res = result;
 
-        if (res != "" && pw.getText().toString().equals(res)) {
+        if (pw.getText().toString().trim().equals(result.trim())) {
             // si l utilisateur existe bien et que son mdp est le bon on peut changer d activité sinon on reste sur la page
             Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
             // recuperation de l id de l utilisateur et de son role
@@ -191,19 +191,14 @@ public class SignIn extends AppCompatActivity {
             Log.d("SignIn", "fin sessionManager ");
             // token fait + connexion ok donc on peut revenir sur l activité principale
             // quand la requete aura une reponse elle se terminera automatiquement
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "Mdp ou email incorrect", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void stopAfterQuery(String result) {
-        Log.d("SignIn.java", "recuperation id = " + result);
-
-        ArrayList<String> value = getInfoToken();
-
-        Log.d("SharedPreferences", "Valeur role : " + value.get(0) + " valeur id : " + value.get(1));
-
-        finish();
-    }
-
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
         ArrayList<String> value = new ArrayList<>();
