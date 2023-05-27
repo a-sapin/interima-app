@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
     //Location Variables//
     double curLong = 2.349014;
     double curLat = 48.864716;
+    boolean geoPermGranted=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,20 +100,25 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
             //LOCATION MANAGER
             // Get the location manager
-//            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//
-//            // Check for location permission
-//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-//                    PackageManager.PERMISSION_GRANTED &&
-//                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-//                            PackageManager.PERMISSION_GRANTED) {
-//                // Do something if perm isnt granted
-//                //#############################################
-//                return;
-//            }
-//
-//
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+            // Check for location permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                // Do something if perm isnt granted
+                //#############################################
+                geoPermGranted=false;
+                return;
+            }
+            else
+            {
+                geoPermGranted=true;
+            }
+
+
+            if (geoPermGranted) locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
 
 
             BottomNavigationView menu = findViewById(R.id.navigation);
@@ -177,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                 System.err.println("Device currently standing at Lo: " + curLong + " La:" + curLat);
             });
 
-            thread1.start();
+            if (geoPermGranted) thread1.start();
 
 
             // search bar
