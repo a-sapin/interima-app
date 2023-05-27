@@ -1,12 +1,17 @@
 package stoil.loki.interim;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,27 +20,121 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CreateOffer extends AppCompatActivity {
 
     private Offer offer;
+    //Intent intent = new Intent(this, MainActivity.class);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.apply);
+        setContentView(R.layout.create_offer);
 
-        Button apply = findViewById(R.id.modifProfil);
+        Button buttonDebut = findViewById(R.id.buttDebut);
+        Button buttonFin = findViewById(R.id.buttFin);
+        Button submit = findViewById(R.id.submit);
 
-        // verifier que tous les champs sont remplis avant de transmettre le apply
-        // mettre un Toast avec le fait que tous les champs ne sont pas remplis par exemple
-        apply.setOnClickListener(new View.OnClickListener() {
+        buttonDebut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
-                Toast.makeText(getApplicationContext(), "Candidature envoyée", Toast.LENGTH_SHORT).show();
-                view.getContext().startActivity(intent);
+            public void onClick(View v) {
+                // Create a Calendar instance to get the current date
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Create a DatePickerDialog and set the initial date to the current date
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOffer.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Set the selected date to the TextView
+                        TextView dateDebutTextView = findViewById(R.id.dateDebut);
+                        String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        dateDebutTextView.setText(selectedDate);
+                        dateDebutTextView.setTextColor(Color.BLACK);
+                    }
+                }, year, month, dayOfMonth);
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
             }
         });
+
+        buttonFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a Calendar instance to get the current date
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Create a DatePickerDialog and set the initial date to the current date
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOffer.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Set the selected date to the TextView
+                        TextView dateDebutTextView = findViewById(R.id.dateFin);
+                        String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        dateDebutTextView.setText(selectedDate);
+                        dateDebutTextView.setTextColor(Color.BLACK);
+                    }
+                }, year, month, dayOfMonth);
+
+                // Show the DatePickerDialog
+                datePickerDialog.show();
+            }
+        });
+
+        //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean validForm = false;
+
+                //TODO: Check if form is valid here
+                if (true) validForm = true;
+
+                if (validForm)
+                {
+                    String titre, description, datedeb, datefin, urlsource, urlimg;
+                    float salaire_H; float geolong; float geolat;
+                    String[] motscles;
+
+                    titre = ((EditText) findViewById(R.id.string_title)).getText().toString();
+                    description = ((EditText) findViewById(R.id.string_desc)).getText().toString();
+                    motscles = ((EditText) findViewById(R.id.string_keywords)).getText().toString().split("\\P{L}+");
+                    datedeb = ((TextView) findViewById(R.id.dateDebut)).getText().toString();
+                    datefin = ((TextView) findViewById(R.id.dateFin)).getText().toString();
+                    urlimg = ((EditText) findViewById(R.id.string_img_url)).getText().toString();
+                    urlsource = ((EditText) findViewById(R.id.string_source)).getText().toString();
+
+
+                    try {
+                        salaire_H = Float.parseFloat(((EditText) findViewById(R.id.float_wage)).getText().toString());
+                        geolong = Float.parseFloat(((EditText) findViewById(R.id.float_long)).getText().toString());
+                        salaire_H = Float.parseFloat(((EditText) findViewById(R.id.float_lat)).getText().toString());
+                    } catch (NumberFormatException e) {
+                        //Do nothing lol
+                        //throw new RuntimeException(e);
+                    }
+
+                    //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
+
+                }
+
+                //Go back to Main//
+                //startActivity(intent);
+
+
+            }
+        });
+
+
+
+
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

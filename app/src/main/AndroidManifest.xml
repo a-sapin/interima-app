@@ -53,6 +53,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Geolocalisation" />
+        <activity android:name=".CreateOffer" />
         <activity android:name=".FullOffer" />
         <activity android:name=".SignIn" />
         <activity android:name=".Notifications" />

@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             this.adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);
 
+            //TEMPORARY INTENT CODE :: SHALL BE REMOVED
+            Intent intent = new Intent(this, CreateOffer.class);
+            startActivity(intent);
+
+
+
 
             //LOCATION MANAGER
             // Get the location manager
