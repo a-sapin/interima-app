@@ -99,11 +99,13 @@ public class CreateOffer extends AppCompatActivity {
 
                 if (validForm)
                 {
-                    String titre, description, motscles, datedeb, datefin, urlsource, urlimg;
+                    String titre, description, datedeb, datefin, urlsource, urlimg;
                     float salaire_H; float geolong; float geolat;
+                    String[] motscles;
+
                     titre = ((EditText) findViewById(R.id.string_title)).getText().toString();
                     description = ((EditText) findViewById(R.id.string_desc)).getText().toString();
-                    motscles = ((EditText) findViewById(R.id.string_keywords)).getText().toString();
+                    motscles = ((EditText) findViewById(R.id.string_keywords)).getText().toString().split("\\P{L}+");
                     datedeb = ((TextView) findViewById(R.id.dateDebut)).getText().toString();
                     datefin = ((TextView) findViewById(R.id.dateFin)).getText().toString();
                     urlimg = ((EditText) findViewById(R.id.string_img_url)).getText().toString();
