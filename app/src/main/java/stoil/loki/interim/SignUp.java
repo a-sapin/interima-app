@@ -4,27 +4,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.format.DateTimeParseException;
 
 public class SignUp extends AppCompatActivity {
 
@@ -73,7 +80,7 @@ public class SignUp extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MdP.class);
+
                 // recuperation de toutes les informations entrées
 
                 EditText emailE = findViewById(R.id.editTextTextEmailAddress2);
@@ -85,10 +92,50 @@ public class SignUp extends AppCompatActivity {
                 EditText prenomE = findViewById(R.id.editTextTextPersonName2);
                 String prenom = prenomE.getText().toString();
 
-//                EditText prenomE = findViewById(R.id.editTextTextPersonName2);
-//                String prenom = prenomE.getText().toString();
+                Spinner natE = findViewById(R.id.spinner);
+                String nat = natE.getSelectedItem().toString();
 
-                view.getContext().startActivity(intent);
+                EditText dateNai = findViewById(R.id.editTextDate);
+                String dateString = dateNai.getText().toString();
+
+                EditText telephoneE = findViewById(R.id.editTextPhone);
+                String tel = telephoneE.getText().toString();
+
+                EditText cityE = findViewById(R.id.editTextTextPersonName4);
+                String city = cityE.getText().toString();
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                try {
+                    LocalDate date = LocalDate.parse(dateString, formatter);
+
+                    if (date != null && !email.equals("") && !nom.equals("") && !prenom.equals("") && !nat.equals("") && !tel.equals("") && !city.equals("")){
+
+                        //si tous les champs sont remplis (un chercheur d emploi doit tout renseigner)
+                        Intent intent = new Intent(view.getContext(), MdP.class);
+
+                        intent.putExtra("role", "chercheuremploi");
+
+                        intent.putExtra("dateNai", date);
+                        intent.putExtra("email", email);
+                        intent.putExtra("nom", nom);
+                        intent.putExtra("prenom", prenom);
+                        intent.putExtra("nat", nat);
+                        intent.putExtra("tel", tel);
+                        intent.putExtra("city", city);
+
+                        view.getContext().startActivity(intent);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (DateTimeParseException e) {
+                    // Gestion de l'exception en cas de format de date incorrect
+                    Toast.makeText(getApplicationContext(), "Format de date incorrect. Veuillez utiliser le format dd/MM/yyyy.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -165,5 +212,12 @@ public class SignUp extends AppCompatActivity {
     public String getInfoTokenRole() {
         ArrayList<String> info = getInfoToken();
         return info.get(0);
+    }
+
+    public void clearToken() {
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
+        editor.remove("role");
+        editor.remove("id");
+        return;
     }
 }

@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DatabaseUpdateCreate<T, U> extends AsyncTask<String, Void, String> {
+public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
     private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima";
     private static final String user = "dev_user";
@@ -24,11 +24,8 @@ public class DatabaseUpdateCreate<T, U> extends AsyncTask<String, Void, String> 
 
     private T callingActivity;
 
-    private U otherActivity;
-
-    public DatabaseUpdateCreate(T callingActivity, U otherActivity) {
+    public DatabaseUpdateCreate(T callingActivity) {
         this.callingActivity = callingActivity;
-        this.otherActivity = otherActivity;
     }
 
     public void setRequete(String SQL) {
@@ -64,9 +61,16 @@ public class DatabaseUpdateCreate<T, U> extends AsyncTask<String, Void, String> 
             Statement st = coDb.createStatement();
             Log.d("DatabaseUpdateCreate.java", "requete : " + this.requete);
 
-            int rs = st.executeUpdate(this.requete);
+            int rs = st.executeUpdate(this.requete, Statement.RETURN_GENERATED_KEYS);
 
-            res = String.valueOf(rs);
+            if (rs > 0) {
+                ResultSet generatedKeys = st.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int insertedId = generatedKeys.getInt(1);
+                    res = String.valueOf(insertedId);
+                    Log.d("DatabaseUpdateCreate.java", "id ligne = " + res);
+                }
+            }
 
             st.close();
             coDb.close();
@@ -82,14 +86,16 @@ public class DatabaseUpdateCreate<T, U> extends AsyncTask<String, Void, String> 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        if (callingActivity != null) {
 
-            if (callingActivity instanceof SignIn) {
-                ((SignIn) callingActivity).onQueryResult(result);
-            } else if (callingActivity instanceof SessionManager) {
-                ((SessionManager) callingActivity).onQueryResult(result);
+
+        if (callingActivity != null) {
+            Log.d("DatabaseUpdateCreate.java", "callingActivity class: " + callingActivity.getClass().getSimpleName());
+            if (callingActivity instanceof MdP) {
+                Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
+                ((MdP) callingActivity).dataAddQuery(Integer.parseInt(result));
             }
         }
+
         res = result;
     }
 }
