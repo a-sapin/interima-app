@@ -93,7 +93,7 @@ public class SavedSearchDisplay extends AppCompatActivity {
             this.searches = searchesQ;
 
             rien.setVisibility(View.GONE);
-            RecyclerView recyclerView = findViewById(R.id.apply_list);
+            RecyclerView recyclerView = findViewById(R.id.search_list);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new SavedSearchAdapter(searches);

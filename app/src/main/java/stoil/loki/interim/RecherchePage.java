@@ -1,15 +1,20 @@
 package stoil.loki.interim;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +23,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RecherchePage extends AppCompatActivity {
 
@@ -29,10 +38,12 @@ public class RecherchePage extends AppCompatActivity {
     private OfferAdapter adapter;
     private static final int PERMISSION_REQUEST_CODE = 1993;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recherche_page);
+        System.out.println(LocalDate.now());
 
         search_bar = (EditText) findViewById(R.id.search_bar);
 
@@ -61,6 +72,7 @@ public class RecherchePage extends AppCompatActivity {
                     dbCo.setContext(getApplicationContext());
                     dbCo.setRequete("SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
                     dbCo.execute("");
+                    SQLSubmit();
                 }
             }
         });
@@ -134,6 +146,23 @@ public class RecherchePage extends AppCompatActivity {
         menu.getMenu().findItem(R.id.recherche).setChecked(true);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void SQLSubmit() {
+        Log.d("RecherchePage.java", "Adding search to saved searches");
+        DatabaseUpdateCreate<RecherchePage> dbCo = new DatabaseUpdateCreate<>(RecherchePage.this, true);
+        dbCo.setContext(getApplicationContext());
+
+        String SQL, search_bar_str;
+        search_bar_str = search_bar.getText().toString();
+        SQL = "INSERT INTO recherche (idUti, metier, lieu, debut, fin, dateRecherche) values ('"+getInfoTokenID()+"', '"+search_bar_str+"', 'NOLIEU', '2023-05-28', '2023-05-28', '"+ LocalDate.now() +"');";
+
+        Log.d("RecherchePage.java", "Requete :" + SQL);
+
+        dbCo.setRequete(SQL);
+        dbCo.execute("");
+
+    }
+
     public void onQueryResult(ArrayList<Offer> offersQ) {
         this.offers = offersQ;
 
@@ -146,6 +175,48 @@ public class RecherchePage extends AppCompatActivity {
         if(offersQ.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Pas de résultat.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public String convertDate(String dateOrigine)
+    {
+        String resConvertedDate = "";
+        String outputFormat = "yyyy-MM-dd";
+        String desiredOutputDate = null;
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormatObj = new SimpleDateFormat(outputFormat);
+
+        try {
+            Date date = inputFormat.parse(dateOrigine);
+            desiredOutputDate = outputFormatObj.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("====== CONVERTDATE IN CREATEOFFER.JAVA =======");
+        System.out.println("Input Date: " + dateOrigine);
+        System.out.println("Desired Output Date: " + desiredOutputDate);
+        resConvertedDate = desiredOutputDate;
+        return resConvertedDate;
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 
 }
