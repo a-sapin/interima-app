@@ -1,12 +1,15 @@
 package stoil.loki.interim;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +33,8 @@ import java.util.List;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> {
     private List<Offer> annonces;
+
+    private View currentView;
     private static final int PERMISSION_REQUEST_CODE = 1993;
 
     public OfferAdapter(ArrayList<Offer> annonces) {
@@ -58,6 +63,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         Offer offer = annonces.get(position);
         holder.titleTextView.setText(encodeString(offer.getTitle()));
         holder.descriptionTextView.setText(encodeString(offer.getUrl()));
+        this.currentView = holder.itemView;
 
         holder.applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,17 +81,44 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
 
                 Drawable imageDrawable = holder.bookmark.getDrawable();
 
+                SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+                ArrayList<String> value = new ArrayList<>();
+                value.add(sharedPreferences.getString("role", null));
+                value.add(sharedPreferences.getString("id", null));
+
+                int id = value.get(1) != null? Integer.parseInt(value.get(1)) : -1;
+
                 Resources resources = holder.itemView.getContext().getResources();
                 Drawable marque = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
                 Drawable marque_vide = ResourcesCompat.getDrawable(resources, R.drawable.marque_page_vide, null);
 
-                if(imageDrawable.getConstantState().equals(marque.getConstantState())) {
+                if(imageDrawable.getConstantState().equals(marque.getConstantState()) && id != -1) {
                     holder.bookmark.setImageDrawable(marque_vide);
-                    // retirer le bookmark de la bdd
 
-                } else {
+                    Log.d("OfferAdapter.java", "debut connexion");
+                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, false);
+                    dbCo.setContext(view.getContext());
+
+                    String SQL = "DELETE FROM interima.favori where idUti = '"+id+"' and idOffre = '"+annonces.get(position).getId()+"';";
+
+                    Log.d("OfferAdapter.java", "Requete :" + SQL);
+
+                    dbCo.setRequete(SQL);
+                    dbCo.execute("");
+
+                } else if (id != -1){
                     holder.bookmark.setImageDrawable(marque);
-                    // ajouter le bookmark dans la bdd
+
+                    Log.d("OfferAdapter.java", "debut connexion");
+                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, false);
+                    dbCo.setContext(view.getContext());
+
+                    String SQL = "INSERT INTO interima.favori (idUti, idOffre) values ('"+id+"', '"+annonces.get(position).getId()+"');";
+
+                    Log.d("OfferAdapter.java", "Requete :" + SQL);
+
+                    dbCo.setRequete(SQL);
+                    dbCo.execute("");
 
                 }
 
@@ -133,6 +166,19 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         });
 
     }
+
+    public void bookmarkOnOff(String result) {
+        ImageButton bookmarkButton = currentView.findViewById(R.id.bookmark);
+        Drawable marque = ResourcesCompat.getDrawable(currentView.getResources(), R.drawable.marque_page, null);
+        Drawable marque_vide = ResourcesCompat.getDrawable(currentView.getResources(), R.drawable.marque_page_vide, null);
+
+        if (result != null && !result.isEmpty()) {
+            bookmarkButton.setImageDrawable(marque_vide);
+        } else {
+            bookmarkButton.setImageDrawable(marque);
+        }
+    }
+
 
     @Override
     public int getItemCount() {

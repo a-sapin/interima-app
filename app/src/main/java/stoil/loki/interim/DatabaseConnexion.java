@@ -96,6 +96,8 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
                 ((SignIn) callingActivity).onQueryResult(result);
             } else if (callingActivity instanceof SessionManager) {
                 ((SessionManager) callingActivity).onQueryResult(result);
+            } else if (callingActivity instanceof OfferAdapter) {
+                ((OfferAdapter) callingActivity).bookmarkOnOff(result);
             }
         }
         res = result;
