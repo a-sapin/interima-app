@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
     //Location Variables//
-    double curLong = 2.349014;
-    double curLat = 48.864716;
-    boolean geoPermGranted=true;
+    double curLong = 0.0;
+    double curLat = 0.0;
+    boolean geoPermGranted = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
         ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
         dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.offre;");
         dbCo.execute("");
 
         File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
@@ -114,16 +116,11 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                             PackageManager.PERMISSION_GRANTED) {
                 // Do something if perm isnt granted
                 //#############################################
-                geoPermGranted=false;
-                return;
-            }
-            else
-            {
-                geoPermGranted=true;
+                geoPermGranted = false;
             }
 
-
-            if (geoPermGranted) locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
+            if (geoPermGranted)
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
 
 
             BottomNavigationView menu = findViewById(R.id.navigation);
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                             // si connecter donner la page du profil
                             // sinon on demande la co ou inscription
                             if (true) {
+                                // ((MainActivity) menu.getContext()).getInfoTokenID() != null
                                 Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                                 startActivity(intentp);
                             } else {
@@ -173,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
             // NOTE : THERES A SIGNIFICANT PROBLEM WITH THIS APPROACH //
 
-            Thread thread1 = new Thread(() -> {
+            /*Thread thread1 = new Thread(() -> {
                 try {
                     Thread.sleep(7000);
                 } catch (InterruptedException e) {
@@ -183,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                 System.err.println("Device currently standing at Lo: " + curLong + " La:" + curLat);
             });
 
-            if (geoPermGranted) thread1.start();
+            if (geoPermGranted) thread1.start();*/
 
 
             // search bar
@@ -216,12 +214,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                 break;
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                    sendIntent.setData(Uri.parse("sms:"));
-                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
-                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
-                    sendIntent.putExtra("sms_body", smsbody);
-                    startActivity(sendIntent);
+                    Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
+                            "de partage par SMS pour partager l'offre.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
                             "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
@@ -244,62 +238,57 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
-        System.err.println("OnLocationChanged() called");
+        //System.err.println("OnLocationChanged() called");
 
         // Use the latitude and longitude values as needed
         // Example: Log the values
-        System.out.println("Latitude: " + latitude);
-        System.out.println("Longitude: " + longitude);
+        //System.out.println("Latitude: " + latitude);
+        //System.out.println("Longitude: " + longitude);
 
-        this.curLat = latitude;
-        this.curLong = longitude;
+        if((this.curLat == latitude) && (this.curLong == longitude)) {
 
-        sortOffers(); //THIS TRIGGERS THE SORTING BASED ON GEOLOCALISATION//
-
-        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        } else {
+            this.curLat = latitude;
+            this.curLong = longitude;
+            System.out.println("Location changed to: "+latitude+", "+longitude);
+            sortOffers();
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this); */
-            }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Do nothing
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
+        }
+    }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+    @Override
+    public void onProviderEnabled(String provider) {}
+
+    @Override
+    public void onProviderDisabled(String provider) {}
+
+
+    public void sortOffers()
+    {
+        for (Offer off : offers) {
+            off.calculateDiff((float) curLong, (float) curLat);
+        }
+
+        Collections.sort(offers, new Comparator<Offer>() {
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
+            public int compare(Offer o1, Offer o2) {
+                // Compare based on DIST from User
+                return Double.compare(o1.getDistFromUser(), o2.getDistFromUser());
+            }});
+        //This calculates the distance
 
-            @Override
-            public void onProviderEnabled(String provider) {
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-            }
-
-
-            public void sortOffers()
-            {
-                for (Offer off : offers) {
-                    off.calculateDiff((float) curLong, (float) curLat);
-                }
-
-                Collections.sort(offers, new Comparator<Offer>() {
-                    @Override
-                    public int compare(Offer o1, Offer o2) {
-                        // Compare based on DIST from User
-                        return Double.compare(o1.getDistFromUser(), o2.getDistFromUser());
-                    }});
-                //This calculates the distance
-
-                //offers.clear();
-                System.out.println("Elements in list offers : "+offers.size());
-                adapter.notifyDataSetChanged();
-            }
+        //offers.clear();
+        //System.out.println("Elements in list offers : "+offers.size());
+        Toast.makeText(getApplicationContext(), "Actualisation de la liste des offres", Toast.LENGTH_SHORT).show();
+        adapter.notifyDataSetChanged();
+    }
 
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);

@@ -89,7 +89,7 @@ public class FullOffer extends AppCompatActivity {
         datePoste.setText(datePoste.getText().toString()+offer.getDatePublication());
 
         TextView periode = findViewById(R.id.textView9);
-        String textPeriode = "De " + offer.getDateDebut() + " à " + offer.getDateFin();
+        String textPeriode = "du " + offer.getDateDebut() + " à " + offer.getDateFin();
         periode.setText(textPeriode);
 
         TextView renumeration = findViewById(R.id.textView10);
@@ -150,8 +150,14 @@ public class FullOffer extends AppCompatActivity {
                                 if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                                     Intent sendIntent = new Intent(Intent.ACTION_VIEW);
                                     sendIntent.setData(Uri.parse("sms:"));
-                                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
-                                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                                    String TITRE = encodeString(offer.getTitle());
+                                    String REMUNERATION = Float.toString(offer.getSalaire());
+                                    String SOURCE = offer.getUrl();
+                                    String smsbody = "Partagé via Interima: "+TITRE+", "+textPeriode+", " +
+                                            REMUNERATION+"€/h";
+                                    if (!SOURCE.isEmpty()){
+                                        smsbody+="("+encodeString(SOURCE)+")";
+                                    }
                                     sendIntent.putExtra("sms_body", smsbody);
                                     startActivity(sendIntent);
                                 } else {

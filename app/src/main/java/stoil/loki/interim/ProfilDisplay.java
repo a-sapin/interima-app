@@ -32,12 +32,21 @@ public class ProfilDisplay extends AppCompatActivity {
 
         int id = 0;
 
+        String userrole = this.getInfoTokenRole();
+        if(userrole != null) {
+            System.out.println(userrole);
+        }
+
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
         profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
-        profils.add(new ItemProfil(id, "Mes favoris", ic, Bookmarks.class));
+        if(userrole != null) {
+            if(userrole.equals("Employeur")) {
+                ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
+                profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
+            }
+        }
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
         profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
@@ -63,8 +72,8 @@ public class ProfilDisplay extends AppCompatActivity {
             profils.add(new ItemProfil(id, "S'inscrire", ic, WhoAreYou.class));
 
         } else {
-            // mettre la page de deconnection
-
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.sidentifier, null);
+            profils.add(new ItemProfil(id, "Se déconnecter", ic, Disconnect.class));
         }
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
@@ -146,5 +155,12 @@ public class ProfilDisplay extends AppCompatActivity {
     public String getInfoTokenRole() {
         ArrayList<String> info = getInfoToken();
         return info.get(0);
+    }
+
+    public void clearToken() {
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
+        editor.remove("role");
+        editor.remove("id");
+        return;
     }
 }

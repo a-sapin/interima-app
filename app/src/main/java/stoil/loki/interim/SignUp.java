@@ -3,6 +3,7 @@ package stoil.loki.interim;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,12 +28,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
-import org.threeten.bp.format.DateTimeParseException;
+//import org.threeten.bp.LocalDate;
+//import org.threeten.bp.format.DateTimeFormatter;
+//import org.threeten.bp.format.DateTimeParseException;
 
 public class SignUp extends AppCompatActivity {
 
@@ -78,6 +83,7 @@ public class SignUp extends AppCompatActivity {
         }
 
         next.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
 
@@ -218,6 +224,7 @@ public class SignUp extends AppCompatActivity {
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
         editor.remove("role");
         editor.remove("id");
+        editor.apply();
         return;
     }
 }
