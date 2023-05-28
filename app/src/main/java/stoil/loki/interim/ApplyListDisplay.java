@@ -36,7 +36,11 @@ public class ApplyListDisplay extends AppCompatActivity {
 
         ListingCandidatureData<ApplyListDisplay> dbCo = new ListingCandidatureData<>(ApplyListDisplay.this);
         dbCo.setContext(getApplicationContext());
-        dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
+        if(this.getInfoTokenRole() == "Chercheur d'emploi") {
+            dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
+        } else {
+            dbCo.setRequete("Select * from interima.candidature where id IN (SELECT idOffre from interima.candidatureoffre WHERE idOffre IN (SELECT id from interima.offre WHERE idEmp='"+ getInfoTokenID() +"'));");
+        }
         dbCo.execute("");
 
 //        for(int i = 0; i < 10; i++) {

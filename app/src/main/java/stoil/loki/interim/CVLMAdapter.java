@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +40,26 @@ public class CVLMAdapter extends RecyclerView.Adapter<CVLMAdapter.ViewHolder> {
         return new CVLMAdapter.ViewHolder(view);
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull CVLMAdapter.ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getOffertitle());
+        holder.titleTextView.setText(encodeString(apply.getOffertitle()));
+        holder.status.setText(encodeString(apply.getStatut()));
 
         holder.cv_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://www.example.com";
+                String url = apply.getLienCV();
                 Intent icv = new Intent(Intent.ACTION_VIEW);
                 icv.setData(Uri.parse(url));
                 view.getContext().startActivity(icv);
@@ -57,7 +69,7 @@ public class CVLMAdapter extends RecyclerView.Adapter<CVLMAdapter.ViewHolder> {
         holder.lm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://www.example.com";
+                String url = apply.getLienLM();
                 Intent ilm = new Intent(Intent.ACTION_VIEW);
                 ilm.setData(Uri.parse(url));
                 view.getContext().startActivity(ilm);

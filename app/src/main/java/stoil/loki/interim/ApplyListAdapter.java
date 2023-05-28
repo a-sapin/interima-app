@@ -64,11 +64,19 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
         holder.see_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.getInfoTokenID(view) != "Chercheur d'emploi" && holder.getInfoTokenID(view) != null) {
+                System.out.println(holder.getInfoTokenRole(view));
+                if(holder.getInfoTokenRole(view).equals("Employeur")) {
                     Intent intent = new Intent(view.getContext(), ApplyListAg.class);
+                    intent.putExtra("lienCV", encodeString(apply.getLienCV()));
+                    intent.putExtra("lienLM", encodeString(apply.getLienLM()));
+                    intent.putExtra("titre", encodeString(apply.getOffertitle()));
+                    intent.putExtra("id", apply.getId());
                     view.getContext().startActivity(intent);
                 } else {
                     Intent intent = new Intent(view.getContext(), ApplyList.class);
+                    intent.putExtra("lienCV", encodeString(apply.getLienCV()));
+                    intent.putExtra("lienLM", encodeString(apply.getLienLM()));
+                    intent.putExtra("titre", encodeString(apply.getOffertitle()));
                     view.getContext().startActivity(intent);
                 }
             }

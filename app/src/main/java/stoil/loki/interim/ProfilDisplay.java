@@ -39,23 +39,24 @@ public class ProfilDisplay extends AppCompatActivity {
 
         Resources resources = getApplicationContext().getResources();
         Drawable ic = ResourcesCompat.getDrawable(resources, R.drawable.profil, null);
-        profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
+        //profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
 
         if(userrole != null) {
-            if(userrole.equals("Employeur")) {
+            if(userrole.equals("Employeur") || userrole.equals("Agence d'intérim")) {
                 ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
                 profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
             }
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
+            profils.add(new ItemProfil(id, "Mes recherches", ic, SavedSearchDisplay.class));
+
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
+            profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyListDisplay.class));
+
+            if(userrole.equals("Chercheur d'emploi")) {
+                ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
+                profils.add(new ItemProfil(id, "Mes CV & lettres de motivation", ic, CVLMDisplay.class));
+            }
         }
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
-        profils.add(new ItemProfil(id, "Mes recherches", ic, SavedSearchDisplay.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
-        profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyListDisplay.class));
-
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.lettre_de_motivation, null);
-        profils.add(new ItemProfil(id, "Mes CV & lettres de motivation", ic, CVLMDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
         profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));

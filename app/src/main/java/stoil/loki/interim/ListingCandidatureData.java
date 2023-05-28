@@ -130,6 +130,9 @@ public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
             } else if (callingActivity instanceof ApplyReuseDisplay) {
                 Log.d("ListingCandidatureData.java", "Requete ok + passage a ApplyReuseDisplay");
                 ((ApplyReuseDisplay) callingActivity).onQueryResult(candidatures);
+            } else if (callingActivity instanceof CVLMDisplay) {
+                Log.d("ListingCandidatureData.java", "Requete ok + passage a CVLMDisplay");
+                ((CVLMDisplay) callingActivity).onQueryResult(candidatures);
             }
         }
         res = result;

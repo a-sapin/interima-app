@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,6 +20,8 @@ import java.util.ArrayList;
 
 public class CVLMDisplay extends AppCompatActivity {
 
+    private ArrayList<CandidatureData> candidatures = new ArrayList<>();
+    CVLMAdapter adapter;
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
     @Override
@@ -23,18 +29,10 @@ public class CVLMDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cvlm_display);
 
-        ArrayList<CandidatureData> candidatures = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++) {
-            candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
-        }
-
-        RecyclerView list_candidatures = findViewById(R.id.cvlm_list);
-        list_candidatures.setLayoutManager(layoutManager);
-        list_candidatures.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
-        CVLMAdapter adapter = new CVLMAdapter(candidatures);
-        list_candidatures.setAdapter(adapter);
+        ListingCandidatureData<CVLMDisplay> dbCo = new ListingCandidatureData<>(CVLMDisplay.this);
+        dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
+        dbCo.execute("");
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -83,5 +81,36 @@ public class CVLMDisplay extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onQueryResult(ArrayList<CandidatureData> candidaturesQ) {
+
+        this.candidatures = candidaturesQ;
+
+        RecyclerView recyclerView = findViewById(R.id.cvlm_list);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        this.adapter = new CVLMAdapter(candidatures);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 }
