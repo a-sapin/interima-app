@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -115,6 +116,36 @@ public class Apply extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
+
+                EditText nomE = findViewById(R.id.nomView);
+                String nom = nomE.getText().toString();
+
+                EditText prenomE = findViewById(R.id.nomServiceView);
+                String prenom = prenomE.getText().toString();
+
+                Spinner natE = findViewById(R.id.siretView);
+                String nat = natE.getSelectedItem().toString();
+
+                EditText lienCVE = findViewById(R.id.button16);
+                String lienCV = lienCVE.getText().toString();
+
+                EditText lienLME = findViewById(R.id.button17);
+                String lienLM = lienLME.getText().toString();
+
+                EditText commentaireE = findViewById(R.id.editTextTextPersonName9);
+                String commentaire = commentaireE.getText().toString();
+
+                Log.d("Apply.java", "debut connexion");
+                DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(Apply.this, false);
+                dbCo.setContext(getApplicationContext());
+
+                String SQL = "INSERT INTO interima.candidature (idUti, lienCV, lienLM, commentaires, statut) values ('"+getInfoTokenID()+"', '"+lienCV+"', '"+lienLM+"', '"+commentaire+"', 'EN ATTENTE');";
+
+                Log.d("Apply.java", "Requete : " + SQL);
+
+                dbCo.setRequete(SQL);
+                dbCo.execute("");
+
                 Toast.makeText(getApplicationContext(), "Candidature envoyée", Toast.LENGTH_SHORT).show();
                 view.getContext().startActivity(intent);
             }
