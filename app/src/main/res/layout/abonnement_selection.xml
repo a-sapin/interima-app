@@ -22,20 +22,40 @@
         android:layout_width="411dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:nestedScrollingEnabled="true"
         android:layout_marginBottom="8dp"
+        android:nestedScrollingEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/button10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedImage">
+        app:layout_constraintTop_toBottomOf="@+id/selectedImage"
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/textView8"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/test"
-            android:textSize="16sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/prix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prix : " />
+
+            <TextView
+                android:id="@+id/avantages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Avantages : " />
+
+            <TextView
+                android:id="@+id/conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Conditions : " />
+        </LinearLayout>
+
 
     </ScrollView>
 

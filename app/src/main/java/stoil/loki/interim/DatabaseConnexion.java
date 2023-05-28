@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
 
@@ -21,6 +23,8 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
     private Context context;
 
     private String res = "";
+
+    private ArrayList<AbonnementData> abonnementData = new ArrayList<>();
 
     private T callingActivity;
 
@@ -58,6 +62,16 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
 //        Toast.makeText(context, "Connexion ... ", Toast.LENGTH_SHORT).show();
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     @Override
     protected String doInBackground(String... params) {
         try {
@@ -73,6 +87,18 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
 //            ResultSetMetaData rsmd = rs.getMetaData();
 
             while (rs.next()) {
+                if (callingActivity instanceof GridAbonnement) {
+                    int id = rs.getInt("id");
+                    String nom = rs.getString("nom");
+                    float prix = rs.getFloat("prix");
+                    String avantages = rs.getString("avantages");
+                    String conditions = rs.getString("conditions");
+
+                    Log.d("DatabaseConnexion.java", "nom  : " + nom);
+
+                    AbonnementData a = new AbonnementData(id, encodeString(nom), prix, encodeString(avantages), encodeString(conditions));
+                    abonnementData.add(a);
+                }
                 res += rs.getString(1).toString() + "\n";
             }
 
@@ -98,6 +124,8 @@ public class DatabaseConnexion<T, U> extends AsyncTask<String, Void, String> {
                 ((SessionManager) callingActivity).onQueryResult(result);
             } else if (callingActivity instanceof OfferAdapter) {
                 ((OfferAdapter) callingActivity).bookmarkOnOff(result);
+            } else if (callingActivity instanceof GridAbonnement) {
+                ((GridAbonnement) callingActivity).onQueryResult(result, abonnementData);
             }
         }
         res = result;

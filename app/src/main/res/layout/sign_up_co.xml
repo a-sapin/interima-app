@@ -37,12 +37,13 @@
                 android:id="@+id/editTextTextEmailAddress2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:ems="10"
+                android:hint="email"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.593"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
@@ -52,11 +53,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="36dp"
                 android:ems="10"
+                android:hint="Adresse"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -64,23 +65,23 @@
                 android:id="@+id/editTextTextPersonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="28dp"
                 android:ems="10"
+                android:hint="Nom Entreprise"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.73"
+                app:layout_constraintHorizontal_bias="0.697"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="116dp"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="40dp"
-                android:text="Adresse email* : "
+                android:text="Adresse email 1 * : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,6 +92,7 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="number"
+                android:hint="N. Siret"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.747"
@@ -103,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
-                android:text="Sous-service : "
+                android:text="Sous-service * : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -120,10 +122,10 @@
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="95dp"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:text="Code postal :"
+                android:text="Nom département * :"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -133,20 +135,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10"
+                android:hint="Nom département"
                 android:inputType="textPostalAddress"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.691"
+                app:layout_constraintHorizontal_bias="0.675"
                 app:layout_constraintStart_toEndOf="@+id/textView21"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
             <TextView
                 android:id="@+id/textView22"
-                android:layout_width="70dp"
-                android:layout_height="29dp"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="40dp"
-                android:text="Ville :"
+                android:layout_marginTop="32dp"
+                android:text="Nom Contact 1 * :"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -157,11 +160,11 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:ems="10"
+                android:hint="Nom Contact 1"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.456"
+                app:layout_constraintHorizontal_bias="0.36"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress" />
 
@@ -182,7 +185,7 @@
                 android:layout_width="87dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="36dp"
                 android:text="Nom de l'entreprise* : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -213,11 +216,11 @@
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="91dp"
-                android:layout_height="26dp"
+                android:layout_width="101dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="40dp"
-                android:text="Téléphone :"
+                android:text="Téléphone 1 * :"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -228,6 +231,7 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="phone"
+                android:hint="Téléphone"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.702"
@@ -236,11 +240,11 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="101dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="40dp"
-                android:text="Site internet :"
+                android:text="Nom Contact 2 :"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -252,7 +256,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
+                android:hint="Sous-Service"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toEndOf="@+id/textView26"
@@ -264,7 +268,7 @@
                 android:layout_height="34dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:text="Lien LinkedIn : "
+                android:text="Email Contact 2 : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
@@ -276,7 +280,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
+                android:hint="Nom Contact 2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.63"
                 app:layout_constraintStart_toEndOf="@+id/textView27"
@@ -290,7 +294,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text=""
+                android:hint="Email Contact 2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.627"
                 app:layout_constraintStart_toEndOf="@+id/textView27"
@@ -302,7 +306,7 @@
                 android:layout_height="36dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="Personne contact : "
+                android:text="Téléphone Contact 2 : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -312,8 +316,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text=""
+                android:inputType="number"
+                android:hint="Téléphone Contact 2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.621"
                 app:layout_constraintStart_toEndOf="@+id/textView29"

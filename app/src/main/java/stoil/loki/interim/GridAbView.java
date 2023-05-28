@@ -15,14 +15,34 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class GridAbView extends AppCompatActivity {
     ImageView selectedImage;
-    TextView title;
+    TextView title, prix, avantages, conditions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abonnement_selection);
         selectedImage = (ImageView) findViewById(R.id.selectedImage);
         title = findViewById(R.id.textView37);
-        Intent intent = getIntent(); // get Intent which we set from Previous Activity
+
+        Intent intent = getIntent();
+
+        int id = intent.getIntExtra("id", 0);
+
+        TextView titre = findViewById(R.id.textView37);
+        titre.setText(intent.getStringExtra("titre"));
+
+        TextView prix = findViewById(R.id.prix);
+        String prixT = "Prix : " + intent.getFloatExtra("prix", 0);
+        prix.setText(prixT);
+
+        TextView avantages = findViewById(R.id.avantages);
+        String avantagesT = "Abonnements : "+intent.getStringExtra("abonnements");
+        avantages.setText(avantagesT);
+
+        TextView conditions = findViewById(R.id.conditions);
+        String conditionsT = "Conditions : "+intent.getStringExtra("conditions");
+        conditions.setText(conditionsT);
+
+
         selectedImage.setImageResource(intent.getIntExtra("image", 0));
         title.setText(intent.getStringExtra("titre"));
 
@@ -32,9 +52,23 @@ public class GridAbView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // passer au paiement donc refaire la redirection vers la bonne page
-                Intent intent = new Intent(view.getContext(), MdP.class);
+                Intent intents = new Intent(view.getContext(), MdP.class);
 
-                view.getContext().startActivity(intent);
+                intents.putExtra("idA", id );
+                intents.putExtra("role", intent.getStringExtra("role") );
+                intents.putExtra("email1", intent.getStringExtra("email1") );
+                intents.putExtra("departement", intent.getStringExtra("departement"));
+                intents.putExtra("adresse", intent.getStringExtra("adresse"));
+                intents.putExtra("nomEntreprise", intent.getStringExtra("nomEntreprise"));
+                intents.putExtra("nom1", intent.getStringExtra("nom1"));
+                intents.putExtra("telephone1", intent.getStringExtra("telephone1"));
+                intents.putExtra("siret", intent.getStringExtra("siret"));
+                intents.putExtra("sousService", intent.getStringExtra("sousService"));
+                intents.putExtra("nom2", intent.getStringExtra("nom2"));
+                intents.putExtra("email2", intent.getStringExtra("email2"));
+                intents.putExtra("tel2", intent.getStringExtra("tel2"));
+
+                view.getContext().startActivity(intents);
             }
         });
 

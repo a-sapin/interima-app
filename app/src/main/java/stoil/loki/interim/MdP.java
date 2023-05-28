@@ -146,6 +146,57 @@ public class MdP extends AppCompatActivity {
 
             dbCo.setRequete(SQL);
             dbCo.execute("");
+        } else if (role.equals("employeur")) {
+
+            int idA = intent.getIntExtra("idA", 0);
+            String email1 = intent.getStringExtra("email1");
+            String nomEntreprise = intent.getStringExtra("nomEntreprise");
+            String departement = intent.getStringExtra("departement");
+            String nom1 = intent.getStringExtra("nom1");
+            String telephone1 = intent.getStringExtra("telephone1");
+            String siret = intent.getStringExtra("siret");
+            String sousService = intent.getStringExtra("sousService");
+            String nom2 = intent.getStringExtra("nom2");
+            String email2 = intent.getStringExtra("email2");
+            String tel2 = intent.getStringExtra("tel2");
+            String adresse = intent.getStringExtra("adresse");
+
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
+            dbCo.setContext(getApplicationContext());
+
+            String SQL = "INSERT INTO interima.employeur (idUti, nomEntreprise, nomServDept, nomSousSD, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+departement+"', '"+sousService+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
+
+            Log.d("MdP.java", "Requete :" + SQL);
+
+            dbCo.setRequete(SQL);
+            dbCo.execute("");
+
+
+        } else if (role.equals("agenceinterim")) {
+
+            int idA = intent.getIntExtra("idA", 0);
+            String email1 = intent.getStringExtra("email1");
+            String nomEntreprise = intent.getStringExtra("nomEntreprise");
+            String departement = intent.getStringExtra("departement");
+            String nom1 = intent.getStringExtra("nom1");
+            String telephone1 = intent.getStringExtra("telephone1");
+            String siret = intent.getStringExtra("siret");
+            String sousService = intent.getStringExtra("sousService");
+            String nom2 = intent.getStringExtra("nom2");
+            String email2 = intent.getStringExtra("email2");
+            String tel2 = intent.getStringExtra("tel2");
+            String adresse = intent.getStringExtra("adresse");
+
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
+            dbCo.setContext(getApplicationContext());
+
+            String SQL = "INSERT INTO agenceinterim (idUti, nomAgence, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
+
+            Log.d("MdP.java", "Requete :" + SQL);
+
+            dbCo.setRequete(SQL);
+            dbCo.execute("");
+
         }
 
         Intent home = new Intent(getApplicationContext(), MainActivity.class);
