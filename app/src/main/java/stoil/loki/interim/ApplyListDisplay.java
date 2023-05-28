@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,19 +36,19 @@ public class ApplyListDisplay extends AppCompatActivity {
 
         ListingCandidatureData<ApplyListDisplay> dbCo = new ListingCandidatureData<>(ApplyListDisplay.this);
         dbCo.setContext(getApplicationContext());
-        dbCo.setRequete("Select * from interima.candidature;");
+        dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
         dbCo.execute("");
 
-        for(int i = 0; i < 10; i++) {
-            candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
-        }
-
-        RecyclerView list_candidatures = findViewById(R.id.apply_list);
-        list_candidatures.setLayoutManager(layoutManager);
-        list_candidatures.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
-        ApplyListAdapter adapter = new ApplyListAdapter(candidatures);
-        list_candidatures.setAdapter(adapter);
+//        for(int i = 0; i < 10; i++) {
+//            candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
+//        }
+//
+//        RecyclerView list_candidatures = findViewById(R.id.apply_list);
+//        list_candidatures.setLayoutManager(layoutManager);
+//        list_candidatures.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//
+//        ApplyListAdapter adapter = new ApplyListAdapter(candidatures);
+//        list_candidatures.setAdapter(adapter);
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -114,13 +118,42 @@ public class ApplyListDisplay extends AppCompatActivity {
     }
 
     public void onQueryResult(ArrayList<CandidatureData> candidaturesQ) {
-        this.candidatures = candidaturesQ;
 
-        RecyclerView recyclerView = findViewById(R.id.apply_list);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        this.adapter = new ApplyListAdapter(candidatures);
-        recyclerView.setAdapter(adapter);
+        TextView rien = findViewById(R.id.empty_textview);
+
+        if (candidaturesQ.isEmpty()){
+            rien.setVisibility(View.VISIBLE);
+
+        } else {
+            this.candidatures = candidaturesQ;
+
+            rien.setVisibility(View.GONE);
+            RecyclerView recyclerView = findViewById(R.id.apply_list);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            this.adapter = new ApplyListAdapter(candidatures);
+            recyclerView.setAdapter(adapter);
+        }
+
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 
 }
