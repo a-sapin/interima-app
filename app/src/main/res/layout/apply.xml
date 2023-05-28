@@ -142,25 +142,25 @@
                 app:layout_constraintStart_toEndOf="@+id/textView41"
                 app:layout_constraintTop_toBottomOf="@+id/nomSousServiceView" />
 
-            <Button
+            <EditText
                 android:id="@+id/button16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="CV"
+                android:layout_marginTop="36dp"
+                android:hint="Lien CV"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.307"
+                app:layout_constraintHorizontal_bias="0.288"
                 app:layout_constraintStart_toEndOf="@+id/textView42"
                 app:layout_constraintTop_toBottomOf="@+id/siretView" />
 
-            <Button
+            <EditText
                 android:id="@+id/button17"
-                android:layout_width="146dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:text="Lettre de motivation"
+                android:layout_marginTop="52dp"
+                android:hint="Lien Lettre de motivation"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.145"
+                app:layout_constraintHorizontal_bias="0.291"
                 app:layout_constraintStart_toEndOf="@+id/textView43"
                 app:layout_constraintTop_toBottomOf="@+id/button16" />
 

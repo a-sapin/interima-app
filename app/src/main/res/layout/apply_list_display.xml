@@ -42,6 +42,7 @@
         android:textSize="18sp"
         android:visibility="gone" />
 
+
     <include
         android:id="@+id/menu"
         layout="@layout/footer_menu"

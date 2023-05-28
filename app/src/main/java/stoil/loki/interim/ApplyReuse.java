@@ -6,14 +6,30 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ApplyReuse extends AppCompatActivity {
 
@@ -23,12 +39,42 @@ public class ApplyReuse extends AppCompatActivity {
 
         Button select = findViewById(R.id.modifProfil);
 
+        DatabaseUserData<ApplyReuse> dbCo = new DatabaseUserData<>(ApplyReuse.this);
+        dbCo.setContext(getApplicationContext());
+        String SQL = "Select * from interima.chercheuremploi where idUti = '"+getInfoTokenID()+"' ;";
+        dbCo.setRequete(SQL);
+        dbCo.execute("");
+
+        Intent intentp = getIntent();
+
+        TextView titre = findViewById(R.id.textView48);
+        titre.setText(intentp.getStringExtra("titre"));
+
+        TextView lienCV = findViewById(R.id.button16);
+        lienCV.setText(intentp.getStringExtra("lienCV"));
+
+        TextView lienLM = findViewById(R.id.button17);
+        lienLM.setText(intentp.getStringExtra("lienLM"));
+
+        int id = intentp.getIntExtra("id", 0);
+
         // verifier que tous les champs sont remplis avant de transmettre le apply
         // mettre un Toast avec le fait que tous les champs ne sont pas remplis par exemple
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Apply.class);
+
+                TextView nom = findViewById(R.id.nomView);
+                TextView prenom = findViewById(R.id.nomServiceView);
+                TextView nat = findViewById(R.id.siretView);
+
+                intent.putExtra("nom", nom.getText());
+                intent.putExtra("id", id);
+                intent.putExtra("prenom", prenom.getText());
+                intent.putExtra("lienCV", lienCV.getText());
+                intent.putExtra("lienLM", lienLM.getText());
+                intent.putExtra("nat", nat.getText());
 
                 view.getContext().startActivity(intent);
             }
@@ -79,6 +125,33 @@ public class ApplyReuse extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
+    public void onQueryResult(ArrayList<String> userData, ArrayList<String> candidatureData) {
+
+        TextView nom = findViewById(R.id.nomView);
+        nom.setText(encodeString(userData.get(0)));
+
+        TextView prenom = findViewById(R.id.nomServiceView);
+        prenom.setText(encodeString(userData.get(1)));
+
+        TextView nat = findViewById(R.id.siretView);
+        nat.setText(encodeString(userData.get(2)));
+
+        ListView utiliseDans = findViewById(R.id.recyclerView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, candidatureData);
+        utiliseDans.setAdapter(adapter);
 
     }
 

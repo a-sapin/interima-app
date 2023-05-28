@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,15 +42,28 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
         return new ViewHolder(view);
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ApplyReuseAdapter.ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getOffertitle());
+        holder.titleTextView.setText(encodeString(apply.getOffertitle()));
 
         holder.select_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Apply.class);
+                intent.putExtra("lienCV", encodeString(list_apply.get(position).getLienCV()));
+                intent.putExtra("lienLM", encodeString(list_apply.get(position).getLienLM()));
+                intent.putExtra("id", list_apply.get(position).getId());
                 // recuperer les donnees de la candidature et preremplir une candidature
                 view.getContext().startActivity(intent);
             }
@@ -60,7 +74,10 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
             public void onClick(View view) {
                 // voir la candidature
                 Intent intent = new Intent(view.getContext(), ApplyReuse.class);
-                // passer les données pour les afficher dans une candidature
+                intent.putExtra("lienCV", encodeString(list_apply.get(position).getLienCV()));
+                intent.putExtra("lienLM", encodeString(list_apply.get(position).getLienLM()));
+                intent.putExtra("titre", encodeString(list_apply.get(position).getOffertitle()));
+                intent.putExtra("id", list_apply.get(position).getId());
                 view.getContext().startActivity(intent);
             }
         });
@@ -107,7 +124,6 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView titleTextView;
-        public TextView source;
         public Button select_button;
         public ImageButton see;
         public ImageButton dot;
@@ -115,7 +131,6 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
         public ViewHolder(View view) {
             super(view);
             titleTextView = view.findViewById(R.id.title);
-            source = view.findViewById(R.id.description);
             select_button = view.findViewById(R.id.select_button);
             see = view.findViewById(R.id.see);
             dot = view.findViewById(R.id.dot);
