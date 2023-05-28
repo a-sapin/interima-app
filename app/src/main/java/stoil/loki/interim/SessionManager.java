@@ -72,6 +72,7 @@ public class SessionManager<T extends Activity, U extends Activity> {
         SharedPreferences.Editor editor = context.getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
         editor.remove("role");
         editor.remove("id");
+        editor.apply();
         return;
     }
 }

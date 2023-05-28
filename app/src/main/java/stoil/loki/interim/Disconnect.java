@@ -26,6 +26,7 @@ public class Disconnect extends AppCompatActivity {
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
         editor.remove("role");
         editor.remove("id");
+        editor.apply();
         return;
     }
 
