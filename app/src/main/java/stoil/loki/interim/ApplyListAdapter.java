@@ -25,6 +25,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,15 +45,26 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
         return new ApplyListAdapter.ViewHolder(view);
     }
 
+    private String encodeString(String text) {
+        try {
+            byte[] utf8Bytes = text.getBytes("ISO-8859-1");
+            return new String(utf8Bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return text;
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ApplyListAdapter.ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getOffertitle());
+        holder.titleTextView.setText(encodeString(apply.getOffertitle()));
+        holder.status.setText(encodeString(apply.getStatut()));
 
         holder.see_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.getInfoTokenID(view) != "ChercheurEmploi" && holder.getInfoTokenID(view) != null) {
+                if(holder.getInfoTokenID(view) != "Chercheur d'emploi" && holder.getInfoTokenID(view) != null) {
                     Intent intent = new Intent(view.getContext(), ApplyListAg.class);
                     view.getContext().startActivity(intent);
                 } else {

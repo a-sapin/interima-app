@@ -68,8 +68,6 @@ public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
             Log.d("DatabaseConnexion.java", "Connexion ok");
 
             Statement st = coDb.createStatement();
-            //String SQL = "Select * from interima.offre;";
-            //this.requete = SQL;
             Log.d("DatabaseConnexion.java", "requete : " + this.requete);
 
             ResultSet rs = st.executeQuery(this.requete);
@@ -91,6 +89,9 @@ public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
                     candidatures.add(cd);
 
             }
+            for(int i = 0; i < candidatures.size(); i++) {
+                Log.d("DatabaseConnexion.java", "candidature : " + candidatures.get(i).getId());
+            }
 
             rs.close();
             st.close();
@@ -99,7 +100,9 @@ public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
             Statement st2 = coDb2.createStatement();
 
             for(CandidatureData cd : candidatures) {
-                ResultSet rs2 = st2.executeQuery("SELECT id, titre from interima.offre WHERE interima.offre.id = (SELECT idOffre from interima.candidatureoffre WHERE interima.candidatureoffre.idOffre="+cd.getIdOffre()+");");
+                String SQL = "SELECT id, titre from interima.offre WHERE id = (SELECT idOffre from interima.candidatureoffre WHERE idCandidature="+cd.getId()+");";
+                Log.d("DatabaseConnexion.java", "requete : " + SQL);
+                ResultSet rs2 = st2.executeQuery(SQL);
                 while(rs2.next()) {
                     System.out.println(rs2.getInt("id"));
                     cd.setIdOffre(rs2.getInt("id"));
