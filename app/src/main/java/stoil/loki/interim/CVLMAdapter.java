@@ -42,7 +42,7 @@ public class CVLMAdapter extends RecyclerView.Adapter<CVLMAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CVLMAdapter.ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getTitle());
+        holder.titleTextView.setText(apply.getOffertitle());
 
         holder.cv_button.setOnClickListener(new View.OnClickListener() {
             @Override

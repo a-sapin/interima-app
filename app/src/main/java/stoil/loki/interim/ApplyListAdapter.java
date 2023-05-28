@@ -47,7 +47,7 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ApplyListAdapter.ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getTitle());
+        holder.titleTextView.setText(apply.getOffertitle());
 
         holder.see_button.setOnClickListener(new View.OnClickListener() {
             @Override
