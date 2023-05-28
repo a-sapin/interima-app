@@ -64,25 +64,14 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Titre de l'annonce"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
                 app:layout_constraintHorizontal_bias="0.782"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="51dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="12dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/langues" />
 
             <TextView
                 android:id="@+id/textView3"
