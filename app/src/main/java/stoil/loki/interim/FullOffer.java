@@ -93,7 +93,7 @@ public class FullOffer extends AppCompatActivity {
         periode.setText(textPeriode);
 
         TextView renumeration = findViewById(R.id.textView10);
-        String textRemu = "Rénumération : " + offer.getSalaire();
+        String textRemu = "Rénumération : " + offer.getSalaire()+"€/hr.";
         renumeration.setText(textRemu);
 
         TextView fin = findViewById(R.id.textView5);
@@ -154,9 +154,9 @@ public class FullOffer extends AppCompatActivity {
                                     String REMUNERATION = Float.toString(offer.getSalaire());
                                     String SOURCE = offer.getUrl();
                                     String smsbody = "Partagé via Interima: "+TITRE+", "+textPeriode+", " +
-                                            REMUNERATION+"€/h";
+                                            REMUNERATION+"€/hr.";
                                     if (!SOURCE.isEmpty()){
-                                        smsbody+="("+encodeString(SOURCE)+")";
+                                        smsbody+=" ("+encodeString(SOURCE)+")";
                                     }
                                     sendIntent.putExtra("sms_body", smsbody);
                                     startActivity(sendIntent);
