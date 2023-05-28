@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +20,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateOffer extends AppCompatActivity {
 
     private Offer offer;
     //Intent intent = new Intent(this, MainActivity.class);
+    private DatabaseUpdateCreate<CreateOffer> dbCo;
+
+    String titre, description, datedeb, datefin, urlsource, urlimg;
+    float salaire_H; float geolong; float geolat;
+    String[] motscles;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,9 +108,6 @@ public class CreateOffer extends AppCompatActivity {
 
                 if (validForm)
                 {
-                    String titre, description, datedeb, datefin, urlsource, urlimg;
-                    float salaire_H; float geolong; float geolat;
-                    String[] motscles;
 
                     titre = ((EditText) findViewById(R.id.string_title)).getText().toString();
                     description = ((EditText) findViewById(R.id.string_desc)).getText().toString();
@@ -121,8 +127,11 @@ public class CreateOffer extends AppCompatActivity {
                         //throw new RuntimeException(e);
                     }
 
-                    //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
+                    datedeb = convertDate(datedeb);
+                    datefin = convertDate(datefin);
 
+                    //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
+                    SQLSubmit();
                 }
 
                 //Go back to Main//
@@ -185,6 +194,65 @@ public class CreateOffer extends AppCompatActivity {
         });
 
     }
+
+
+    private void SQLSubmit() {
+        Log.d("SignIn.java", "Starting connection from CreateOffer.java");
+        dbCo = new DatabaseUpdateCreate<>(CreateOffer.this, true);
+        dbCo.setContext(getApplicationContext());
+
+        String SQL;
+        //SQL = "SELECT mdp FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email.getText().toString()+"');";
+        SQL = "INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description) values ('"+getInfoTokenID()+"', '"+titre+"', '2023-05-01', '2023-06-02', '"+datedeb+"', '"+datefin+"', '"+urlsource+"', '77.5', '"+geolat+"', '"+geolong+"', '"+urlimg+"', '"+description+"');";
+
+
+        Log.d("CreateOffer.java", "Requete :" + SQL);
+
+        dbCo.setRequete(SQL);
+        dbCo.execute("");
+
+    }
+
+
+    public void onQueryResult(String result) {
+        // Traitez le résultat de la requête ici
+        //Log.d("SignIn", "Résultat de la requête : " + result + " pw = " + pw.getText().toString() + " res = " + pw.getText().toString().trim().equals(result.trim()));
+        String res = result;
+        if (res!="1")
+        {
+             System.out.println("Successful insertion to database");
+             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+             startActivity(intent);
+             finish();
+
+        }
+        else System.out.println("Something went wrong.");
+    }
+
+    public String convertDate(String dateOrigine)
+    {
+        String resConvertedDate = "";
+        String outputFormat = "yyyy-MM-dd";
+        String desiredOutputDate = null;
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormatObj = new SimpleDateFormat(outputFormat);
+
+        try {
+            Date date = inputFormat.parse(dateOrigine);
+            desiredOutputDate = outputFormatObj.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("====== CONVERTDATE IN CREATEOFFER.JAVA =======");
+        System.out.println("Input Date: " + dateOrigine);
+        System.out.println("Desired Output Date: " + desiredOutputDate);
+        resConvertedDate = desiredOutputDate;
+        return resConvertedDate;
+    }
+
+
 
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);

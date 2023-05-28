@@ -17,7 +17,7 @@ public class SessionManager<T extends Activity, U extends Activity> {
 
     private T activity;
 
-    public SessionManager(Context context, String email, String role, T activity) {
+    public SessionManager(Context context, String email, String role, String mdp, T activity) {
         this.context = context;
         DatabaseConnexion<SessionManager, T> dbCo = new DatabaseConnexion<>(this, activity);
         dbCo.setContext(context);
@@ -26,16 +26,16 @@ public class SessionManager<T extends Activity, U extends Activity> {
         String SQL = "";
 
         if (role.equals("Gestionnaire")){
-            SQL = "SELECT id FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email+"');";
+            SQL = "SELECT id FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email+"' AND mdp = '"+mdp+"');";
 
         } else if (role.equals("Chercheur d'emploi")) {
-            SQL = "SELECT id FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.chercheuremploi WHERE email = '"+email+"');";
+            SQL = "SELECT id FROM interima.utilisateur WHERE id = (SELECT idUti FROM interima.chercheuremploi WHERE email = '"+email+"' AND mdp = '"+mdp+"');";
 
         } else if (role.equals("Employeur")) {
-            SQL = "SELECT id FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.employeur WHERE emailC1 = '"+email+"');";
+            SQL = "SELECT id FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.employeur WHERE emailC1 = '"+email+"' AND mdp = '"+mdp+"');";
 
         } else if (role.equals("Agence d'intérim")) {
-            SQL = "SELECT id FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.agenceinterim WHERE emailC1 = '"+email+"');";
+            SQL = "SELECT id FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.agenceinterim WHERE emailC1 = '"+email+"' AND mdp = '"+mdp+"');";
         }
 
         dbCo.setRequete(SQL);
@@ -48,6 +48,7 @@ public class SessionManager<T extends Activity, U extends Activity> {
     }
 
     public void onQueryResult(String result) {
+        result=result.replaceAll("\\s", ""); //Deleting spaces\\
         setTokenID(result);
     }
 

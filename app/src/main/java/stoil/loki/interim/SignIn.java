@@ -190,7 +190,7 @@ public class SignIn extends AppCompatActivity {
                     // recuperation de l id de l utilisateur et de son role
                     // on passe la creation du token au SessionManager
                     Log.d("SignIn", "Debut sessionManager ");
-                    SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this);
+                    SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, password, SignIn.this);
 
                     Log.d("SignIn", "fin sessionManager ");
                     // token fait + connexion ok donc on peut revenir sur l activité principale
