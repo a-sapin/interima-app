@@ -69,8 +69,8 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
             Log.d("DatabaseConnexion.java", "Connexion ok");
 
             Statement st = coDb.createStatement();
-            String SQL = "Select * from interima.offre;";
-            this.requete = SQL;
+            //String SQL = "Select * from interima.offre;";
+            //this.requete = SQL;
             Log.d("DatabaseConnexion.java", "requete : " + this.requete);
 
             ResultSet rs = st.executeQuery(this.requete);
@@ -118,6 +118,10 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
             if (callingActivity instanceof MainActivity) {
                 Log.d("ListingOffer.java", "Requete ok + passage a main");
                 ((MainActivity) callingActivity).onQueryResult(offers);
+            }
+            if (callingActivity instanceof RecherchePage) {
+                Log.d("ListingOffer.java", "Requete ok + passage a recherche");
+                ((RecherchePage) callingActivity).onQueryResult(offers);
             }
         }
         res = result;

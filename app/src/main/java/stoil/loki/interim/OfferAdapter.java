@@ -105,10 +105,17 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                         switch(menuItem.getItemId()) {
                             case R.id.share_sms:
                                 if (ContextCompat.checkSelfPermission(view.getContext(), android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                                    String TITRE = offer.getTitle();
+                                    String DUREE = "du "+offer.getDateDebut()+" au "+offer.getDateFin();
+                                    String REMUNERATION = Float.toString(offer.getSalaire());
+                                    String SOURCE = offer.getUrl();
                                     Intent sendIntent = new Intent(Intent.ACTION_VIEW);
                                     sendIntent.setData(Uri.parse("sms:"));
-                                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
-                                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
+                                    String smsbody = "Partagé via Interima: "+encodeString(TITRE+", "+DUREE+", " +
+                                            REMUNERATION)+"€/h";
+                                    if (!SOURCE.isEmpty()){
+                                        smsbody+="("+encodeString(SOURCE)+")";
+                                    }
                                     sendIntent.putExtra("sms_body", smsbody);
                                     view.getContext().startActivity(sendIntent);
                                 } else {

@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
 
         ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
         dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.offre;");
         dbCo.execute("");
 
         File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
@@ -102,10 +103,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);
-
-            //TEMPORARY INTENT CODE :: SHALL BE REMOVED
-            Intent intent = new Intent(this, CreateOffer.class);
-            startActivity(intent);
 
 
 
@@ -224,12 +221,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                 break;
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                    sendIntent.setData(Uri.parse("sms:"));
-                    String smsbody = "Partagé via Interima: TITRE, DUREE, " +
-                            "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
-                    sendIntent.putExtra("sms_body", smsbody);
-                    startActivity(sendIntent);
+                    Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
+                            "de partage par SMS pour partager l'offre.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
                             "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();

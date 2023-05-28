@@ -24,6 +24,9 @@ public class RecherchePage extends AppCompatActivity {
 
     private EditText search_bar;
     private ImageButton search;
+    private ArrayList<Offer> offers = new ArrayList<>();
+    private RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+    private OfferAdapter adapter;
     private static final int PERMISSION_REQUEST_CODE = 1993;
 
     @Override
@@ -35,25 +38,30 @@ public class RecherchePage extends AppCompatActivity {
 
         search = (ImageButton) findViewById(R.id.search);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.offersList);
         recyclerView.setLayoutManager(layoutManager);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Principe: cliquer trigger l'instanciation d'un OfferAdapter
-                // dont on filtre les résultats qui ne correspondent pas à
-                // un mot clé entré dans search_bar
-
-                ArrayList<Offer> offers = new ArrayList<Offer>();
-                for (int i = 0; i < 10; i++) {
-                    offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
+                String search_str = search_bar.getText().toString();
+                if(search_str.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Veuillez entrer au moins un mot clé.", Toast.LENGTH_LONG).show();
+                } else {
+                    String search_array = "(";
+                    String[] search_keywords = search_str.split(" ");
+                    for(int i=0; i < search_keywords.length; i++) {
+                        if(i == search_keywords.length-1) {
+                            search_array+="'"+search_keywords[i]+"')";
+                        } else {
+                            search_array+="'"+search_keywords[i]+"', ";
+                        }
+                    }
+                    ListingOffer<RecherchePage> dbCo = new ListingOffer<>(RecherchePage.this);
+                    dbCo.setContext(getApplicationContext());
+                    dbCo.setRequete("SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
+                    dbCo.execute("");
                 }
-
-                recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
-                OfferAdapter adapter = new OfferAdapter(offers);
-                recyclerView.setAdapter(adapter);
             }
         });
 
@@ -110,12 +118,8 @@ public class RecherchePage extends AppCompatActivity {
 
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setData(Uri.parse("sms:"));
-                String smsbody = "Partagé via Interima: TITRE, DUREE, " +
-                        "REMUNERATION, LIEN SI SOURCE DISPONIBLE";
-                sendIntent.putExtra("sms_body", smsbody);
-                startActivity(sendIntent);
+                Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
+                        "de partage par SMS pour partager l'offre.", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
                         "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
@@ -128,6 +132,16 @@ public class RecherchePage extends AppCompatActivity {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.recherche).setChecked(true);
+    }
+
+    public void onQueryResult(ArrayList<Offer> offersQ) {
+        this.offers = offersQ;
+
+        RecyclerView recyclerView = findViewById(R.id.offersList);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        this.adapter = new OfferAdapter(offers);
+        recyclerView.setAdapter(adapter);
     }
 
 }
