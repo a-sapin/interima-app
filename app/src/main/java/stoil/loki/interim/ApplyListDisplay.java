@@ -104,15 +104,11 @@ public class ApplyListDisplay extends AppCompatActivity {
 
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.setData(Uri.parse("sms:"));
-                String smsbody = "Partagé via Interima: TITRE, DATE, " +
-                        "LIEN CV, LIEN LM";
-                sendIntent.putExtra("sms_body", smsbody);
-                startActivity(sendIntent);
+                Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
+                        "de partage par SMS pour partager la candidature.", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
-                        "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
+                        "partager cette candidature par SMS.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -123,7 +119,6 @@ public class ApplyListDisplay extends AppCompatActivity {
 
         if (candidaturesQ.isEmpty()){
             rien.setVisibility(View.VISIBLE);
-
         } else {
             this.candidatures = candidaturesQ;
 

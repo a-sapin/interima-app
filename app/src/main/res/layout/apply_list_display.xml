@@ -35,12 +35,13 @@
 
     <TextView
         android:id="@+id/empty_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Il n'y a pas de candidatures."
+        android:text="Vous n'avez pas publié de candidatures."
         android:textSize="18sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textView"/>
 
     <include
         android:id="@+id/menu"
