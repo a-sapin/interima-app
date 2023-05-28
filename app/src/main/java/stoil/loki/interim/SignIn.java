@@ -199,11 +199,12 @@ public class SignIn extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Mdp ou email incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
         }
 
-        Toast.makeText(getApplicationContext(), "Mdp ou email incorrect", Toast.LENGTH_SHORT).show();
     }
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
