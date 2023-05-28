@@ -125,8 +125,11 @@ public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
         if (callingActivity != null) {
             if (callingActivity instanceof ApplyListDisplay) {
-                Log.d("ListingCandidatureData.java", "Requete ok + passage a applylistdisplay");
+                Log.d("ListingCandidatureData.java", "Requete ok + passage a ApplyListDisplay");
                 ((ApplyListDisplay) callingActivity).onQueryResult(candidatures);
+            } else if (callingActivity instanceof ApplyReuseDisplay) {
+                Log.d("ListingCandidatureData.java", "Requete ok + passage a ApplyReuseDisplay");
+                ((ApplyReuseDisplay) callingActivity).onQueryResult(candidatures);
             }
         }
         res = result;

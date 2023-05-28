@@ -1,10 +1,14 @@
 package stoil.loki.interim;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +24,9 @@ import java.util.ArrayList;
 public class ApplyReuseDisplay extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1993;
+    private ArrayList<CandidatureData> candidatures = new ArrayList<>();
+
+    private ApplyReuseAdapter adapter;
 
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
@@ -27,18 +34,23 @@ public class ApplyReuseDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apply_reuse);
 
-        ArrayList<CandidatureData> candidatures = new ArrayList<>();
+        ListingCandidatureData<ApplyReuseDisplay> dbCo = new ListingCandidatureData<>(ApplyReuseDisplay.this);
+        dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
+        dbCo.execute("");
 
-        for(int i = 0; i < 10; i++) {
-            candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
-        }
-
-        RecyclerView list_candidatures = findViewById(R.id.apply_list);
-        list_candidatures.setLayoutManager(layoutManager);
-        list_candidatures.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
-        ApplyReuseAdapter adapter = new ApplyReuseAdapter(candidatures);
-        list_candidatures.setAdapter(adapter);
+//        ArrayList<CandidatureData> candidatures = new ArrayList<>();
+//
+//        for(int i = 0; i < 10; i++) {
+//            candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
+//        }
+//
+//        RecyclerView list_candidatures = findViewById(R.id.apply_list);
+//        list_candidatures.setLayoutManager(layoutManager);
+//        list_candidatures.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//
+//        ApplyReuseAdapter adapter = new ApplyReuseAdapter(candidatures);
+//        list_candidatures.setAdapter(adapter);
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,6 +99,45 @@ public class ApplyReuseDisplay extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onQueryResult(ArrayList<CandidatureData> candidaturesQ) {
+
+        TextView rien = findViewById(R.id.empty_textview);
+
+        if (candidaturesQ.isEmpty()){
+            rien.setVisibility(View.VISIBLE);
+
+        } else {
+            this.candidatures = candidaturesQ;
+
+            rien.setVisibility(View.GONE);
+            RecyclerView recyclerView = findViewById(R.id.apply_list);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            this.adapter = new ApplyReuseAdapter(candidatures);
+            recyclerView.setAdapter(adapter);
+        }
+
+    }
+
+    public ArrayList<String> getInfoToken() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
+        ArrayList<String> value = new ArrayList<>();
+        value.add(sharedPreferences.getString("role", null));
+        value.add(sharedPreferences.getString("id", null));
+
+        return value;
+    }
+
+    public String getInfoTokenID() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(1);
+    }
+
+    public String getInfoTokenRole() {
+        ArrayList<String> info = getInfoToken();
+        return info.get(0);
     }
 
     // Handle the permission request result
