@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                 // Do something if perm isnt granted
                 //#############################################
                 geoPermGranted = false;
-                return;
             }
 
             if (geoPermGranted)
@@ -255,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             sortOffers();
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            // Do nothing
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
         }
