@@ -29,10 +29,12 @@ import java.util.List;
 
 public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.ViewHolder> {
     private List<CandidatureData> list_apply;
+    private int offerid;
     private static final int PERMISSION_REQUEST_CODE = 1993;
 
     public ApplyReuseAdapter(ArrayList<CandidatureData> list_apply) {
         this.list_apply = list_apply;
+        this.offerid = -1;
     }
 
     @NonNull
@@ -64,6 +66,7 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
                 intent.putExtra("lienCV", encodeString(list_apply.get(position).getLienCV()));
                 intent.putExtra("lienLM", encodeString(list_apply.get(position).getLienLM()));
                 intent.putExtra("id", list_apply.get(position).getId());
+                intent.putExtra("offerid", offerid);
                 // recuperer les donnees de la candidature et preremplir une candidature
                 view.getContext().startActivity(intent);
             }
@@ -120,6 +123,14 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
     @Override
     public int getItemCount() {
         return list_apply.size();
+    }
+
+    public int getOfferid() {
+        return offerid;
+    }
+
+    public void setOfferid(int offerid) {
+        this.offerid = offerid;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

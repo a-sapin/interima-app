@@ -27,12 +27,16 @@ public class ApplyReuseDisplay extends AppCompatActivity {
     private ArrayList<CandidatureData> candidatures = new ArrayList<>();
 
     private ApplyReuseAdapter adapter;
+    private int offerid;
 
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apply_reuse);
+
+        Intent iffo = getIntent();
+        this.offerid = iffo.getIntExtra("offerid", -1);
 
         ListingCandidatureData<ApplyReuseDisplay> dbCo = new ListingCandidatureData<>(ApplyReuseDisplay.this);
         dbCo.setContext(getApplicationContext());
@@ -116,6 +120,7 @@ public class ApplyReuseDisplay extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new ApplyReuseAdapter(candidatures);
+            this.adapter.setOfferid(offerid);
             recyclerView.setAdapter(adapter);
         }
 

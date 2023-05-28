@@ -96,8 +96,9 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
             if (callingActivity instanceof MdP && query2 == true) {
                 Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
                 ((MdP) callingActivity).dataAddQuery(Integer.parseInt(result));
-            } else if (callingActivity instanceof Apply) {
-
+            } else if (callingActivity instanceof Apply && query2 == true) {
+                Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
+                ((Apply) callingActivity).dataAddQuery(Integer.parseInt(result));
             }
         }
 

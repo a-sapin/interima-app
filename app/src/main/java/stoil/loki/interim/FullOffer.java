@@ -105,6 +105,7 @@ public class FullOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ChooseApply.class);
+                intent.putExtra("offerid", offer.getId());
                 view.getContext().startActivity(intent);
             }
         });

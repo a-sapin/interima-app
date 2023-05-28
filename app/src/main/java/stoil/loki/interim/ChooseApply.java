@@ -24,6 +24,9 @@ public class ChooseApply extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_apply);
 
+        Intent iffo = getIntent();
+        int offerid = iffo.getIntExtra("offerid", -1);
+
         Button reuse = findViewById(R.id.button5);
         Button newOne = findViewById(R.id.button6);
 
@@ -32,6 +35,7 @@ public class ChooseApply extends AppCompatActivity {
             public void onClick(View view) {
                 // changer la classe a lancer pour le choix de la candidature a donne
                 Intent intent = new Intent(view.getContext(), ApplyReuseDisplay.class);
+                intent.putExtra("offerid", offerid);
                 view.getContext().startActivity(intent);
             }
         });
@@ -41,6 +45,7 @@ public class ChooseApply extends AppCompatActivity {
             public void onClick(View view) {
                 // changer la classe a lancer pour le choix de la candidature a donne
                 Intent intent = new Intent(view.getContext(), Apply.class);
+                intent.putExtra("offerid", offerid);
                 view.getContext().startActivity(intent);
             }
         });

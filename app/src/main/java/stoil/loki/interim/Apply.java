@@ -35,7 +35,7 @@ import java.util.List;
 
 public class Apply extends AppCompatActivity {
 
-    private Offer offer;
+    private int offerid;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class Apply extends AppCompatActivity {
         Intent intentp = getIntent();
         String CV = intentp.getStringExtra("lienCV");
         String LM = intentp.getStringExtra("lienLM");
+        offerid = intentp.getIntExtra("offerid", -1);
         int id = intentp.getIntExtra("id", 0);
 
         String nom = intentp.getStringExtra("nom");
@@ -136,7 +137,7 @@ public class Apply extends AppCompatActivity {
                 String commentaire = commentaireE.getText().toString();
 
                 Log.d("Apply.java", "debut connexion");
-                DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(Apply.this, false);
+                DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(Apply.this, true);
                 dbCo.setContext(getApplicationContext());
 
                 String SQL = "INSERT INTO interima.candidature (idUti, lienCV, lienLM, commentaires, statut) values ('"+getInfoTokenID()+"', '"+lienCV+"', '"+lienLM+"', '"+commentaire+"', 'EN ATTENTE');";
@@ -264,6 +265,25 @@ public class Apply extends AppCompatActivity {
         EditText lienLM = findViewById(R.id.button17);
         lienLM.setText(LM);
 
+    }
+
+    public void dataAddQuery(int id) {
+        Intent intent = getIntent();
+
+        Log.d("Apply.java", "debut connexion pour query 2");
+        DatabaseUpdateCreate<Apply> dbCo = new DatabaseUpdateCreate(Apply.this, false);
+        dbCo.setContext(getApplicationContext());
+
+        String SQL = "INSERT INTO interima.candidatureoffre (idOffre, idCandidature) values ('"+offerid+"', '"+id+"');";
+
+        Log.d("Apply.java", "Requete :" + SQL);
+
+        dbCo.setRequete(SQL);
+        dbCo.execute("");
+
+        Intent home = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(home);
+        finish();
     }
 
     public ArrayList<String> getInfoToken() {
