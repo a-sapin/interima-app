@@ -58,8 +58,10 @@ public class ProfilDisplay extends AppCompatActivity {
             }
         }
 
-        ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
-        profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));
+        if(userrole == null || userrole.equals("Chercheur d'emploi")) {
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.forum, null);
+            profils.add(new ItemProfil(id, "Aide à la candidature", ic, ApplyHelp.class));
+        }
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.info, null);
         profils.add(new ItemProfil(id, "A propos de nous", ic, AboutUs.class));
