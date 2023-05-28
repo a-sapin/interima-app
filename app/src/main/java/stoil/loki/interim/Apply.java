@@ -53,63 +53,65 @@ public class Apply extends AppCompatActivity {
         String prenom = intentp.getStringExtra("prenom");
         String nat = intentp.getStringExtra("nat");
 
-        if (CV != null || LM != null) {
-            if (nom == null) {
-                DatabaseUserData<Apply> dbCo = new DatabaseUserData<>(Apply.this);
-                dbCo.setContext(getApplicationContext());
-                String SQL = "Select * from interima.chercheuremploi where idUti = '"+getInfoTokenID()+"' ;";
-                dbCo.setRequete(SQL);
-                dbCo.execute("");
-            } else {
+        if (nom == null) {
+            DatabaseUserData<Apply> dbCo = new DatabaseUserData<>(Apply.this);
+            dbCo.setContext(getApplicationContext());
+            String SQL = "Select * from interima.chercheuremploi where idUti = '"+getInfoTokenID()+"' ;";
+            dbCo.setRequete(SQL);
+            dbCo.execute("");
+        } else {
 
-                EditText nomE = findViewById(R.id.nomView);
-                nomE.setText(nom);
+            Spinner natE = findViewById(R.id.siretView);
+            List<String> nationalities;
 
-                EditText prenomE = findViewById(R.id.nomServiceView);
-                prenomE.setText(prenom);
+            try {
+                InputStream inputStream = getAssets().open("nationalites.json");
+                int size = inputStream.available();
+                byte[] buffer = new byte[size];
+                inputStream.read(buffer);
+                inputStream.close();
 
-                Spinner natE = findViewById(R.id.siretView);
-                List<String> nationalities;
+                String json = new String(buffer, StandardCharsets.UTF_8);
 
-                try {
-                    InputStream inputStream = getAssets().open("nationalites.json");
-                    int size = inputStream.available();
-                    byte[] buffer = new byte[size];
-                    inputStream.read(buffer);
-                    inputStream.close();
+                // Parsing du JSON
+                JSONObject jsonObject = new JSONObject(json);
+                JSONArray jsonArray = jsonObject.getJSONArray("pays");
 
-                    String json = new String(buffer, StandardCharsets.UTF_8);
-
-                    // Parsing du JSON
-                    JSONObject jsonObject = new JSONObject(json);
-                    JSONArray jsonArray = jsonObject.getJSONArray("pays");
-
-                    nationalities = new ArrayList<>();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject countryObject  = jsonArray.getJSONObject(i);
-                        String nationality = countryObject .getString("nationalite");
-                        nationalities.add(nationality);
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nationalities);
-                    natE.setAdapter(adapter);
-
-                    int defaultPosition = nationalities.indexOf(nat);
-                    natE.setSelection(defaultPosition);
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                nationalities = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject countryObject  = jsonArray.getJSONObject(i);
+                    String nationality = countryObject .getString("nationalite");
+                    nationalities.add(nationality);
                 }
+                System.out.println("Nationalités: "+nationalities.toString());
 
-                EditText lienCV = findViewById(R.id.button16);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nationalities);
+                natE.setAdapter(adapter);
+
+                int defaultPosition = nationalities.indexOf(nat);
+                natE.setSelection(defaultPosition);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+        if (CV != null || LM != null) {
+
+            EditText nomE = findViewById(R.id.nomView);
+            nomE.setText(nom);
+
+            EditText prenomE = findViewById(R.id.nomServiceView);
+            prenomE.setText(prenom);
+
+            EditText lienCV = findViewById(R.id.button16);
                 lienCV.setText(CV);
-
                 EditText lienLM = findViewById(R.id.button17);
                 lienLM.setText(LM);
             }
         }
+
 
         // verifier que tous les champs sont remplis avant de transmettre le apply
         // mettre un Toast avec le fait que tous les champs ne sont pas remplis par exemple
