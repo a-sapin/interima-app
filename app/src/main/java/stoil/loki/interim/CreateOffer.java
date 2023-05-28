@@ -20,8 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateOffer extends AppCompatActivity {
 
@@ -124,6 +127,9 @@ public class CreateOffer extends AppCompatActivity {
                         //throw new RuntimeException(e);
                     }
 
+                    datedeb = convertDate(datedeb);
+                    datefin = convertDate(datefin);
+
                     //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
                     SQLSubmit();
                 }
@@ -221,7 +227,31 @@ public class CreateOffer extends AppCompatActivity {
 
         }
         else System.out.println("Something went wrong.");
-            }
+    }
+
+    public String convertDate(String dateOrigine)
+    {
+        String resConvertedDate = "";
+        String outputFormat = "yyyy-MM-dd";
+        String desiredOutputDate = null;
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormatObj = new SimpleDateFormat(outputFormat);
+
+        try {
+            Date date = inputFormat.parse(dateOrigine);
+            desiredOutputDate = outputFormatObj.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("====== CONVERTDATE IN CREATEOFFER.JAVA =======");
+        System.out.println("Input Date: " + dateOrigine);
+        System.out.println("Desired Output Date: " + desiredOutputDate);
+        resConvertedDate = desiredOutputDate;
+        return resConvertedDate;
+    }
+
 
 
     public ArrayList<String> getInfoToken() {

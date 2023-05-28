@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="62dp"
         android:background="@color/teal_700"
         android:gravity="center"
@@ -26,9 +26,10 @@
         android:nestedScrollingEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="32dp"
                 android:text="Nom : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider6" />
@@ -49,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="88dp"
                 android:text="Prénom : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView38" />
@@ -69,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="48dp"
                 android:text="Nationalité : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView40" />
@@ -96,21 +97,21 @@
 
             <TextView
                 android:id="@+id/nomView"
-                android:layout_width="200dp"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="32dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.471"
+                app:layout_constraintHorizontal_bias="0.561"
                 app:layout_constraintStart_toEndOf="@+id/textView38"
                 app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
             <TextView
                 android:id="@+id/nomServiceView"
-                android:layout_width="200dp"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:ems="10"
@@ -118,51 +119,51 @@
                 android:minHeight="48dp"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.387"
+                app:layout_constraintHorizontal_bias="0.473"
                 app:layout_constraintStart_toEndOf="@+id/textView39"
                 app:layout_constraintTop_toBottomOf="@+id/nomView" />
 
             <TextView
                 android:id="@+id/nomSousServiceView"
-                android:layout_width="200dp"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="52dp"
                 android:ems="10"
                 android:inputType="date"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.204"
+                app:layout_constraintHorizontal_bias="0.218"
                 app:layout_constraintStart_toEndOf="@+id/textView40"
                 app:layout_constraintTop_toBottomOf="@+id/nomServiceView" />
 
             <TextView
                 android:id="@+id/siretView"
-                android:layout_width="200dp"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.285"
+                app:layout_constraintHorizontal_bias="0.342"
                 app:layout_constraintStart_toEndOf="@+id/textView41"
                 app:layout_constraintTop_toBottomOf="@+id/nomSousServiceView" />
 
-            <Button
+            <TextView
                 android:id="@+id/button16"
-                android:layout_width="wrap_content"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="CV"
+                android:layout_marginTop="60dp"
+                android:text="lien CV"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.307"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toEndOf="@+id/textView42"
                 app:layout_constraintTop_toBottomOf="@+id/siretView" />
 
-            <Button
+            <TextView
                 android:id="@+id/button17"
-                android:layout_width="146dp"
+                android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:text="Lettre de motivation"
+                android:layout_marginTop="56dp"
+                android:text=" lien Lettre de motivation"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.145"
+                app:layout_constraintHorizontal_bias="0.285"
                 app:layout_constraintStart_toEndOf="@+id/textView43"
                 app:layout_constraintTop_toBottomOf="@+id/button16" />
 
@@ -187,48 +188,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <TextView
-                android:id="@+id/textView44"
-                android:layout_width="78dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="72dp"
-                android:text="Date du poste : "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView46" />
-
-            <TextView
-                android:id="@+id/editTextDate3"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:ems="10"
-                android:inputType="date"
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.299"
-                app:layout_constraintStart_toEndOf="@+id/textView44"
-                app:layout_constraintTop_toBottomOf="@+id/textView48" />
-
-            <TextView
                 android:id="@+id/textView45"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="76dp"
                 android:text="Utilsé dans : "
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ListView
                 android:id="@+id/recyclerView"
                 android:layout_width="253dp"
                 android:layout_height="202dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView45"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate3" />
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
             <TextView
                 android:id="@+id/textView46"
@@ -242,12 +220,12 @@
 
             <TextView
                 android:id="@+id/textView48"
-                android:layout_width="204dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="256dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="48dp"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintHorizontal_bias="0.565"
                 app:layout_constraintStart_toEndOf="@+id/textView46"
                 app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
@@ -256,10 +234,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="Vous pouvez changer des éléments après la sélection de la candidature"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Vous pouvez changer des éléments après la sélection de la candidature"
                 android:textAlignment="center"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
