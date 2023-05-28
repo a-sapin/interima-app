@@ -49,7 +49,7 @@ public class ProfilDisplay extends AppCompatActivity {
         }
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
-        profils.add(new ItemProfil(id, "Mes recherches", ic, MainActivity.class));
+        profils.add(new ItemProfil(id, "Mes recherches", ic, SavedSearchDisplay.class));
 
         ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
         profils.add(new ItemProfil(id, "Mes candidatures", ic, ApplyListDisplay.class));
