@@ -3,7 +3,6 @@ package stoil.loki.interim;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ListingOffer<T> extends AsyncTask<String, Void, String> {
+public class ListingCandidatureData<T> extends AsyncTask<String, Void, String> {
 
     private static final String url = "jdbc:mysql://interima.ddns.net:11006/interima?user=root&useUnicode=true&characterEncoding=utf8";
     private static final String user = "dev_user";
@@ -25,11 +24,11 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
 
     private String res = "";
 
-    private ArrayList<Offer> offers = new ArrayList<>();
+    private ArrayList<CandidatureData> candidatures = new ArrayList<>();
 
     private T callingActivity;
 
-    public ListingOffer(T callingActivity) {
+    public ListingCandidatureData(T callingActivity) {
         this.callingActivity = callingActivity;
     }
 
@@ -82,26 +81,33 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
             while (rs.next()) {
                 // Parcours des colonnes
                     int id = rs.getInt("id");
-                    int idEmp = rs.getInt("idEmp");
-                    String titre = rs.getString("titre");
-                    Date publication = rs.getDate("publication");
-                    Date fermeture = rs.getDate("fermeture");
-                    Date debut = rs.getDate("debut");
-                    Date fin = rs.getDate("fin");
-                    String url = rs.getString("url");
-                    float salaire = rs.getFloat("salaire");
-                    float geolat = (float) rs.getDouble("geolat");
-                    float geolong = (float) rs.getDouble("geolong");
-                    String img = rs.getString("img");
-                    String description = rs.getString("description");
+                    int idUti = rs.getInt("idUti");
+                    String lienCV = rs.getString("lienCV");
+                    String lienLM = rs.getString("lienLM");
+                    String commentaires = rs.getString("commentaires");
+                    String statut = rs.getString("statut");
 
-                    Offer el = new Offer(id, idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description);
-                    offers.add(el);
+                    CandidatureData cd = new CandidatureData(id, idUti, 0, lienCV, lienLM, commentaires, statut, "");
+                    candidatures.add(cd);
 
             }
 
             rs.close();
             st.close();
+
+            Connection coDb2 = DriverManager.getConnection(url, user, password);
+            Statement st2 = coDb2.createStatement();
+
+            for(CandidatureData cd : candidatures) {
+                ResultSet rs2 = st2.executeQuery("SELECT id, titre from interima.offre WHERE interima.offre.id = (SELECT idOffre from interima.candidatureoffre WHERE interima.candidatureoffre.idOffre="+cd.getIdOffre()+");");
+                while(rs2.next()) {
+                    System.out.println(rs2.getInt("id"));
+                    cd.setIdOffre(rs2.getInt("id"));
+                    cd.setOffertitle(rs2.getString("titre"));
+                }
+                rs2.close();
+            }
+            st2.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,13 +121,9 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if (callingActivity != null) {
-            if (callingActivity instanceof MainActivity) {
-                Log.d("ListingOffer.java", "Requete ok + passage a main");
-                ((MainActivity) callingActivity).onQueryResult(offers);
-            }
-            if (callingActivity instanceof RecherchePage) {
-                Log.d("ListingOffer.java", "Requete ok + passage a recherche");
-                ((RecherchePage) callingActivity).onQueryResult(offers);
+            if (callingActivity instanceof ApplyListDisplay) {
+                Log.d("ListingCandidatureData.java", "Requete ok + passage a applylistdisplay");
+                ((ApplyListDisplay) callingActivity).onQueryResult(candidatures);
             }
         }
         res = result;

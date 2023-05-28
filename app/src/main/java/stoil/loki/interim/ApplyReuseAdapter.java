@@ -44,7 +44,7 @@ public class ApplyReuseAdapter extends RecyclerView.Adapter<ApplyReuseAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CandidatureData apply = list_apply.get(position);
-        holder.titleTextView.setText(apply.getTitle());
+        holder.titleTextView.setText(apply.getOffertitle());
 
         holder.select_button.setOnClickListener(new View.OnClickListener() {
             @Override

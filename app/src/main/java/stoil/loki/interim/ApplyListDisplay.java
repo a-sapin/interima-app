@@ -20,14 +20,20 @@ import java.util.ArrayList;
 public class ApplyListDisplay extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1993;
+    private ArrayList<CandidatureData> candidatures = new ArrayList<>();
+    ApplyListAdapter adapter;
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apply_list_display);
+        System.setProperty("file.encoding", "UTF-8");
 
-        ArrayList<CandidatureData> candidatures = new ArrayList<>();
+        ListingCandidatureData<ApplyListDisplay> dbCo = new ListingCandidatureData<>(ApplyListDisplay.this);
+        dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.candidature;");
+        dbCo.execute("");
 
         for(int i = 0; i < 10; i++) {
             candidatures.add(new CandidatureData("Candidature Developpeur FullStack"));
@@ -105,6 +111,16 @@ public class ApplyListDisplay extends AppCompatActivity {
                         "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void onQueryResult(ArrayList<CandidatureData> candidaturesQ) {
+        this.candidatures = candidaturesQ;
+
+        RecyclerView recyclerView = findViewById(R.id.apply_list);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        this.adapter = new ApplyListAdapter(candidatures);
+        recyclerView.setAdapter(adapter);
     }
 
 }
