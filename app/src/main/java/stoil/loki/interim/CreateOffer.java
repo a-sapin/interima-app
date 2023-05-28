@@ -104,7 +104,20 @@ public class CreateOffer extends AppCompatActivity {
                 boolean validForm = false;
 
                 //TODO: Check if form is valid here
-                if (true) validForm = true;
+                if (
+                        !((EditText) findViewById(R.id.string_title)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.string_desc)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.string_keywords)).getText().toString().isEmpty() &&
+                                !((TextView) findViewById(R.id.dateDebut)).getText().toString().equals("DATE NON CHOISIE") &&
+                                !((TextView) findViewById(R.id.dateFin)).getText().toString().equals("DATE NON CHOISIE") &&
+                                !((EditText) findViewById(R.id.string_img_url)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.string_source)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.float_wage)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.float_long)).getText().toString().isEmpty() &&
+                                !((EditText) findViewById(R.id.float_lat)).getText().toString().isEmpty()
+                ) {
+                    validForm = true;
+                }
 
                 if (validForm)
                 {
@@ -132,6 +145,15 @@ public class CreateOffer extends AppCompatActivity {
 
                     //TODO: OCEANE FAIS LA REQUETE POUR CREER L'OFFRE D'EMPLOI//
                     SQLSubmit();
+
+                    Intent in = new Intent(CreateOffer.this, MainActivity.class);
+                    Toast.makeText(CreateOffer.this, "Offre mise en ligne", Toast.LENGTH_SHORT).show();
+                    startActivity(in);
+
+                }
+                else
+                {
+                    Toast.makeText(CreateOffer.this, "Veuillez compléter tous les champs pour soumettre le formulaire.", Toast.LENGTH_SHORT).show();
                 }
 
                 //Go back to Main//

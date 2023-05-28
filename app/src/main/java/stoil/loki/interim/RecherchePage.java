@@ -70,7 +70,7 @@ public class RecherchePage extends AppCompatActivity {
                     }
                     ListingOffer<RecherchePage> dbCo = new ListingOffer<>(RecherchePage.this);
                     dbCo.setContext(getApplicationContext());
-                    dbCo.setRequete("SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
+                    dbCo.setRequete("SELECT * from interima.offre where interima.offre.titre LIKE '%"+search_bar.getText().toString()+"%' UNION SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
                     dbCo.execute("");
                     SQLSubmit();
                 }
