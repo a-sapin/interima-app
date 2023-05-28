@@ -167,7 +167,7 @@
                     android:id="@+id/float_long"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:inputType="numberDecimal|numberSigned"
                     android:hint="Cherchez à l'aide de Google Maps" />
             </LinearLayout>
 
@@ -189,7 +189,7 @@
                     android:id="@+id/float_lat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:inputType="numberDecimal|numberSigned"
                     android:hint="Cherchez à l'aide de Google Maps" />
             </LinearLayout>
             <LinearLayout
