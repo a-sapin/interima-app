@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Interima"
         tools:targetApi="31">
         <activity
+            android:name=".Disconnect"
+            android:exported="false" />
+        <activity
             android:name=".ApplyListAg"
             android:exported="false" />
         <activity

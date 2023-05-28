@@ -68,8 +68,8 @@ public class ProfilDisplay extends AppCompatActivity {
             profils.add(new ItemProfil(id, "S'inscrire", ic, WhoAreYou.class));
 
         } else {
-            // mettre la page de deconnection
-
+            ic = ResourcesCompat.getDrawable(resources, R.drawable.sidentifier, null);
+            profils.add(new ItemProfil(id, "Se déconnecter", ic, Disconnect.class));
         }
 
         RecyclerView list_profil = findViewById(R.id.list_profil);
@@ -151,5 +151,12 @@ public class ProfilDisplay extends AppCompatActivity {
     public String getInfoTokenRole() {
         ArrayList<String> info = getInfoToken();
         return info.get(0);
+    }
+
+    public void clearToken() {
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE).edit();
+        editor.remove("role");
+        editor.remove("id");
+        return;
     }
 }

@@ -142,6 +142,10 @@ public class RecherchePage extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         this.adapter = new OfferAdapter(offers);
         recyclerView.setAdapter(adapter);
+
+        if(offersQ.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Pas de résultat.", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
