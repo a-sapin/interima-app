@@ -56,6 +56,7 @@ public class RecherchePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String search_str = search_bar.getText().toString();
+                //System.out.println(((RecherchePage)view.getContext()).getInfoTokenRole());
                 if(search_str.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Veuillez entrer au moins un mot clé.", Toast.LENGTH_LONG).show();
                 } else {
@@ -70,9 +71,11 @@ public class RecherchePage extends AppCompatActivity {
                     }
                     ListingOffer<RecherchePage> dbCo = new ListingOffer<>(RecherchePage.this);
                     dbCo.setContext(getApplicationContext());
-                    dbCo.setRequete("SELECT * from interima.offre where interima.offre.titre LIKE '%"+search_bar.getText().toString()+"%' UNION SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
+                    dbCo.setRequete("SELECT * from interima.offre where interima.offre.titre LIKE '%"+search_str+"%' UNION SELECT * from interima.offre where interima.offre.id in (SELECT idOffre from interima.contient where interima.contient.idMot in (SELECT id from interima.motclef where interima.motclef.mot in "+search_array+"));");
                     dbCo.execute("");
-                    SQLSubmit();
+                    if(((RecherchePage)view.getContext()).getInfoToken() != null) {
+                        SQLSubmit();
+                    }
                 }
             }
         });
