@@ -26,7 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SavedSearchAdapter extends RecyclerView.Adapter<SavedSearchAdapter.ViewHolder> {
@@ -58,13 +61,31 @@ public class SavedSearchAdapter extends RecyclerView.Adapter<SavedSearchAdapter.
     public void onBindViewHolder(@NonNull SavedSearchAdapter.ViewHolder holder, int position) {
         Search search = list_search.get(position);
         holder.search_title.setText(encodeString(search.getSearchstr()));
-        holder.search_date.setText(holder.search_date.getText().toString()+search.getDatesearch());
-
+        holder.search_date.setText(convertDate(holder.search_date.getText().toString()+search.getDatesearch()));
     }
 
     @Override
     public int getItemCount() {
         return list_search.size();
+    }
+
+    public String convertDate(String dateOrigine) {
+        String resConvertedDate = "";
+        String inputFormat = "yyyy-MM-dd";
+        String desiredOutputDate = null;
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat(inputFormat);
+        SimpleDateFormat inputFormatObj = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date date = outputFormat.parse(dateOrigine);
+            desiredOutputDate = inputFormatObj.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        resConvertedDate = desiredOutputDate;
+        return resConvertedDate;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +103,6 @@ public class SavedSearchAdapter extends RecyclerView.Adapter<SavedSearchAdapter.
             ArrayList<String> value = new ArrayList<>();
             value.add(sharedPreferences.getString("role", null));
             value.add(sharedPreferences.getString("id", null));
-
             return value;
         }
 

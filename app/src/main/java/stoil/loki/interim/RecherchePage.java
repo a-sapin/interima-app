@@ -56,7 +56,6 @@ public class RecherchePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String search_str = search_bar.getText().toString();
-                //System.out.println(((RecherchePage)view.getContext()).getInfoTokenRole());
                 if(search_str.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Veuillez entrer au moins un mot clé.", Toast.LENGTH_LONG).show();
                 } else {
@@ -87,38 +86,23 @@ public class RecherchePage extends AppCompatActivity {
                 // Gérez la redirection ici
                 switch (item.getItemId()) {
                     case R.id.home:
-                        // Redirigez vers l'écran d'accueil
-
                         Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intenth);
                         return true;
-
                     case R.id.favoris:
-
                         Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
                         startActivity(intentf);
                         return true;
                     case R.id.recherche:
                         return true;
                     case R.id.notifs:
-
                         Intent intentn = new Intent(getApplicationContext(), Notifications.class);
                         startActivity(intentn);
                         return true;
-
                     case R.id.profil:
-                        // si connecter donner la page du profil
-                        // sinon on demande la co ou inscription
-
-                        if(true) {
-                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                            startActivity(intentp);
-                        } else {
-                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                            startActivity(intentp);
-                        }
+                        Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                        startActivity(intentp);
                         return true;
-
                     default:
                         return false;
                 }
@@ -130,7 +114,6 @@ public class RecherchePage extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
@@ -163,7 +146,6 @@ public class RecherchePage extends AppCompatActivity {
 
         dbCo.setRequete(SQL);
         dbCo.execute("");
-
     }
 
     public void onQueryResult(ArrayList<Offer> offersQ) {
@@ -178,29 +160,6 @@ public class RecherchePage extends AppCompatActivity {
         if(offersQ.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Pas de résultat.", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public String convertDate(String dateOrigine)
-    {
-        String resConvertedDate = "";
-        String outputFormat = "yyyy-MM-dd";
-        String desiredOutputDate = null;
-
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat outputFormatObj = new SimpleDateFormat(outputFormat);
-
-        try {
-            Date date = inputFormat.parse(dateOrigine);
-            desiredOutputDate = outputFormatObj.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("====== CONVERTDATE IN CREATEOFFER.JAVA =======");
-        System.out.println("Input Date: " + dateOrigine);
-        System.out.println("Desired Output Date: " + desiredOutputDate);
-        resConvertedDate = desiredOutputDate;
-        return resConvertedDate;
     }
 
     public ArrayList<String> getInfoToken() {

@@ -47,8 +47,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements Serializable, LocationListener {
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-
-    private static final int PERMISSION_REQUEST_CODE = 1993;
+    private static final int PERMISSION_REQUEST_CODE = 1993; // For access to SMS sharing
     private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
     OfferAdapter adapter;
@@ -83,10 +82,9 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             }
             Intent intent = new Intent(this, Geolocalisation.class);
             startActivity(intent);
-            finish(); //Kill the activity to avoid force backout
-        } else //This isn't the first launch
-        {
-            for (int i = 0; i < 10; i++) {
+            finish();
+        } else { //This isn't the first launch
+            /*for (int i = 0; i < 10; i++) {
                 offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
             }
 
@@ -94,93 +92,49 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new OfferAdapter(offers);
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);*/
 
-
-            //LOCATION MANAGER
-            // Get the location manager
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-            // Check for location permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                     PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                             PackageManager.PERMISSION_GRANTED) {
-                // Do something if perm isnt granted
-                //#############################################
                 geoPermGranted = false;
             }
-
             if (geoPermGranted)
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
-
 
             BottomNavigationView menu = findViewById(R.id.navigation);
             menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    // Gérez la redirection ici
                     switch (item.getItemId()) {
                         case R.id.home:
                             //Nous sommes déjà à l'accueil.
                             return true;
-
                         case R.id.recherche:
                             Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
                             startActivity(intents);
                             return true;
-
                         case R.id.favoris:
                             Intent intentb = new Intent(MainActivity.this, Bookmarks.class);
                             startActivity(intentb);
                             return true;
-
                         case R.id.notifs:
                             Intent intentn = new Intent(MainActivity.this, Notifications.class);
                             startActivity(intentn);
                             return true;
-
                         case R.id.profil:
-                            // si connecter donner la page du profil
-                            // sinon on demande la co ou inscription
-                            if (true) {
-                                // ((MainActivity) menu.getContext()).getInfoTokenID() != null
-                                Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                                startActivity(intentp);
-                            } else {
-                                Intent intentp = new Intent(MainActivity.this, SignIn.class);
-                                startActivity(intentp);
-                            }
+                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                            startActivity(intentp);
                             return true;
-
                         default:
                             return false;
                     }
                 }
             });
-
-            // Display Lat and Long
-
-            // NOTE : THERES A SIGNIFICANT PROBLEM WITH THIS APPROACH //
-
-            /*Thread thread1 = new Thread(() -> {
-                try {
-                    Thread.sleep(7000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                System.err.println("Device currently standing at Lo: " + curLong + " La:" + curLat);
-            });
-
-            if (geoPermGranted) thread1.start();*/
-
-
-            // search bar
         }
-
-        // test du token sur autre activite
-//        Toast.makeText(getApplicationContext(), "shared id = : " + getInfoTokenID() + "role = " + getInfoTokenRole(), Toast.LENGTH_SHORT).show();
     }
 
     public void onQueryResult(ArrayList<Offer> offersQ) {
@@ -212,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
                     Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
                             "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
                 }
+                break;
         }
-
     }
 
     @Override
@@ -223,19 +177,10 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         menu.getMenu().findItem(R.id.home).setChecked(true);
     }
 
-
-    //Location Listener BS here
     @Override
     public void onLocationChanged(Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-
-        //System.err.println("OnLocationChanged() called");
-
-        // Use the latitude and longitude values as needed
-        // Example: Log the values
-        //System.out.println("Latitude: " + latitude);
-        //System.out.println("Longitude: " + longitude);
 
         if((this.curLat == latitude) && (this.curLong == longitude)) {
 
@@ -262,22 +207,15 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
     public void onProviderDisabled(String provider) {}
 
 
-    public void sortOffers()
-    {
+    public void sortOffers() {
         for (Offer off : offers) {
             off.calculateDiff((float) curLong, (float) curLat);
         }
-
         Collections.sort(offers, new Comparator<Offer>() {
             @Override
             public int compare(Offer o1, Offer o2) {
-                // Compare based on DIST from User
                 return Double.compare(o1.getDistFromUser(), o2.getDistFromUser());
             }});
-        //This calculates the distance
-
-        //offers.clear();
-        //System.out.println("Elements in list offers : "+offers.size());
         Toast.makeText(getApplicationContext(), "Actualisation de la liste des offres", Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
