@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             finish(); //Kill the activity to avoid force backout
         } else //This isn't the first launch
         {
-            /*for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
             }
 
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new OfferAdapter(offers);
-            recyclerView.setAdapter(adapter);*/
+            recyclerView.setAdapter(adapter);
 
 
             //LOCATION MANAGER
