@@ -145,6 +145,13 @@ public class SignUpCo extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
     public ArrayList<String> getInfoToken() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("User DATA", Context.MODE_PRIVATE);
         ArrayList<String> value = new ArrayList<>();

@@ -81,4 +81,12 @@ public class AboutUs extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
 }

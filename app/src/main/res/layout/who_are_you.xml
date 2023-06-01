@@ -76,19 +76,6 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="147dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="52dp"
-                android:text="Gestionnaire"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.383"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:layout_constraintVertical_bias="0.166" />
-
             <View
                 android:id="@+id/divider2"
                 android:layout_width="406dp"
@@ -99,18 +86,6 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:layout_constraintVertical_bias="0.289"
-                app:srcCompat="@drawable/gestionnaire" />
 
             <ImageView
                 android:id="@+id/imageView4"

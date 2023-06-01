@@ -21,7 +21,6 @@ public class WhoAreYou extends AppCompatActivity {
         Button seeker = findViewById(R.id.button5);
         Button corp = findViewById(R.id.button6);
         Button agency = findViewById(R.id.button7);
-        Button gest = findViewById(R.id.button8);
 
         seeker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,13 +45,6 @@ public class WhoAreYou extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), SignUpCo.class);
                 intent.putExtra("role","agenceinterim");
                 view.getContext().startActivity(intent);
-            }
-        });
-
-        gest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // faire un comportement pour un gestionnaire
             }
         });
 
@@ -104,4 +96,12 @@ public class WhoAreYou extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
 }
