@@ -31,11 +31,11 @@ public class GridAbView extends AppCompatActivity {
         titre.setText(intent.getStringExtra("titre"));
 
         TextView prix = findViewById(R.id.prix);
-        String prixT = "Prix : " + intent.getFloatExtra("prix", 0);
+        String prixT = "Prix : " + intent.getFloatExtra("prix", 0) + "€";
         prix.setText(prixT);
 
         TextView avantages = findViewById(R.id.avantages);
-        String avantagesT = "Abonnements : "+intent.getStringExtra("abonnements");
+        String avantagesT = "Avantages : "+intent.getStringExtra("avantages");
         avantages.setText(avantagesT);
 
         TextView conditions = findViewById(R.id.conditions);

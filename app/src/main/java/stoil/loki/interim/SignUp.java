@@ -45,7 +45,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        Button connect = findViewById(R.id.button11);
+        //Button connect = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
         Spinner nat = findViewById(R.id.spinner);
 
@@ -145,13 +145,13 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        connect.setOnClickListener(new View.OnClickListener() {
+        /*connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SignIn.class);
                 view.getContext().startActivity(intent);
             }
-        });
+        });*/
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

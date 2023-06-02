@@ -19,7 +19,7 @@
 
     <ScrollView
         android:id="@+id/scrollViewd"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"
@@ -39,18 +39,21 @@
 
             <TextView
                 android:id="@+id/prix"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Prix : " />
 
             <TextView
                 android:id="@+id/avantages"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Avantages : " />
 
             <TextView
                 android:id="@+id/conditions"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Conditions : " />

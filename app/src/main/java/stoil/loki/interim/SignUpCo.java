@@ -24,19 +24,19 @@ public class SignUpCo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_co);
 
-        Button sign_in = findViewById(R.id.button11);
+        //Button sign_in = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
 
         Intent intentp = getIntent();
         String role = intentp.getStringExtra("role");
 
-        sign_in.setOnClickListener(new View.OnClickListener() {
+        /*sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SignIn.class);
                 view.getContext().startActivity(intent);
             }
-        });
+        });*/
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

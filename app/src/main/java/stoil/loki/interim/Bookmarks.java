@@ -3,11 +3,13 @@ package stoil.loki.interim;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,6 @@ import java.util.ArrayList;
 public class Bookmarks extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1993; // For access to SMS sharing
-    private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
     private ArrayList<Integer> bookmarked_ids = new ArrayList<>();
     OfferAdapter adapter;
@@ -82,6 +83,22 @@ public class Bookmarks extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Appuyez de nouveau sur le bouton " +
+                            "de partage par SMS pour partager l'offre.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Activez l'accès à vos messages pour " +
+                            "partager cette annonce par SMS.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
     }
 
     public void onQueryResult(ArrayList<Offer> offersQ) {
