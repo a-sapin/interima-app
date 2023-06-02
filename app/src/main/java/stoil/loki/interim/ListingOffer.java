@@ -123,6 +123,10 @@ public class ListingOffer<T> extends AsyncTask<String, Void, String> {
                 Log.d("ListingOffer.java", "Requete ok + passage a recherche");
                 ((RecherchePage) callingActivity).onQueryResult(offers);
             }
+            if (callingActivity instanceof Bookmarks) {
+                Log.d("ListingOffer.java", "Requete ok + passage a bookmars");
+                ((Bookmarks) callingActivity).onQueryResult(offers);
+            }
         }
         res = result;
     }

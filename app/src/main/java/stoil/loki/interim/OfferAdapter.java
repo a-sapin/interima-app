@@ -147,7 +147,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                                     String smsbody = "Partagé via Interima: "+encodeString(TITRE+", "+DUREE+", " +
                                             REMUNERATION)+"€/hr.";
                                     if (!SOURCE.isEmpty()){
-                                        smsbody+="("+encodeString(SOURCE)+")";
+                                        smsbody+=" ("+encodeString(SOURCE)+")";
                                     }
                                     sendIntent.putExtra("sms_body", smsbody);
                                     view.getContext().startActivity(sendIntent);

@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         setContentView(R.layout.activity_main);
         System.setProperty("file.encoding", "UTF-8");
 
-        ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
+        /*ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
         dbCo.setContext(getApplicationContext());
         dbCo.setRequete("Select * from interima.offre;");
-        dbCo.execute("");
+        dbCo.execute("");*/
 
         File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
         System.out.println(getFilesDir());
@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             this.adapter = new OfferAdapter(offers);
             recyclerView.setAdapter(adapter);*/
+
+            this.adapter = new OfferAdapter(offers);
 
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -175,6 +177,12 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.home).setChecked(true);
+        this.offers = new ArrayList<>();
+        this.offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
+        ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
+        dbCo.setContext(getApplicationContext());
+        dbCo.setRequete("Select * from interima.offre;");
+        dbCo.execute("");
     }
 
     @Override
