@@ -47,7 +47,7 @@
                     android:id="@+id/apply_button"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
-                    android:text="Candidater"
+                    android:text="Consulter"
                     android:textSize="10dp" />
 
                 <ImageButton
