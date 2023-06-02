@@ -24,6 +24,7 @@ public class Bookmarks extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1993; // For access to SMS sharing
     private LocationManager locationManager;
     private ArrayList<Offer> offers = new ArrayList<Offer>();
+    private ArrayList<Integer> bookmarked_ids = new ArrayList<>();
     OfferAdapter adapter;
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
@@ -32,7 +33,7 @@ public class Bookmarks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookmarks);
 
-        this.adapter = new OfferAdapter(offers);
+        this.adapter = new OfferAdapter(offers, bookmarked_ids);
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -92,9 +93,28 @@ public class Bookmarks extends AppCompatActivity {
             RecyclerView recyclerView = findViewById(R.id.offersList);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-            this.adapter = new OfferAdapter(offers);
-            recyclerView.setAdapter(adapter);
+            if(getInfoToken() != null) {
+                if(getInfoTokenRole().equals("Chercheur d'emploi")) {
+                    ListingBookmarkedIds<Bookmarks> dbCo = new ListingBookmarkedIds<>(Bookmarks.this);
+                    dbCo.setContext(getApplicationContext());
+                    dbCo.setRequete("SELECT id FROM interima.offre WHERE offre.id IN (SELECT idOffre FROM interima.favori WHERE idUti="+getInfoTokenID()+");");
+                    dbCo.execute("");
+                } else {
+                    this.adapter = new OfferAdapter(offers, new ArrayList<>());
+                    recyclerView.setAdapter(adapter);
+                }
+            } else {
+                this.adapter = new OfferAdapter(offers, new ArrayList<>());
+                recyclerView.setAdapter(adapter);
+            }
         }
+    }
+
+    public void onQueryResult2(ArrayList<Integer> bookmarked_idsQ) {
+        this.bookmarked_ids = bookmarked_idsQ;
+        this.adapter = new OfferAdapter(offers, bookmarked_ids);
+        RecyclerView recyclerView = findViewById(R.id.offersList);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -128,5 +148,4 @@ public class Bookmarks extends AppCompatActivity {
         ArrayList<String> info = getInfoToken();
         return info.get(0);
     }
-
 }

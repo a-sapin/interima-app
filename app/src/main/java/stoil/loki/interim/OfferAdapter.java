@@ -33,12 +33,13 @@ import java.util.List;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> {
     private List<Offer> annonces;
-
+    private List<Integer> bookmarked_ids;
     private View currentView;
     private static final int PERMISSION_REQUEST_CODE = 1993;
 
-    public OfferAdapter(ArrayList<Offer> annonces) {
+    public OfferAdapter(ArrayList<Offer> annonces, ArrayList<Integer> bookmarked_ids) {
         this.annonces = annonces;
+        this.bookmarked_ids = bookmarked_ids;
     }
 
     @NonNull
@@ -64,6 +65,12 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         holder.titleTextView.setText(encodeString(offer.getTitle()));
         holder.descriptionTextView.setText(encodeString(offer.getUrl()));
         this.currentView = holder.itemView;
+
+        Resources resources = holder.itemView.getContext().getResources();
+        Drawable marque = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
+        if(bookmarked_ids.contains(offer.getId())) {
+            holder.bookmark.setImageDrawable(marque);
+        }
 
         holder.applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +197,6 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
         public TextView descriptionTextView;
         public Button applyButton;
         public ImageButton bookmark;
-        public ImageButton translation;
         public ImageButton dot;
 
         public ViewHolder(View view) {

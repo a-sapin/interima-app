@@ -22,7 +22,7 @@
                 android:layout_height="62dp"
                 android:background="@color/teal_700"
                 android:gravity="center"
-                android:text="Candidater"
+                android:text="Publier une annonce"
                 android:textAlignment="center"
                 android:textSize="20dp"
                 android:textStyle="bold" />
