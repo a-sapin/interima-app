@@ -31,11 +31,6 @@ public class SavedSearchDisplay extends AppCompatActivity {
         setContentView(R.layout.saved_search_display);
         System.setProperty("file.encoding", "UTF-8");
 
-        ListingSearch<SavedSearchDisplay> dbCo = new ListingSearch<>(SavedSearchDisplay.this);
-        dbCo.setContext(getApplicationContext());
-        dbCo.setRequete("Select * from interima.recherche where idUti = '"+ getInfoTokenID() +"';");
-        dbCo.execute("");
-
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -105,6 +100,12 @@ public class SavedSearchDisplay extends AppCompatActivity {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.profil).setChecked(true);
+        if(getInfoTokenID() != null) {
+            ListingSearch<SavedSearchDisplay> dbCo = new ListingSearch<>(SavedSearchDisplay.this);
+            dbCo.setContext(getApplicationContext());
+            dbCo.setRequete("Select * from interima.recherche where idUti = '"+ getInfoTokenID() +"';");
+            dbCo.execute("");
+        }
     }
 
     public ArrayList<String> getInfoToken() {

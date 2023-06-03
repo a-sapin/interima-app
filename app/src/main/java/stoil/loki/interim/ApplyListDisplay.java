@@ -34,15 +34,6 @@ public class ApplyListDisplay extends AppCompatActivity {
         setContentView(R.layout.apply_list_display);
         System.setProperty("file.encoding", "UTF-8");
 
-        ListingCandidatureData<ApplyListDisplay> dbCo = new ListingCandidatureData<>(ApplyListDisplay.this);
-        dbCo.setContext(getApplicationContext());
-        if(this.getInfoTokenRole().equals("Chercheur d'emploi")) {
-            dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
-        } else {
-            dbCo.setRequete("Select * from interima.candidature where id IN (SELECT idOffre from interima.candidatureoffre WHERE idOffre IN (SELECT id from interima.offre WHERE idEmp='"+ getInfoTokenID() +"'));");
-        }
-        dbCo.execute("");
-
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -127,6 +118,14 @@ public class ApplyListDisplay extends AppCompatActivity {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.profil).setChecked(true);
+        ListingCandidatureData<ApplyListDisplay> dbCo = new ListingCandidatureData<>(ApplyListDisplay.this);
+        dbCo.setContext(getApplicationContext());
+        if(this.getInfoTokenRole().equals("Chercheur d'emploi")) {
+            dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
+        } else {
+            dbCo.setRequete("Select * from interima.candidature where id IN (SELECT idOffre from interima.candidatureoffre WHERE idOffre IN (SELECT id from interima.offre WHERE idEmp='"+ getInfoTokenID() +"'));");
+        }
+        dbCo.execute("");
     }
 
     public ArrayList<String> getInfoToken() {
