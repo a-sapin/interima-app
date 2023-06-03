@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 public class UploadOffer extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
+    private String handledfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class UploadOffer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Behavior to send data
+                //Use JSONReader
             }
         });
 
@@ -115,6 +119,11 @@ public class UploadOffer extends AppCompatActivity {
                     stringBuilder.append(line);
                 }
                 inputStream.close();
+                Cursor returnCursor =
+                        getContentResolver().query(uri, null, null, null, null);
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                returnCursor.moveToFirst();
+                this.handledfile = returnCursor.getString(nameIndex);
                 TextView jsoncontent = (TextView) findViewById(R.id.jsoncontent);
                 jsoncontent.setText(stringBuilder.toString());
             } catch (IOException e) {
