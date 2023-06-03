@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,46 +39,43 @@ public class CVLMDisplay extends AppCompatActivity {
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Gérez la redirection ici
                 switch (item.getItemId()) {
                     case R.id.home:
-                        // Redirigez vers l'écran d'accueil
-
                         Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intenth);
                         return true;
-
                     case R.id.favoris:
-
-                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
-                        startActivity(intentf);
-                        return true;
+                        if(((CVLMDisplay)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                            startActivity(intentf);
+                            return true;
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                     case R.id.recherche:
                         Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
                         startActivity(intents);
                         return true;
                     case R.id.notifs:
-
-                        Intent intentn = new Intent(getApplicationContext(), Notifications.class);
-                        startActivity(intentn);
-                        return true;
-
-                    case R.id.profil:
-                        // si connecter donner la page du profil
-                        // sinon on demande la co ou inscription
-
-                        if(true) {
-                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                            startActivity(intentp);
+                        if(((CVLMDisplay)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                            startActivity(intentn);
+                            return true;
                         } else {
-                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                            startActivity(intentp);
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
                         }
+                        break;
+                    case R.id.profil:
+                        Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                        startActivity(intentp);
                         return true;
-
                     default:
-                        return false;
+                        break;
                 }
+                return false;
             }
         });
 

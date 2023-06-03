@@ -72,8 +72,6 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("SignIn.java", "bouton co");
                 connexion();
-
-//                SessionManager sessionManager = new SessionManager(getApplicationContext(), email.getText().toString(), role, SignIn.this );
             }
         });
 
@@ -89,45 +87,43 @@ public class SignIn extends AppCompatActivity {
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Gérez la redirection ici
                 switch (item.getItemId()) {
                     case R.id.home:
-                        // Redirigez vers l'écran d'accueil
-
                         Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intenth);
                         return true;
-
                     case R.id.favoris:
-                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
-                        startActivity(intentf);
-                        return true;
+                        if(((SignIn)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                            startActivity(intentf);
+                            return true;
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                     case R.id.recherche:
                         Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
                         startActivity(intents);
                         return true;
                     case R.id.notifs:
-
-                        Intent intentn = new Intent(getApplicationContext(), Notifications.class);
-                        startActivity(intentn);
-                        return true;
-
-                    case R.id.profil:
-                        // si connecter donner la page du profil
-                        // sinon on demande la co ou inscription
-                        if(true) {
-                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                            startActivity(intentp);
+                        if(((SignIn)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                            startActivity(intentn);
+                            return true;
                         } else {
-                            //On est déjà sur la page de connexion
-                            //Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                            //startActivity(intentp);
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
                         }
+                        break;
+                    case R.id.profil:
+                        Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                        startActivity(intentp);
                         return true;
-
                     default:
-                        return false;
+                        break;
                 }
+                return false;
             }
         });
 

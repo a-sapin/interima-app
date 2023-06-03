@@ -65,11 +65,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         setContentView(R.layout.activity_main);
         System.setProperty("file.encoding", "UTF-8");
 
-        /*ListingOffer<MainActivity> dbCo = new ListingOffer<>(MainActivity.this);
-        dbCo.setContext(getApplicationContext());
-        dbCo.setRequete("Select * from interima.offre;");
-        dbCo.execute("");*/
-
         File file = new File(getFilesDir().toString() + "/first_time_launch.txt");
         System.out.println(getFilesDir());
         if (!file.exists()) {
@@ -85,15 +80,6 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             startActivity(intent);
             finish();
         } else { //This isn't the first launch
-            /*for (int i = 0; i < 10; i++) {
-                offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
-            }
-
-            RecyclerView recyclerView = findViewById(R.id.offersList);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-            this.adapter = new OfferAdapter(offers);
-            recyclerView.setAdapter(adapter);*/
 
             this.adapter = new OfferAdapter(offers, bookmarked_ids);
 
@@ -108,33 +94,54 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
             if (geoPermGranted)
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, this);
 
+            Button button = (Button) findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
+                    startActivity(intents);
+                }
+            });
+
             BottomNavigationView menu = findViewById(R.id.navigation);
             menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.home:
-                            //Nous sommes déjà à l'accueil.
-                            return true;
+                            break;
+                        case R.id.favoris:
+                            if(((MainActivity)menu.getContext()).getInfoTokenID() != null) {
+                                Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                                startActivity(intentf);
+                                return true;
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                        "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
                         case R.id.recherche:
                             Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
                             startActivity(intents);
                             return true;
-                        case R.id.favoris:
-                            Intent intentb = new Intent(MainActivity.this, Bookmarks.class);
-                            startActivity(intentb);
-                            return true;
                         case R.id.notifs:
-                            Intent intentn = new Intent(MainActivity.this, Notifications.class);
-                            startActivity(intentn);
-                            return true;
+                            if(((MainActivity)menu.getContext()).getInfoTokenID() != null) {
+                                Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                                startActivity(intentn);
+                                return true;
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                        "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
                         case R.id.profil:
                             Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
                             startActivity(intentp);
                             return true;
                         default:
-                            return false;
+                            break;
                     }
+                    return false;
                 }
             });
         }
