@@ -43,7 +43,7 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        Button connect = findViewById(R.id.button11);
+        //Button connect = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
         Spinner nat = findViewById(R.id.spinner);
 
@@ -143,57 +143,47 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SignIn.class);
-                view.getContext().startActivity(intent);
-            }
-        });
-
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Gérez la redirection ici
                 switch (item.getItemId()) {
                     case R.id.home:
-                        // Redirigez vers l'écran d'accueil
-
                         Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intenth);
                         return true;
-
                     case R.id.favoris:
-                        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
-                        startActivity(intentf);
-                        return true;
+                        if(((EditProfile)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+                            startActivity(intentf);
+                            return true;
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                     case R.id.recherche:
                         Intent intents = new Intent(getApplicationContext(), RecherchePage.class);
                         startActivity(intents);
                         return true;
                     case R.id.notifs:
-
-                        Intent intentn = new Intent(getApplicationContext(), Notifications.class);
-                        startActivity(intentn);
-                        return true;
-
-                    case R.id.profil:
-                        // si connecter donner la page du profil
-                        // sinon on demande la co ou inscription
-
-                        if(true) {
-                            Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
-                            startActivity(intentp);
+                        if(((EditProfile)menu.getContext()).getInfoTokenID() != null) {
+                            Intent intentn = new Intent(getApplicationContext(), Notifications.class);
+                            startActivity(intentn);
+                            return true;
                         } else {
-                            Intent intentp = new Intent(getApplicationContext(), SignIn.class);
-                            startActivity(intentp);
+                            Toast.makeText(getApplicationContext(), "Connectez-vous pour " +
+                                    "accéder à cette fonctionnalité.", Toast.LENGTH_SHORT).show();
                         }
+                        break;
+                    case R.id.profil:
+                        Intent intentp = new Intent(getApplicationContext(), ProfilDisplay.class);
+                        startActivity(intentp);
                         return true;
-
                     default:
-                        return false;
+                        break;
                 }
+                return false;
             }
         });
 
