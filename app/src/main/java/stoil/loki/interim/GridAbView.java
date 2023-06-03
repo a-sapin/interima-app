@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridAbView extends AppCompatActivity {
     ImageView selectedImage;
@@ -48,13 +53,19 @@ public class GridAbView extends AppCompatActivity {
 
         Button next = findViewById(R.id.button10);
 
+        Spinner pay = findViewById(R.id.spinner);
+        List<String> pay_means = new ArrayList<>();
+        pay_means.add("Prélèvement automatique");
+        pay_means.add("Carte");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pay_means);
+        pay.setAdapter(adapter);
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // passer au paiement donc refaire la redirection vers la bonne page
                 Intent intents = new Intent(view.getContext(), MdP.class);
 
-                intents.putExtra("idA", id );
                 intents.putExtra("role", intent.getStringExtra("role") );
                 intents.putExtra("email1", intent.getStringExtra("email1") );
                 intents.putExtra("departement", intent.getStringExtra("departement"));
@@ -67,6 +78,9 @@ public class GridAbView extends AppCompatActivity {
                 intents.putExtra("nom2", intent.getStringExtra("nom2"));
                 intents.putExtra("email2", intent.getStringExtra("email2"));
                 intents.putExtra("tel2", intent.getStringExtra("tel2"));
+
+                intents.putExtra("idA", id );
+                intents.putExtra("paiement", pay.getSelectedItem().toString());
 
                 view.getContext().startActivity(intents);
             }
@@ -117,5 +131,12 @@ public class GridAbView extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BottomNavigationView menu = findViewById(R.id.navigation);
+        menu.getMenu().findItem(R.id.profil).setChecked(true);
     }
 }

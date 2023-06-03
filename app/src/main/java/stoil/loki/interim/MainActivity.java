@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements Serializable, Loc
         RecyclerView recyclerView = findViewById(R.id.offersList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        if(getInfoToken() != null) {
+        if(getInfoTokenID() != null) {
             if(getInfoTokenRole().equals("Chercheur d'emploi")) {
                 ListingBookmarkedIds<MainActivity> dbCo = new ListingBookmarkedIds<>(MainActivity.this);
                 dbCo.setContext(getApplicationContext());

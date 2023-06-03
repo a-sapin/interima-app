@@ -220,7 +220,7 @@ public class CreateOffer extends AppCompatActivity {
 
     private void SQLSubmit() {
         Log.d("SignIn.java", "Starting connection from CreateOffer.java");
-        dbCo = new DatabaseUpdateCreate<>(CreateOffer.this, true);
+        dbCo = new DatabaseUpdateCreate<>(CreateOffer.this, 1);
         dbCo.setContext(getApplicationContext());
 
         String SQL;

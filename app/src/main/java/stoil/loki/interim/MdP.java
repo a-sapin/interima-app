@@ -3,6 +3,7 @@ package stoil.loki.interim;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,13 +13,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MdP extends AppCompatActivity {
+
+    private int userid_for_subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +48,7 @@ public class MdP extends AppCompatActivity {
                     // faire la demande de code de verification
 
                     Log.d("MdP.java", "debut connexion");
-                    DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, true);
+                    DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, 2);
                     dbCo.setContext(getApplicationContext());
 
                     Intent intent = getIntent();
@@ -129,7 +134,7 @@ public class MdP extends AppCompatActivity {
         if (role.equals("chercheuremploi")) {
 
             Log.d("MdP.java", "debut connexion pour query 2");
-            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, 0);
             dbCo.setContext(getApplicationContext());
 
             String nom = intent.getStringExtra("nom");
@@ -146,9 +151,15 @@ public class MdP extends AppCompatActivity {
 
             dbCo.setRequete(SQL);
             dbCo.execute("");
+
+            Intent home = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(home);
+            finish();
+
         } else if (role.equals("employeur")) {
 
-            int idA = intent.getIntExtra("idA", 0);
+            this.userid_for_subscription = id;
+
             String email1 = intent.getStringExtra("email1");
             String nomEntreprise = intent.getStringExtra("nomEntreprise");
             String departement = intent.getStringExtra("departement");
@@ -161,7 +172,7 @@ public class MdP extends AppCompatActivity {
             String tel2 = intent.getStringExtra("tel2");
             String adresse = intent.getStringExtra("adresse");
 
-            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, 1);
             dbCo.setContext(getApplicationContext());
 
             String SQL = "INSERT INTO interima.employeur (idUti, nomEntreprise, nomServDept, nomSousSD, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+departement+"', '"+sousService+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
@@ -171,23 +182,21 @@ public class MdP extends AppCompatActivity {
             dbCo.setRequete(SQL);
             dbCo.execute("");
 
-
         } else if (role.equals("agenceinterim")) {
 
-            int idA = intent.getIntExtra("idA", 0);
+            this.userid_for_subscription = id;
+
             String email1 = intent.getStringExtra("email1");
             String nomEntreprise = intent.getStringExtra("nomEntreprise");
-            String departement = intent.getStringExtra("departement");
             String nom1 = intent.getStringExtra("nom1");
             String telephone1 = intent.getStringExtra("telephone1");
             String siret = intent.getStringExtra("siret");
-            String sousService = intent.getStringExtra("sousService");
             String nom2 = intent.getStringExtra("nom2");
             String email2 = intent.getStringExtra("email2");
             String tel2 = intent.getStringExtra("tel2");
             String adresse = intent.getStringExtra("adresse");
 
-            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, false);
+            DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, 1);
             dbCo.setContext(getApplicationContext());
 
             String SQL = "INSERT INTO agenceinterim (idUti, nomAgence, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
@@ -198,6 +207,40 @@ public class MdP extends AppCompatActivity {
             dbCo.execute("");
 
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public void dataForSubscriptionQuery() {
+        Intent intent = getIntent();
+        int idA = intent.getIntExtra("idA", 0);
+        String paiement = intent.getStringExtra("paiement");
+        Log.d("MdP.java", "debut query 3");
+        LocalDate expiration = LocalDate.now();
+        switch(idA) {
+            case 2:
+                expiration = expiration.plusMonths(1);
+                break;
+            case 3:
+                expiration = expiration.plusMonths(3);
+                break;
+            case 4:
+                expiration = expiration.plusMonths(6);
+                break;
+            case 5:
+                expiration = expiration.plusYears(1);
+                break;
+            case 6:
+                expiration = expiration.plusYears(100);
+                break;
+            default:
+                break;
+        }
+        DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(MdP.this, 0);
+        dbCo.setContext(getApplicationContext());
+        String SQL = "INSERT INTO interima.souscription (idAbonnement, idUti, souscription, expiration, paiement) values ('"+idA+"', '"+userid_for_subscription+"', '"+LocalDate.now()+"', '"+expiration+"', '"+paiement+"');";
+        Log.d("MdP.java", "Requete :" + SQL);
+        dbCo.setRequete(SQL);
+        dbCo.execute("");
 
         Intent home = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(home);

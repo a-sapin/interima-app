@@ -103,7 +103,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                     holder.bookmark.setImageDrawable(marque_vide);
 
                     Log.d("OfferAdapter.java", "debut connexion");
-                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, false);
+                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
                     dbCo.setContext(view.getContext());
 
                     String SQL = "DELETE FROM interima.favori where idUti = '"+id+"' and idOffre = '"+annonces.get(position).getId()+"';";
@@ -117,7 +117,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                     holder.bookmark.setImageDrawable(marque);
 
                     Log.d("OfferAdapter.java", "debut connexion");
-                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, false);
+                    DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
                     dbCo.setContext(view.getContext());
 
                     String SQL = "INSERT INTO interima.favori (idUti, idOffre) values ('"+id+"', '"+annonces.get(position).getId()+"');";

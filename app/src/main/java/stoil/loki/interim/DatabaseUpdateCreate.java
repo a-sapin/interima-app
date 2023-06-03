@@ -2,8 +2,11 @@ package stoil.loki.interim;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,11 +27,11 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
 
     private T callingActivity;
 
-    private boolean query2;
+    private int querynumber;
 
-    public DatabaseUpdateCreate(T callingActivity, boolean query2) {
+    public DatabaseUpdateCreate(T callingActivity, int querynb) {
         this.callingActivity = callingActivity;
-        this.query2 = query2;
+        this.querynumber = querynb;
     }
 
     public void setRequete(String SQL) {
@@ -85,23 +88,25 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
         return res;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-
-
         if (callingActivity != null) {
             Log.d("DatabaseUpdateCreate.java", "callingActivity class: " + callingActivity.getClass().getSimpleName() + "result = " + result);
-            if (callingActivity instanceof MdP && query2 == true) {
+            if (callingActivity instanceof MdP && this.querynumber == 2) {
                 Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
                 ((MdP) callingActivity).dataAddQuery(Integer.parseInt(result));
-            } 
-            if (callingActivity instanceof Apply && query2 == true) {
+            }
+            if (callingActivity instanceof MdP && this.querynumber == 1) {
+                Log.d("DatabaseUpdateCreate.java", "query 3, souscription");
+                ((MdP) callingActivity).dataForSubscriptionQuery();
+            }
+            if (callingActivity instanceof Apply && this.querynumber == 2) {
                 Log.d("DatabaseUpdateCreate.java", "query 2, id = " + Integer.parseInt(result));
                 ((Apply) callingActivity).dataAddQuery(Integer.parseInt(result));
             }
         }
-
         res = result;
     }
 }

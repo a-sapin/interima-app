@@ -139,7 +139,7 @@ public class Apply extends AppCompatActivity {
                 String commentaire = commentaireE.getText().toString();
 
                 Log.d("Apply.java", "debut connexion");
-                DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(Apply.this, true);
+                DatabaseUpdateCreate<MdP> dbCo = new DatabaseUpdateCreate(Apply.this, 2);
                 dbCo.setContext(getApplicationContext());
 
                 String SQL = "INSERT INTO interima.candidature (idUti, lienCV, lienLM, commentaires, statut) values ('"+getInfoTokenID()+"', '"+lienCV+"', '"+lienLM+"', '"+commentaire+"', 'EN ATTENTE');";
@@ -273,7 +273,7 @@ public class Apply extends AppCompatActivity {
         Intent intent = getIntent();
 
         Log.d("Apply.java", "debut connexion pour query 2");
-        DatabaseUpdateCreate<Apply> dbCo = new DatabaseUpdateCreate(Apply.this, false);
+        DatabaseUpdateCreate<Apply> dbCo = new DatabaseUpdateCreate(Apply.this, 1);
         dbCo.setContext(getApplicationContext());
 
         String SQL = "INSERT INTO interima.candidatureoffre (idOffre, idCandidature) values ('"+offerid+"', '"+id+"');";

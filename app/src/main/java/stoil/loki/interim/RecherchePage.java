@@ -136,7 +136,7 @@ public class RecherchePage extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void SQLSubmit() {
         Log.d("RecherchePage.java", "Adding search to saved searches");
-        DatabaseUpdateCreate<RecherchePage> dbCo = new DatabaseUpdateCreate<>(RecherchePage.this, true);
+        DatabaseUpdateCreate<RecherchePage> dbCo = new DatabaseUpdateCreate<>(RecherchePage.this, 1);
         dbCo.setContext(getApplicationContext());
 
         String SQL, search_bar_str;

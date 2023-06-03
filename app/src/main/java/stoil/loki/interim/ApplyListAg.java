@@ -140,7 +140,7 @@ public class ApplyListAg extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void SQLSubmitAccepter() {
         Log.d("ApplyListAg.java", "Validating candidature");
-        DatabaseUpdateCreate<ApplyListAg> dbCo = new DatabaseUpdateCreate<>(ApplyListAg.this, true);
+        DatabaseUpdateCreate<ApplyListAg> dbCo = new DatabaseUpdateCreate<>(ApplyListAg.this, 1);
         dbCo.setContext(getApplicationContext());
         String SQL;
         SQL = "UPDATE candidature SET statut='ACCEPTEE' WHERE candidature.id='"+apply_id+"';";
@@ -152,7 +152,7 @@ public class ApplyListAg extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void SQLSubmitRefuser() {
         Log.d("ApplyListAg.java", "Refusing candidature");
-        DatabaseUpdateCreate<ApplyListAg> dbCo = new DatabaseUpdateCreate<>(ApplyListAg.this, true);
+        DatabaseUpdateCreate<ApplyListAg> dbCo = new DatabaseUpdateCreate<>(ApplyListAg.this, 1);
         dbCo.setContext(getApplicationContext());
         String SQL;
         SQL = "UPDATE candidature SET statut='REFUSEE' WHERE candidature.id='"+apply_id+"';";
