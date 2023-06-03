@@ -16,6 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class UploadOffer extends AppCompatActivity {
@@ -90,7 +95,7 @@ public class UploadOffer extends AppCompatActivity {
 
     private void openFileBrowser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("file/json");
+        intent.setType("application/json");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, REQUEST_CODE);
     }
@@ -100,8 +105,21 @@ public class UploadOffer extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            TextView jsoncontent = (TextView) findViewById(R.id.jsoncontent);
-            jsoncontent.setText(uri.toString());
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        inputStream));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                inputStream.close();
+                TextView jsoncontent = (TextView) findViewById(R.id.jsoncontent);
+                jsoncontent.setText(stringBuilder.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
