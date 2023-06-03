@@ -110,7 +110,7 @@ public class Bookmarks extends AppCompatActivity {
             RecyclerView recyclerView = findViewById(R.id.offersList);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-            if(getInfoToken() != null) {
+            if(getInfoTokenID() != null) {
                 if(getInfoTokenRole().equals("Chercheur d'emploi")) {
                     ListingBookmarkedIds<Bookmarks> dbCo = new ListingBookmarkedIds<>(Bookmarks.this);
                     dbCo.setContext(getApplicationContext());
@@ -140,11 +140,19 @@ public class Bookmarks extends AppCompatActivity {
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.favoris).setChecked(true);
         this.offers = new ArrayList<>();
-        this.offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
-        ListingOffer<Bookmarks> dbCo = new ListingOffer<>(Bookmarks.this);
-        dbCo.setContext(getApplicationContext());
-        dbCo.setRequete("SELECT * FROM interima.offre WHERE offre.id IN (SELECT idOffre FROM interima.favori WHERE idUti="+getInfoTokenID()+");");
-        dbCo.execute("");
+        if(getInfoTokenID() != null) {
+            this.offers.add(new Offer(1, "Developpeur Fullstack", "capgemini.com"));
+            ListingOffer<Bookmarks> dbCo = new ListingOffer<>(Bookmarks.this);
+            dbCo.setContext(getApplicationContext());
+            if(getInfoTokenRole().equals("Chercheur d'emploi")) {
+                dbCo.setRequete("SELECT * FROM interima.offre WHERE offre.id IN (SELECT idOffre FROM interima.favori WHERE idUti="+getInfoTokenID()+");");
+            } else {
+                TextView tv = (TextView) findViewById(R.id.textView);
+                tv.setText("Vos annonces publiées");
+                dbCo.setRequete("SELECT * FROM interima.offre WHERE offre.idEmp="+getInfoTokenID()+");");
+            }
+            dbCo.execute("");
+        }
     }
 
     public ArrayList<String> getInfoToken() {

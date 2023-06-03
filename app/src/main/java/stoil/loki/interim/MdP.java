@@ -242,8 +242,8 @@ public class MdP extends AppCompatActivity {
         dbCo.setRequete(SQL);
         dbCo.execute("");
 
-        Intent home = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(home);
+        Intent signin = new Intent(getApplicationContext(), SignIn.class);
+        startActivity(signin);
         finish();
     }
 

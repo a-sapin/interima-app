@@ -20,9 +20,10 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:background="@color/teal_700"
+                android:background="@color/interima_light_blue"
                 android:gravity="center"
                 android:text="Publier une annonce"
+                android:fontFamily="@font/bruno_ace_regular"
                 android:textAlignment="center"
                 android:textSize="20dp"
                 android:textStyle="bold" />

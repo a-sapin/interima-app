@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="411dp"
         android:layout_height="62dp"
-        android:background="@color/teal_700"
+        android:background="@color/interima_light_blue"
         android:text="Notification"
         android:textAlignment="center"
         android:gravity="center"
