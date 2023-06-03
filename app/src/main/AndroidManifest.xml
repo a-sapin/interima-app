@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Interima"
         tools:targetApi="31">
         <activity
+            android:name=".UploadOffer"
+            android:exported="false" />
+        <activity
             android:name=".SavedSearchDisplay"
             android:exported="false" />
         <activity
