@@ -33,36 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/checkBox4"
-                android:layout_width="161dp"
-                android:layout_height="41dp"
-                android:text="Même durée"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
-
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="161dp"
-                android:layout_height="41dp"
-                android:text="Même lieu"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="161dp"
-                android:layout_height="41dp"
-                android:text="Même période"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
@@ -193,13 +163,13 @@
 
             <ImageButton
                 android:id="@+id/button2"
-                android:layout_width="141dp"
+                android:layout_width="112dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintBottom_toBottomOf="@+id/button"
                 app:srcCompat="@drawable/marque_page_vide" />
 
             <Button
@@ -217,47 +187,12 @@
                 android:id="@+id/button3"
                 android:layout_width="112dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.272"
                 app:layout_constraintStart_toEndOf="@+id/button2"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintBottom_toBottomOf="@+id/button"
                 app:srcCompat="@drawable/partager" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="410dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="8dp"
-                android:text="Chercher des annonces simlaires"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="161dp"
-                android:layout_height="41dp"
-                android:text="Même employeur"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="188dp"
-                android:layout_height="41dp"
-                android:text="Rechercher"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

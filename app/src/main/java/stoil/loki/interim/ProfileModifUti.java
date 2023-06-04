@@ -96,7 +96,6 @@ public class ProfileModifUti extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     public ArrayList<String> getInfoToken() {
