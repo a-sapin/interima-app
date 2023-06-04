@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -128,7 +129,16 @@ public class EditProfile extends AppCompatActivity {
                         intent.putExtra("tel", tel);
                         intent.putExtra("city", city);
 
-                        view.getContext().startActivity(intent);
+                        //view.getContext().startActivity(intent);
+
+                        DatabaseUpdateCreate<EditProfile> dbCo = new DatabaseUpdateCreate(EditProfile.this, 0);
+                        dbCo.setContext(getApplicationContext());
+                        String USERid = getInfoTokenID();
+                        String SQL = "UPDATE interima.chercheuremploi SET nom = '"+nom+"', prenom = '"+prenom+"', email = '"+email+"', nationalite = '"+nat+"', tel = '"+tel+"', ville = '"+city+"' WHERE idUti = "+USERid+";";
+                        Log.d("EditProfile.java", "Requete :" + SQL);
+                        dbCo.setRequete(SQL);
+                        dbCo.execute("");
+
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();

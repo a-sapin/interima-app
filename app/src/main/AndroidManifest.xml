@@ -29,6 +29,12 @@
             android:name=".Historique"
             android:exported="false" />
         <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileCo"
+            android:exported="false" />
+        <activity
             android:name=".CVLMDisplay"
             android:exported="false" />
         <activity
