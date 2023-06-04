@@ -65,8 +65,6 @@ public class EditProfileCo extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), GridAbonnement.class);
-
                 String email1 = email1E.getText().toString();
                 String nomEntreprise = nomEntrepriseE.getText().toString();
                 String adresse = adresseE.getText().toString();
@@ -82,25 +80,6 @@ public class EditProfileCo extends AppCompatActivity {
                 if (nomEntreprise.isEmpty() || sousService.isEmpty() || NomDepartement.isEmpty() || siret.isEmpty() || Nom1.isEmpty() || email1.isEmpty() || telephone1.isEmpty() || adresse.isEmpty() ) {
                     Toast.makeText(getApplicationContext(), "Les champs obligatoires ne sont pas tous remplis", Toast.LENGTH_SHORT).show();
                 } else {
-
-                    //intent.putExtra("role", role);
-                    intent.putExtra("email1", email1);
-                    intent.putExtra("departement", NomDepartement);
-                    intent.putExtra("adresse", adresse);
-                    intent.putExtra("nomEntreprise", nomEntreprise);
-                    intent.putExtra("nom1", Nom1);
-                    intent.putExtra("telephone1", telephone1);
-                    intent.putExtra("siret", siret);
-                    intent.putExtra("sousService", sousService);
-                    intent.putExtra("nom2", nom2);
-                    intent.putExtra("email2", email2);
-                    intent.putExtra("tel2", tel2);
-
-                    //EMPLOYEUR TABLE HAS THE FOLLOWING ATTRIBUTES:
-                //nomEntreprise, nomServDept, nomSousSD, siret,
-                //nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse
-
-                    //view.getContext().startActivity(intent);
                     DatabaseUpdateCreate<EditProfileCo> dbCo = new DatabaseUpdateCreate(EditProfileCo.this, 0);
                     dbCo.setContext(getApplicationContext());
                     String USERid = getInfoTokenID();
@@ -115,7 +94,6 @@ public class EditProfileCo extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    finish();
                 }
 
             }
@@ -164,6 +142,11 @@ public class EditProfileCo extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void onQueryResult() {
+        Toast.makeText(getApplicationContext(), "Vos informations ont bien été modifiées!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

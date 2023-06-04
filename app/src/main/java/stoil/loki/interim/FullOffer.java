@@ -104,9 +104,13 @@ public class FullOffer extends AppCompatActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ChooseApply.class);
-                intent.putExtra("offerid", offer.getId());
-                view.getContext().startActivity(intent);
+                if(getInfoTokenRole().equals("Chercheur d'emploi")) {
+                    Intent intent = new Intent(view.getContext(), ChooseApply.class);
+                    intent.putExtra("offerid", offer.getId());
+                    view.getContext().startActivity(intent);
+                } else {
+                    Toast.makeText(FullOffer.this, "Vous n'êtes pas autorisé à faire ça.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

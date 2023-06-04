@@ -117,6 +117,10 @@ public class DatabaseUpdateCreate<T> extends AsyncTask<String, Void, String> {
                 Log.d("DatabaseUpdateCreate.java", "Mise à jour des informations");
                 ((EditProfile) callingActivity).onQueryResult();
             }
+            if (callingActivity instanceof EditProfileCo) {
+                Log.d("DatabaseUpdateCreate.java", "Mise à jour des informations");
+                ((EditProfileCo) callingActivity).onQueryResult();
+            }
         }
         res = result;
     }
