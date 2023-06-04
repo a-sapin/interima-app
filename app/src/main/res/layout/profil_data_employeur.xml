@@ -38,31 +38,31 @@
 
             <TextView
                 android:id="@+id/textView38"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="Nom Entreprise : "
+                android:text="Nom de \nl'Entreprise : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView39"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="Nom d'un service/département : "
+                android:text="Nom \nservice /\ndépartement : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
             <TextView
                 android:id="@+id/textView40"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="Nom d'un sous service/ sous département : "
+                android:text="Nom \nsous-service / \nsous-département : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="Siret : "
+                android:text="N° SIRET : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView38"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView38" />
 
             <TextView
                 android:id="@+id/nomServiceView"
@@ -98,7 +98,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView39"
-                app:layout_constraintTop_toBottomOf="@+id/nomView" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView39" />
 
             <TextView
                 android:id="@+id/nomSousServiceView"
@@ -109,7 +109,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView40"
-                app:layout_constraintTop_toBottomOf="@+id/nomServiceView" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView40" />
 
             <TextView
                 android:id="@+id/siretView"
@@ -119,13 +119,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView41"
-                app:layout_constraintTop_toBottomOf="@+id/nomSousServiceView" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView41" />
 
             <Button
                 android:id="@+id/modifProfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginTop="50dp"
                 android:text="Modifier Profil"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,12 +136,12 @@
                 android:id="@+id/modifMdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginEnd="18dp"
                 android:text="Modifier MdP"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.592"
                 app:layout_constraintStart_toEndOf="@+id/modifProfil"
-                app:layout_constraintTop_toBottomOf="@+id/paiement" />
+                app:layout_constraintTop_toTopOf="@+id/modifProfil" />
 
             <TextView
                 android:id="@+id/textView50"
@@ -163,7 +163,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView50"
-                app:layout_constraintTop_toBottomOf="@+id/siretView" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView50" />
 
             <TextView
                 android:id="@+id/email1"
@@ -185,11 +185,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.276"
                 app:layout_constraintStart_toEndOf="@+id/email1"
-                app:layout_constraintTop_toBottomOf="@+id/name1" />
+                app:layout_constraintBottom_toBottomOf="@+id/email1" />
 
             <TextView
                 android:id="@+id/textView54"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
@@ -207,7 +207,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.276"
                 app:layout_constraintStart_toEndOf="@+id/textView54"
-                app:layout_constraintTop_toBottomOf="@+id/email_1" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView54" />
 
             <TextView
                 android:id="@+id/textView51"
@@ -231,7 +231,7 @@
 
             <TextView
                 android:id="@+id/textView55"
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
@@ -250,24 +250,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
             <TextView
-                android:id="@+id/textView57"
-                android:layout_width="80dp"
+                android:id="@+id/textView58"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="Liens : "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView56" />
-
-            <TextView
-                android:id="@+id/textView58"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="170dp"
                 android:text="Abonnement : "
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+                app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
             <TextView
                 android:id="@+id/textView59"
@@ -288,7 +278,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView51"
-                app:layout_constraintTop_toBottomOf="@+id/phone1" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView51" />
 
             <TextView
                 android:id="@+id/email2"
@@ -299,7 +289,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView53"
-                app:layout_constraintTop_toBottomOf="@+id/name2" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView53" />
 
             <TextView
                 android:id="@+id/phone2"
@@ -310,7 +300,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView55"
-                app:layout_constraintTop_toBottomOf="@+id/email2" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView55" />
 
             <TextView
                 android:id="@+id/adress"
@@ -321,28 +311,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView56"
-                app:layout_constraintTop_toBottomOf="@+id/phone2" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/links"
-                android:layout_width="260dp"
-                android:layout_height="148dp"
-                android:layout_marginTop="56dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.653"
-                app:layout_constraintStart_toEndOf="@+id/textView57"
-                app:layout_constraintTop_toBottomOf="@+id/adress" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView56" />
 
             <TextView
                 android:id="@+id/abo"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView58"
-                app:layout_constraintTop_toBottomOf="@+id/links" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView58" />
 
             <TextView
                 android:id="@+id/paiement"
@@ -353,7 +332,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.405"
                 app:layout_constraintStart_toEndOf="@+id/textView59"
-                app:layout_constraintTop_toBottomOf="@+id/abo" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView59" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

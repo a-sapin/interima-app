@@ -3,55 +3,57 @@ package stoil.loki.interim;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ProfileModifUti extends AppCompatActivity {
-
-    private TextView fname = findViewById(R.id.nomView);
-    private TextView name = findViewById(R.id.nomServiceView);
-    private TextView bd = findViewById(R.id.nomSousServiceView);
-    private TextView nat = findViewById(R.id.siretView);
-    private TextView email = findViewById(R.id.name1);
-    private TextView city = findViewById(R.id.email_1);
-    private TextView phone = findViewById(R.id.phone1);
+public class UpdateMdP extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil_data_uti);
+        setContentView(R.layout.update_mdp);
 
-        Button modif_profil = findViewById(R.id.modifProfil);
-        Button modif_mdp = findViewById(R.id.modifMdp);
+        Button update = findViewById(R.id.button12);
 
-        modif_profil.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), EditProfile.class);
-                view.getContext().startActivity(intent);
+
+                EditText mdp1E = findViewById(R.id.editTextTextPassword2);
+                String mdp1 = mdp1E.getText().toString();
+
+                EditText mdp2E = findViewById(R.id.editTextTextPassword3);
+                String mdp2 = mdp2E.getText().toString();
+
+                if (mdp1.equals(mdp2)) {
+                    Log.d("MdP.java", "debut connexion");
+                    DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 2);
+                    dbCo.setContext(getApplicationContext());
+                    String SQL = "UPDATE interima.utilisateur SET mdp='"+mdp1+"' WHERE id="+getInfoTokenID()+";";
+                    Log.d("UpdateMdP.java", "Requete :" + SQL);
+                    dbCo.setRequete(SQL);
+                    dbCo.execute("");
+                } else {
+                    Toast.makeText(getApplicationContext(), "Attention ! Les mots de passe ne sont pas identiques !", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-
-        modif_mdp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MdP.class);
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        // mettre les donnees en fonction de ce qui a été récup de la bdd
 
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -63,7 +65,7 @@ public class ProfileModifUti extends AppCompatActivity {
                         startActivity(intenth);
                         return true;
                     case R.id.favoris:
-                        if(((ProfileModifUti)menu.getContext()).getInfoTokenID() != null) {
+                        if(((UpdateMdP)menu.getContext()).getInfoTokenID() != null) {
                             Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
                             startActivity(intentf);
                             return true;
@@ -77,7 +79,7 @@ public class ProfileModifUti extends AppCompatActivity {
                         startActivity(intents);
                         return true;
                     case R.id.notifs:
-                        if(((ProfileModifUti)menu.getContext()).getInfoTokenID() != null) {
+                        if(((UpdateMdP)menu.getContext()).getInfoTokenID() != null) {
                             Intent intentn = new Intent(getApplicationContext(), Notifications.class);
                             startActivity(intentn);
                             return true;
@@ -96,7 +98,12 @@ public class ProfileModifUti extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
+    public void onQueryResult() {
+        Toast.makeText(this, "Mot de passe mis à jour", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        finish();
     }
 
     public ArrayList<String> getInfoToken() {
@@ -117,5 +124,4 @@ public class ProfileModifUti extends AppCompatActivity {
         ArrayList<String> info = getInfoToken();
         return info.get(0);
     }
-
 }

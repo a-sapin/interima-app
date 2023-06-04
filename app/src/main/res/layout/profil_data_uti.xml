@@ -12,7 +12,7 @@
         android:layout_height="62dp"
         android:background="@color/interima_light_blue"
         android:gravity="center"
-        android:text="Profil"
+        android:text="Profil Chercheur d'emploi"
         android:fontFamily="@font/bruno_ace_regular"
         android:textAlignment="center"
         android:textSize="20dp"
@@ -138,10 +138,9 @@
                 android:layout_height="wrap_content"
                 android:text="Modifier MdP"
                 android:layout_marginTop="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/modifProfil"
-                app:layout_constraintTop_toBottomOf="@+id/phone1" />
+                app:layout_constraintBottom_toBottomOf="@+id/modifProfil" />
 
             <TextView
                 android:id="@+id/textView50"
@@ -171,12 +170,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="50dp"
-                android:text="ville : "
+                android:text="Ville : "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
             <TextView
-                android:id="@+id/email_1"
+                android:id="@+id/city_1"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -207,7 +206,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toEndOf="@+id/textView54"
-                app:layout_constraintTop_toBottomOf="@+id/email_1" />
+                app:layout_constraintTop_toBottomOf="@+id/city_1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

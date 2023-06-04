@@ -97,8 +97,11 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
                                 if (ContextCompat.checkSelfPermission(view.getContext(), android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                                     Intent sendIntent = new Intent(Intent.ACTION_VIEW);
                                     sendIntent.setData(Uri.parse("sms:"));
-                                    String smsbody = "Partagé via Interima: TITRE, DATE, " +
-                                            "LIEN CV, LIEN LM";
+                                    String TITRE = apply.getOffertitle();
+                                    String LIENCV = apply.getLienCV();
+                                    String LIENLM = apply.getLienLM();
+                                    String smsbody = "Partagé via Interima: "+encodeString(TITRE)+
+                                            " (CV : "+encodeString(LIENCV)+"; LM : "+encodeString(LIENLM)+")";
                                     sendIntent.putExtra("sms_body", smsbody);
                                     view.getContext().startActivity(sendIntent);
                                 } else {
