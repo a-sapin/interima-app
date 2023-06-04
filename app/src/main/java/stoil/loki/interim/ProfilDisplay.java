@@ -44,10 +44,15 @@ public class ProfilDisplay extends AppCompatActivity {
         if(userrole != null) {
             if(userrole.equals("Employeur") || userrole.equals("Agence d'intérim")) {
                 profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifAg.class));
+                ic = ResourcesCompat.getDrawable(resources, R.drawable.crayon, null);
+                profils.add(new ItemProfil(id, "Modifier profil", ic, EditProfileCo.class));
                 ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
                 profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
+
             } else {
                 profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifUti.class));
+                ic = ResourcesCompat.getDrawable(resources, R.drawable.crayon, null);
+                profils.add(new ItemProfil(id, "Modifier profil", ic, EditProfile.class));
             }
             ic = ResourcesCompat.getDrawable(resources, R.drawable.recherche, null);
             profils.add(new ItemProfil(id, "Mes recherches", ic, SavedSearchDisplay.class));
