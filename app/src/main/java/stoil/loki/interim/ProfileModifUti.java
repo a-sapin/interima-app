@@ -38,7 +38,7 @@ public class ProfileModifUti extends AppCompatActivity {
         modif_profil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WhoAreYou.class);
+                Intent intent = new Intent(view.getContext(), EditProfile.class);
                 view.getContext().startActivity(intent);
             }
         });
