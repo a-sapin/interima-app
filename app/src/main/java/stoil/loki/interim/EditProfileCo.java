@@ -22,7 +22,7 @@ public class EditProfileCo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up_co);
+        setContentView(R.layout.edit_profile_co);
 
         //Button sign_in = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
@@ -93,7 +93,12 @@ public class EditProfileCo extends AppCompatActivity {
                     intent.putExtra("email2", email2);
                     intent.putExtra("tel2", tel2);
 
-                    view.getContext().startActivity(intent);
+                    //EMPLOYEUR TABLE HAS THE FOLLOWING ATTRIBUTES:
+                //nomEntreprise, nomServDept, nomSousSD, siret,
+                //nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse
+
+                    //view.getContext().startActivity(intent);
+                    
                 }
 
             }
