@@ -10,7 +10,7 @@
         android:layout_width="411dp"
         android:layout_height="62dp"
         android:background="@color/interima_light_blue"
-        android:text="Inscription Utilisateur"
+        android:text="Modification profil\nChercheur d'emploi"
         android:fontFamily="@font/bruno_ace_regular"
         android:textAlignment="center"
         android:gravity="center"
@@ -78,7 +78,7 @@
                 android:layout_marginTop="72dp"
                 android:text="Téléphone : "
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 
             <EditText
@@ -164,7 +164,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.59"
                 app:layout_constraintStart_toEndOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+                app:layout_constraintBottom_toBottomOf="@+id/textView19" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName"
@@ -185,7 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Suivant"
+                android:text="Appliquer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
