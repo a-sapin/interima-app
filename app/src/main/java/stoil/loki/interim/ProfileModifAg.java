@@ -45,7 +45,7 @@ public class ProfileModifAg extends AppCompatActivity {
         modif_profil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WhoAreYou.class);
+                Intent intent = new Intent(view.getContext(), EditProfileCo.class);
                 view.getContext().startActivity(intent);
             }
         });
