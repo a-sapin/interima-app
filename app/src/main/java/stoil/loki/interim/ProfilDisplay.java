@@ -48,7 +48,11 @@ public class ProfilDisplay extends AppCompatActivity {
                 profils.add(new ItemProfil(id, "Modifier profil", ic, EditProfileCo.class));
                 ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
                 profils.add(new ItemProfil(id, "Publier une offre", ic, CreateOffer.class));
-
+                if(userrole.equals("Agence d'intérim")) {
+                    ic = ResourcesCompat.getDrawable(resources, R.drawable.candidatures, null);
+                    profils.add(new ItemProfil(id, "Publier une offre depuis un fichier JSON",
+                            ic, UploadOffer.class));
+                }
             } else {
                 profils.add(new ItemProfil(id, "Mon profil", ic, ProfileModifUti.class));
                 ic = ResourcesCompat.getDrawable(resources, R.drawable.crayon, null);

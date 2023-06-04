@@ -23,16 +23,14 @@ import java.util.ArrayList;
 
 public class UpdateMdP extends AppCompatActivity {
 
-    private int userid_for_subscription;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.finishing_sign_up);
+        setContentView(R.layout.update_mdp);
 
-        Button sign_up = findViewById(R.id.button12);
+        Button update = findViewById(R.id.button12);
 
-        sign_up.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -42,36 +40,14 @@ public class UpdateMdP extends AppCompatActivity {
                 EditText mdp2E = findViewById(R.id.editTextTextPassword3);
                 String mdp2 = mdp2E.getText().toString();
 
-                // verification que les deux sont identiques
                 if (mdp1.equals(mdp2)) {
-
-                    // faire la demande de code de verification
-
                     Log.d("MdP.java", "debut connexion");
                     DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 2);
                     dbCo.setContext(getApplicationContext());
-
-                    Intent intent = getIntent();
-                    String role = intent.getStringExtra("role");
-
-                    String SQL = "";
-
-                    if (role.equals("chercheuremploi")) {
-                        SQL = "INSERT INTO interima.utilisateur (mdp, role) values ('"+mdp1+"', 'ChercheurEmploi');";
-                    } else if (role.equals("employeur")) {
-                        SQL = "INSERT INTO interima.utilisateur (mdp, role) values ('"+mdp1+"', 'Employeur');";
-                    } else if (role.equals("agenceinterim")) {
-                        SQL = "INSERT INTO interima.utilisateur (mdp, role) values ('"+mdp1+"', 'AgenceInterim');";
-                    } else if (role.equals("gestionnaire")) {
-                        SQL = "INSERT INTO interima.utilisateur (mdp, role) values ('"+mdp1+"', 'Gestionnaire');";
-                    }
-
-                    Log.d("MdP.java", "Requete :" + SQL);
-
+                    String SQL = "UPDATE interima.utilisateur SET mdp='"+mdp1+"' WHERE id="+getInfoTokenID()+";";
+                    Log.d("UpdateMdP.java", "Requete :" + SQL);
                     dbCo.setRequete(SQL);
                     dbCo.execute("");
-
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Attention ! Les mots de passe ne sont pas identiques !", Toast.LENGTH_SHORT).show();
                 }
@@ -124,124 +100,9 @@ public class UpdateMdP extends AppCompatActivity {
         });
     }
 
-    public void dataAddQuery(int id) {
-        Intent intent = getIntent();
-        String role = intent.getStringExtra("role");
-        Log.d("MdP.java", "debut query 2");
-
-        if (role.equals("chercheuremploi")) {
-
-            Log.d("MdP.java", "debut connexion pour query 2");
-            DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 0);
-            dbCo.setContext(getApplicationContext());
-
-            String nom = intent.getStringExtra("nom");
-            String prenom = intent.getStringExtra("prenom");
-            String email = intent.getStringExtra("email");
-            String nat = intent.getStringExtra("nat");
-            String tel = intent.getStringExtra("tel");
-            String city = intent.getStringExtra("city");
-            String dateNai = intent.getStringExtra("dateNai");
-
-            String SQL = "INSERT INTO interima.chercheuremploi (idUti, nom, prenom, email, nationalite, tel, ville) values ('"+id+"', '"+nom+"', '"+prenom+"', '"+email+"', '"+nat+"', '"+tel+"', '"+city+"');";
-
-            Log.d("MdP.java", "Requete :" + SQL);
-
-            dbCo.setRequete(SQL);
-            dbCo.execute("");
-
-            Intent home = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(home);
-            finish();
-
-        } else if (role.equals("employeur")) {
-
-            this.userid_for_subscription = id;
-
-            String email1 = intent.getStringExtra("email1");
-            String nomEntreprise = intent.getStringExtra("nomEntreprise");
-            String departement = intent.getStringExtra("departement");
-            String nom1 = intent.getStringExtra("nom1");
-            String telephone1 = intent.getStringExtra("telephone1");
-            String siret = intent.getStringExtra("siret");
-            String sousService = intent.getStringExtra("sousService");
-            String nom2 = intent.getStringExtra("nom2");
-            String email2 = intent.getStringExtra("email2");
-            String tel2 = intent.getStringExtra("tel2");
-            String adresse = intent.getStringExtra("adresse");
-
-            DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 1);
-            dbCo.setContext(getApplicationContext());
-
-            String SQL = "INSERT INTO interima.employeur (idUti, nomEntreprise, nomServDept, nomSousSD, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+departement+"', '"+sousService+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
-
-            Log.d("MdP.java", "Requete :" + SQL);
-
-            dbCo.setRequete(SQL);
-            dbCo.execute("");
-
-        } else if (role.equals("agenceinterim")) {
-
-            this.userid_for_subscription = id;
-
-            String email1 = intent.getStringExtra("email1");
-            String nomEntreprise = intent.getStringExtra("nomEntreprise");
-            String nom1 = intent.getStringExtra("nom1");
-            String telephone1 = intent.getStringExtra("telephone1");
-            String siret = intent.getStringExtra("siret");
-            String nom2 = intent.getStringExtra("nom2");
-            String email2 = intent.getStringExtra("email2");
-            String tel2 = intent.getStringExtra("tel2");
-            String adresse = intent.getStringExtra("adresse");
-
-            DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 1);
-            dbCo.setContext(getApplicationContext());
-
-            String SQL = "INSERT INTO agenceinterim (idUti, nomAgence, siret, nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse) values ('"+id+"', '"+nomEntreprise+"', '"+siret+"', '"+nom1+"', '"+nom2+"', '"+email1+"', '"+email2+"', '"+telephone1+"', '"+tel2+"', '"+adresse+"');";
-
-            Log.d("MdP.java", "Requete :" + SQL);
-
-            dbCo.setRequete(SQL);
-            dbCo.execute("");
-
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.Q)
-    public void dataForSubscriptionQuery() {
-        Intent intent = getIntent();
-        int idA = intent.getIntExtra("idA", 0);
-        String paiement = intent.getStringExtra("paiement");
-        Log.d("MdP.java", "debut query 3");
-        LocalDate expiration = LocalDate.now();
-        switch(idA) {
-            case 2:
-                expiration = expiration.plusMonths(1);
-                break;
-            case 3:
-                expiration = expiration.plusMonths(3);
-                break;
-            case 4:
-                expiration = expiration.plusMonths(6);
-                break;
-            case 5:
-                expiration = expiration.plusYears(1);
-                break;
-            case 6:
-                expiration = expiration.plusYears(100);
-                break;
-            default:
-                break;
-        }
-        DatabaseUpdateCreate<UpdateMdP> dbCo = new DatabaseUpdateCreate(UpdateMdP.this, 0);
-        dbCo.setContext(getApplicationContext());
-        String SQL = "INSERT INTO interima.souscription (idAbonnement, idUti, souscription, expiration, paiement) values ('"+idA+"', '"+userid_for_subscription+"', '"+LocalDate.now()+"', '"+expiration+"', '"+paiement+"');";
-        Log.d("MdP.java", "Requete :" + SQL);
-        dbCo.setRequete(SQL);
-        dbCo.execute("");
-
-        Intent signin = new Intent(getApplicationContext(), SignIn.class);
-        startActivity(signin);
+    public void onQueryResult() {
+        Toast.makeText(this, "Mot de passe mis à jour", Toast.LENGTH_SHORT).show();
+        onBackPressed();
         finish();
     }
 
