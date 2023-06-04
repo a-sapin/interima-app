@@ -25,63 +25,65 @@ public class EditProfileCo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_co);
 
-        //Button sign_in = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
 
         Intent intentp = getIntent();
-        String role = intentp.getStringExtra("role");
 
-        /*sign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SignIn.class);
-                view.getContext().startActivity(intent);
-            }
-        });*/
+        EditText email1E = findViewById(R.id.editTextTextEmailAddress2);
+        email1E.setText(intentp.getStringExtra("udEmail"));
+
+        EditText nomEntrepriseE = findViewById(R.id.editTextTextPersonName);
+        nomEntrepriseE.setText(intentp.getStringExtra("udNomEntreprise"));
+
+        EditText adresseE = findViewById(R.id.editTextTextPersonName2);
+        adresseE.setText(intentp.getStringExtra("udAdresse"));
+
+        EditText NomDepartementE = findViewById(R.id.editTextTextPostalAddress);
+        NomDepartementE.setText(intentp.getStringExtra("udNomServDept"));
+
+        EditText Nom1E = findViewById(R.id.editTextTextPersonName3);
+        Nom1E.setText(intentp.getStringExtra("udNom"));
+
+        EditText telephone1E = findViewById(R.id.editTextPhone2);
+        telephone1E.setText(intentp.getStringExtra("udTel"));
+
+        EditText siretE = findViewById(R.id.editTextNumber);
+        siretE.setText(intentp.getStringExtra("udSiret"));
+
+        EditText sousServiceE = findViewById(R.id.editTextTextPersonName5);
+        sousServiceE.setText(intentp.getStringExtra("udNomSousSD"));
+
+        EditText nom2E = findViewById(R.id.editTextTextPersonName6);
+        nom2E.setText(intentp.getStringExtra("udNom2"));
+
+        EditText email2E = findViewById(R.id.editTextTextPersonName7);
+        email2E.setText(intentp.getStringExtra("udEmail2"));
+
+        EditText tel2E = findViewById(R.id.editTextTextPersonName8);
+        tel2E.setText(intentp.getStringExtra("udTel2"));
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), GridAbonnement.class);
 
-                EditText email1E = findViewById(R.id.editTextTextEmailAddress2);
                 String email1 = email1E.getText().toString();
-
-                EditText nomEntrepriseE = findViewById(R.id.editTextTextPersonName);
                 String nomEntreprise = nomEntrepriseE.getText().toString();
-
-                EditText adresseE = findViewById(R.id.editTextTextPersonName2);
                 String adresse = adresseE.getText().toString();
-
-                EditText NomDepartementE = findViewById(R.id.editTextTextPostalAddress);
                 String NomDepartement = NomDepartementE.getText().toString();
-
-                EditText Nom1E = findViewById(R.id.editTextTextPersonName3);
                 String Nom1 = Nom1E.getText().toString();
-
-                EditText telephone1E = findViewById(R.id.editTextPhone2);
                 String telephone1 = telephone1E.getText().toString();
-
-                EditText siretE = findViewById(R.id.editTextNumber);
                 String siret = siretE.getText().toString();
-
-                EditText sousServiceE = findViewById(R.id.editTextTextPersonName5);
                 String sousService = sousServiceE.getText().toString();
-
-                EditText nom2E = findViewById(R.id.editTextTextPersonName6);
                 String nom2 = nom2E.getText().toString();
-
-                EditText email2E = findViewById(R.id.editTextTextPersonName7);
                 String email2 = email2E.getText().toString();
-
-                EditText tel2E = findViewById(R.id.editTextTextPersonName8);
                 String tel2 = tel2E.getText().toString();
 
                 if (nomEntreprise.isEmpty() || sousService.isEmpty() || NomDepartement.isEmpty() || siret.isEmpty() || Nom1.isEmpty() || email1.isEmpty() || telephone1.isEmpty() || adresse.isEmpty() ) {
                     Toast.makeText(getApplicationContext(), "Les champs obligatoires ne sont pas tous remplis", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    intent.putExtra("role", role);
+                    //intent.putExtra("role", role);
                     intent.putExtra("email1", email1);
                     intent.putExtra("departement", NomDepartement);
                     intent.putExtra("adresse", adresse);
@@ -102,7 +104,7 @@ public class EditProfileCo extends AppCompatActivity {
                     DatabaseUpdateCreate<EditProfileCo> dbCo = new DatabaseUpdateCreate(EditProfileCo.this, 0);
                     dbCo.setContext(getApplicationContext());
                     String USERid = getInfoTokenID();
-                    String SQL = "UPDATE interima.employeur SET nomEntreprise = '"+nomEntreprise+"', nomServDept = '"+NomDepartement+"', nomSousSD = '"+sousService+"', siret = '"+siret+"', nomC1 = '"+Nom1+"', nomC2 = '"+nom2+"', emailC1 = '"+email1+"', emailC2 = '"+email2+"', telC1 = '"+telephone1+"', telC2 = '"+tel2+"', adresse = '\"+tel+\"' WHERE idUti = "+USERid+";";
+                    String SQL = "UPDATE interima.employeur SET nomEntreprise = '"+nomEntreprise+"', nomServDept = '"+NomDepartement+"', nomSousSD = '"+sousService+"', siret = '"+siret+"', nomC1 = '"+Nom1+"', nomC2 = '"+nom2+"', emailC1 = '"+email1+"', emailC2 = '"+email2+"', telC1 = '"+telephone1+"', telC2 = '"+tel2+"', adresse = '"+adresse+"' WHERE idUti = "+USERid+";";
                     Log.d("EditProfile.java", "Requete :" + SQL);
                     dbCo.setRequete(SQL);
                     dbCo.execute("");

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,9 @@ public class ProfileModifAg extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profil_data_uti);
+        setContentView(R.layout.profil_data_employeur);
+
+        Intent intentp = getIntent();
 
         TextView co_name = findViewById(R.id.nomView);
         TextView name_service = findViewById(R.id.nomServiceView);
@@ -35,8 +38,18 @@ public class ProfileModifAg extends AppCompatActivity {
         TextView email2 = findViewById(R.id.email2);
         TextView phone2 = findViewById(R.id.phone2);
         TextView adress = findViewById(R.id.adress);
-        TextView abo = findViewById(R.id.abo);
-        TextView paiement = findViewById(R.id.paiement);
+
+        email1.setText(intentp.getStringExtra("udEmail"));
+        co_name.setText(intentp.getStringExtra("udNomEntreprise"));
+        adress.setText(intentp.getStringExtra("udAdresse"));
+        name_service.setText(intentp.getStringExtra("udNomServDept"));
+        name1.setText(intentp.getStringExtra("udNom"));
+        phone1.setText(intentp.getStringExtra("udTel"));
+        siret.setText(intentp.getStringExtra("udSiret"));
+        name_s_service.setText(intentp.getStringExtra("udNomSousSD"));
+        name2.setText(intentp.getStringExtra("udNom2"));
+        email2.setText(intentp.getStringExtra("udEmail2"));
+        phone2.setText(intentp.getStringExtra("udTel2"));
 
         Button modif_profil = findViewById(R.id.modifProfil);
         Button modif_mdp = findViewById(R.id.modifMdp);
@@ -52,7 +65,7 @@ public class ProfileModifAg extends AppCompatActivity {
         modif_mdp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MdP.class);
+                Intent intent = new Intent(view.getContext(), UpdateMdP.class);
                 view.getContext().startActivity(intent);
             }
         });
