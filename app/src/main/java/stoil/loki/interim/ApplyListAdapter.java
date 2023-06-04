@@ -65,7 +65,7 @@ public class ApplyListAdapter extends RecyclerView.Adapter<ApplyListAdapter.View
             @Override
             public void onClick(View view) {
                 System.out.println(holder.getInfoTokenRole(view));
-                if(holder.getInfoTokenRole(view).equals("Employeur")) {
+                if(holder.getInfoTokenRole(view).equals("Employeur") || holder.getInfoTokenRole(view).equals("Agence d'intérim")) {
                     Intent intent = new Intent(view.getContext(), ApplyListAg.class);
                     intent.putExtra("lienCV", encodeString(apply.getLienCV()));
                     intent.putExtra("lienLM", encodeString(apply.getLienLM()));

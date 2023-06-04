@@ -104,7 +104,7 @@ public class ListingUserData<T> extends AsyncTask<String, Void, String> {
             }
             if(role.equals("Agence d'intérim")) {
                 while(rs.next()) {
-                    String nomEntreprise = rs.getString("nomEntreprise");
+                    String nomEntreprise = rs.getString("nomAgence");
                     String siret = rs.getString("siret");
                     String nomC1 = rs.getString("nomC1");
                     String emailC1 = rs.getString("emailC1");

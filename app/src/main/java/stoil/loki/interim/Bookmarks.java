@@ -137,7 +137,7 @@ public class Bookmarks extends AppCompatActivity {
             } else {
                 TextView tv = (TextView) findViewById(R.id.textView);
                 tv.setText("Vos annonces publiées");
-                dbCo.setRequete("SELECT * FROM interima.offre WHERE offre.idEmp="+getInfoTokenID()+");");
+                dbCo.setRequete("SELECT * FROM interima.offre WHERE offre.idEmp="+getInfoTokenID()+";");
             }
             dbCo.execute("");
         }

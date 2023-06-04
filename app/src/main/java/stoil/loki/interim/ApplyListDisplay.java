@@ -123,7 +123,7 @@ public class ApplyListDisplay extends AppCompatActivity {
         if(this.getInfoTokenRole().equals("Chercheur d'emploi")) {
             dbCo.setRequete("Select * from interima.candidature where idUti = '"+ getInfoTokenID() +"';");
         } else {
-            dbCo.setRequete("Select * from interima.candidature where id IN (SELECT idOffre from interima.candidatureoffre WHERE idOffre IN (SELECT id from interima.offre WHERE idEmp='"+ getInfoTokenID() +"'));");
+            dbCo.setRequete("Select * from interima.candidature where id IN (SELECT idCandidature from interima.candidatureoffre WHERE idOffre IN (SELECT id from interima.offre WHERE idEmp='"+ getInfoTokenID() +"'));");
         }
         dbCo.execute("");
     }

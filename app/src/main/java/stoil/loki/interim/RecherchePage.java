@@ -166,7 +166,7 @@ public class RecherchePage extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.offersList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        if(getInfoToken() != null) {
+        if(getInfoTokenID() != null) {
             if(getInfoTokenRole().equals("Chercheur d'emploi")) {
                 ListingBookmarkedIds<RecherchePage> dbCo = new ListingBookmarkedIds<>(RecherchePage.this);
                 dbCo.setContext(getApplicationContext());

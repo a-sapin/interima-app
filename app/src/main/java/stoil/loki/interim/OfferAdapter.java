@@ -99,38 +99,42 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> 
                 Drawable marque = ResourcesCompat.getDrawable(resources, R.drawable.marque_page, null);
                 Drawable marque_vide = ResourcesCompat.getDrawable(resources, R.drawable.marque_page_vide, null);
 
-                if(value.get(0).equals("Chercheur d'emploi")) {
-                    if(imageDrawable.getConstantState().equals(marque.getConstantState()) && id != -1) {
-                        holder.bookmark.setImageDrawable(marque_vide);
+                if(value.get(1) != null) {
+                    if(value.get(0).equals("Chercheur d'emploi")) {
+                        if(imageDrawable.getConstantState().equals(marque.getConstantState()) && id != -1) {
+                            holder.bookmark.setImageDrawable(marque_vide);
 
-                        Log.d("OfferAdapter.java", "debut connexion");
-                        DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
-                        dbCo.setContext(view.getContext());
+                            Log.d("OfferAdapter.java", "debut connexion");
+                            DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
+                            dbCo.setContext(view.getContext());
 
-                        String SQL = "DELETE FROM interima.favori where idUti = '"+id+"' and idOffre = '"+annonces.get(position).getId()+"';";
+                            String SQL = "DELETE FROM interima.favori where idUti = '"+id+"' and idOffre = '"+annonces.get(position).getId()+"';";
 
-                        Log.d("OfferAdapter.java", "Requete :" + SQL);
+                            Log.d("OfferAdapter.java", "Requete :" + SQL);
 
-                        dbCo.setRequete(SQL);
-                        dbCo.execute("");
+                            dbCo.setRequete(SQL);
+                            dbCo.execute("");
 
-                    } else if (id != -1){
-                        holder.bookmark.setImageDrawable(marque);
+                        } else if (id != -1){
+                            holder.bookmark.setImageDrawable(marque);
 
-                        Log.d("OfferAdapter.java", "debut connexion");
-                        DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
-                        dbCo.setContext(view.getContext());
+                            Log.d("OfferAdapter.java", "debut connexion");
+                            DatabaseUpdateCreate<OfferAdapter> dbCo = new DatabaseUpdateCreate(OfferAdapter.this, 1);
+                            dbCo.setContext(view.getContext());
 
-                        String SQL = "INSERT INTO interima.favori (idUti, idOffre) values ('"+id+"', '"+annonces.get(position).getId()+"');";
+                            String SQL = "INSERT INTO interima.favori (idUti, idOffre) values ('"+id+"', '"+annonces.get(position).getId()+"');";
 
-                        Log.d("OfferAdapter.java", "Requete :" + SQL);
+                            Log.d("OfferAdapter.java", "Requete :" + SQL);
 
-                        dbCo.setRequete(SQL);
-                        dbCo.execute("");
+                            dbCo.setRequete(SQL);
+                            dbCo.execute("");
 
+                        }
+                    } else {
+                        Toast.makeText(view.getContext(), "Vous n'êtes pas autorisé à faire ça.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(view.getContext(), "Vous n'êtes pas autorisé à faire ça.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Connectez-vous pour effectuer cette action.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
