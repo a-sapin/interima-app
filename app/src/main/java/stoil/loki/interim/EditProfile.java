@@ -42,7 +42,7 @@ public class EditProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up);
+        setContentView(R.layout.sign_up2);
 
         //Button connect = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
@@ -100,8 +100,8 @@ public class EditProfile extends AppCompatActivity {
                 Spinner natE = findViewById(R.id.spinner);
                 String nat = natE.getSelectedItem().toString();
 
-                EditText dateNai = findViewById(R.id.editTextDate);
-                String dateString = dateNai.getText().toString();
+                //EditText dateNai = findViewById(R.id.editTextDate);
+                //String dateString = dateNai.getText().toString();
 
                 EditText telephoneE = findViewById(R.id.editTextPhone);
                 String tel = telephoneE.getText().toString();
@@ -112,16 +112,15 @@ public class EditProfile extends AppCompatActivity {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 try {
-                    LocalDate date = LocalDate.parse(dateString, formatter);
 
-                    if (date != null && !email.equals("") && !nom.equals("") && !prenom.equals("") && !nat.equals("") && !tel.equals("") && !city.equals("")){
+                    if (!email.equals("") && !nom.equals("") && !prenom.equals("") && !nat.equals("") && !tel.equals("") && !city.equals("")){
 
                         //si tous les champs sont remplis (un chercheur d emploi doit tout renseigner)
                         Intent intent = new Intent(view.getContext(), MdP.class);
 
                         intent.putExtra("role", "chercheuremploi");
 
-                        intent.putExtra("dateNai", date);
+                        //intent.putExtra("dateNai", date);
                         intent.putExtra("email", email);
                         intent.putExtra("nom", nom);
                         intent.putExtra("prenom", prenom);
