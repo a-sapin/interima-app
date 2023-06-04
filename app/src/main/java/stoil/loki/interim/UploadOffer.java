@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,17 +19,24 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UploadOffer extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
     private String handledfile;
+    private String handledfile_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +55,37 @@ public class UploadOffer extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Behavior to send data
-                //Use JSONReader
+                TextView jsoncontent = (TextView) findViewById(R.id.jsoncontent);
+                String toread = jsoncontent.getText().toString();
+                try {
+                    JSONObject offerinfo = new JSONObject(toread);
+                    if(jsonFieldChecker(offerinfo)) {
+                        String titre = offerinfo.getString("titre");
+                        String debut = offerinfo.getString("debut");
+                        String fin = offerinfo.getString("fin");
+                        String source = offerinfo.getString("source");
+                        float salaire = (float) offerinfo.getDouble("salaire");
+                        double longitude = offerinfo.getDouble("longitude");
+                        double latitude = offerinfo.getDouble("latitude");
+                        String image = offerinfo.getString("image");
+                        String description = offerinfo.getString("description");
+                        if(isDateFormatCorrect(debut) && isDateFormatCorrect(fin)) {
+                            DatabaseUpdateCreate<UploadOffer> dbCo = new DatabaseUpdateCreate<>(UploadOffer.this, 1);
+                            dbCo.setContext(getApplicationContext());
+                            String SQL = "INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description) values ('"+getInfoTokenID()+"', '"+titre+"', '2023-05-01', '2023-06-02', '"+debut+"', '"+fin+"', '"+source+"', '"+salaire+"', '"+latitude+"', '"+longitude+"', '"+image+"', '"+description+"');";
+                            Log.d("UploadOffer.java", "Requete :" + SQL);
+                            dbCo.setRequete(SQL);
+                            dbCo.execute("");
+                        } else {
+                            Toast.makeText(UploadOffer.this, "Format de date invalide", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(UploadOffer.this, "Format de fichier JSON invalide", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(UploadOffer.this, "Une erreur est survenue lors de l'envoi.", Toast.LENGTH_SHORT).show();
+                    Log.e("UploadOffer.upload.onClick", "JSONException");
+                }
             }
         });
 
@@ -97,6 +134,13 @@ public class UploadOffer extends AppCompatActivity {
         });
     }
 
+    public void onQueryResult() {
+        Toast.makeText(UploadOffer.this, "Annonce publiée", Toast.LENGTH_SHORT).show();
+        Intent intentf = new Intent(getApplicationContext(), Bookmarks.class);
+        startActivity(intentf);
+        finish();
+    }
+
     private void openFileBrowser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/json");
@@ -126,10 +170,33 @@ public class UploadOffer extends AppCompatActivity {
                 this.handledfile = returnCursor.getString(nameIndex);
                 TextView jsoncontent = (TextView) findViewById(R.id.jsoncontent);
                 jsoncontent.setText(stringBuilder.toString());
+                this.handledfile_path = trimFilePath(uri.getPath());
+                //System.out.println(this.handledfile_path);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                Log.e("UploadOffer.onActivityResult", "IOException");
             }
         }
+    }
+
+    private String trimFilePath(String filepath) {
+        String trimmed_fp = "";
+        Pattern p = Pattern.compile(":(.+)");
+        Matcher m = p.matcher(filepath);
+        while(m.find()) {
+            trimmed_fp = m.group(1);
+        }
+        return trimmed_fp;
+    }
+
+    private boolean isDateFormatCorrect(String date) {
+        return Pattern.matches("\\d{4}-\\d{2}-\\d{2}", date);
+    }
+
+    private boolean jsonFieldChecker(JSONObject file) {
+        return file.has("titre") && file.has("debut") && file.has("fin")
+                && file.has("source") && file.has("salaire")
+                && file.has("longitude") && file.has("latitude")
+                && file.has("image") && file.has("description");
     }
 
     public ArrayList<String> getInfoToken() {

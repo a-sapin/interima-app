@@ -213,13 +213,9 @@ public class CreateOffer extends AppCompatActivity {
         dbCo = new DatabaseUpdateCreate<>(CreateOffer.this, 1);
         dbCo.setContext(getApplicationContext());
 
-        String SQL;
-        //SQL = "SELECT mdp FROM interima.utilisateur WHERE id IN (SELECT idUti FROM interima.gestionnaire WHERE email = '"+email.getText().toString()+"');";
-        SQL = "INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description) values ('"+getInfoTokenID()+"', '"+titre+"', '2023-05-01', '2023-06-02', '"+datedeb+"', '"+datefin+"', '"+urlsource+"', '77.5', '"+geolat+"', '"+geolong+"', '"+urlimg+"', '"+description+"');";
-
+        String SQL = "INSERT INTO offre (idEmp, titre, publication, fermeture, debut, fin, url, salaire, geolat, geolong, img, description) values ('"+getInfoTokenID()+"', '"+titre+"', '2023-05-01', '2023-06-02', '"+datedeb+"', '"+datefin+"', '"+urlsource+"', '77.5', '"+geolat+"', '"+geolong+"', '"+urlimg+"', '"+description+"');";
 
         Log.d("CreateOffer.java", "Requete :" + SQL);
-
         dbCo.setRequete(SQL);
         dbCo.execute("");
 
