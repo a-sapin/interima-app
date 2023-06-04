@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class EditProfileCo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up_co);
+        setContentView(R.layout.edit_profile_co);
 
         //Button sign_in = findViewById(R.id.button11);
         Button next = findViewById(R.id.button10);
@@ -93,7 +94,26 @@ public class EditProfileCo extends AppCompatActivity {
                     intent.putExtra("email2", email2);
                     intent.putExtra("tel2", tel2);
 
-                    view.getContext().startActivity(intent);
+                    //EMPLOYEUR TABLE HAS THE FOLLOWING ATTRIBUTES:
+                //nomEntreprise, nomServDept, nomSousSD, siret,
+                //nomC1, nomC2, emailC1, emailC2, telC1, telC2, adresse
+
+                    //view.getContext().startActivity(intent);
+                    DatabaseUpdateCreate<EditProfileCo> dbCo = new DatabaseUpdateCreate(EditProfileCo.this, 0);
+                    dbCo.setContext(getApplicationContext());
+                    String USERid = getInfoTokenID();
+                    String SQL = "UPDATE interima.employeur SET nomEntreprise = '"+nomEntreprise+"', nomServDept = '"+NomDepartement+"', nomSousSD = '"+sousService+"', siret = '"+siret+"', nomC1 = '"+Nom1+"', nomC2 = '"+nom2+"', emailC1 = '"+email1+"', emailC2 = '"+email2+"', telC1 = '"+telephone1+"', telC2 = '"+tel2+"', adresse = '\"+tel+\"' WHERE idUti = "+USERid+";";
+                    Log.d("EditProfile.java", "Requete :" + SQL);
+                    dbCo.setRequete(SQL);
+                    dbCo.execute("");
+
+                    Toast.makeText(getApplicationContext(), "Vos informations ont bien été modifiées!", Toast.LENGTH_SHORT).show();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    finish();
                 }
 
             }
