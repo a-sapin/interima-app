@@ -138,6 +138,10 @@ public class EditProfile extends AppCompatActivity {
                         dbCo.setRequete(SQL);
                         dbCo.execute("");
 
+                        Toast.makeText(getApplicationContext(), "Vos informations ont bien été modifiées!", Toast.LENGTH_SHORT).show();
+                        Thread.sleep(300);
+                        finish();
+
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();
@@ -147,6 +151,8 @@ public class EditProfile extends AppCompatActivity {
                     // Gestion de l'exception en cas de format de date incorrect
                     Toast.makeText(getApplicationContext(), "Format de date incorrect. Veuillez utiliser le format dd/MM/yyyy.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
 
             }
