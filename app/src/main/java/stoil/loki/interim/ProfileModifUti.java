@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +26,19 @@ public class ProfileModifUti extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_data_uti);
 
+        Intent intent = getIntent();
+
         TextView fname = findViewById(R.id.nomView);
         TextView name = findViewById(R.id.nomServiceView);
-        TextView bd = findViewById(R.id.nomSousServiceView);
         TextView nat = findViewById(R.id.siretView);
         TextView email = findViewById(R.id.name1);
-        TextView city = findViewById(R.id.email_1);
         TextView phone = findViewById(R.id.phone1);
+
+        fname.setText(intent.getStringExtra("udNom"));
+        name.setText(intent.getStringExtra("udPrenom"));
+        nat.setText(intent.getStringExtra("udNat"));
+        email.setText(intent.getStringExtra("udEmail"));
+        phone.setText(intent.getStringExtra("udTel"));
 
         Button modif_profil = findViewById(R.id.modifProfil);
         Button modif_mdp = findViewById(R.id.modifMdp);
@@ -46,7 +54,7 @@ public class ProfileModifUti extends AppCompatActivity {
         modif_mdp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MdP.class);
+                Intent intent = new Intent(view.getContext(), UpdateMdP.class);
                 view.getContext().startActivity(intent);
             }
         });

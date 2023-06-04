@@ -11,15 +11,16 @@ import java.io.Serializable;
 public class ItemProfil implements Serializable {
     private int id;
     private String title;
-
     private Drawable icon;
     private Class intent;
+    private UserData ud;
 
-    public ItemProfil(int id, String title, Drawable icon, Class intent) {
+    public ItemProfil(int id, String title, Drawable icon, Class intent, UserData ud) {
         this.id = id;
         this.title = title;
         this.icon = icon;
         this.intent = intent;
+        this.ud = ud;
     }
 
     public ItemProfil(Context context) {
@@ -45,4 +46,7 @@ public class ItemProfil implements Serializable {
 
     public Class getIntentClass() {return intent;}
 
+    public UserData getUd() {
+        return ud;
+    }
 }

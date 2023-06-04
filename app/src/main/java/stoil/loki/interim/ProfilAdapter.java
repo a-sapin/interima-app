@@ -68,6 +68,48 @@ public class ProfilAdapter extends RecyclerView.Adapter<ProfilAdapter.ViewHolder
                     Context context = v.getContext();
                     Intent intent = new Intent(context, itemProfil.get(getAdapterPosition()).getIntentClass());
                     intent.putExtra("item_id", itemProfil.get(getAdapterPosition()).getId());
+                    UserData currentud = itemProfil.get(getAdapterPosition()).getUd();
+                    if(currentud != null) {
+                        if(currentud.getNom() != null) {
+                            intent.putExtra("udNom", currentud.getNom());
+                        }
+                        if(currentud.getPrenom() != null) {
+                            intent.putExtra("udPrenom", currentud.getPrenom());
+                        }
+                        if(currentud.getEmail() != null) {
+                            intent.putExtra("udEmail", currentud.getEmail());
+                        }
+                        if(currentud.getNat() != null) {
+                            intent.putExtra("udNat", currentud.getNat());
+                        }
+                        if(currentud.getTel() != null) {
+                            intent.putExtra("udTel", currentud.getTel());
+                        }
+                        if(currentud.getNomServDept() != null) {
+                            intent.putExtra("udNomServDept", currentud.getNomServDept());
+                        }
+                        if(currentud.getNomSousSD() != null) {
+                            intent.putExtra("udNomSousSD", currentud.getNomSousSD());
+                        }
+                        if(currentud.getSiret() != null) {
+                            intent.putExtra("udSiret", currentud.getSiret());
+                        }
+                        if(currentud.getNom2() != null) {
+                            intent.putExtra("udNom2", currentud.getNom2());
+                        }
+                        if(currentud.getEmail2() != null) {
+                            intent.putExtra("udEmail2", currentud.getEmail2());
+                        }
+                        if(currentud.getTel2() != null) {
+                            intent.putExtra("udTel2", currentud.getTel2());
+                        }
+                        if(currentud.getAdresse() != null) {
+                            intent.putExtra("udAdresse", currentud.getAdresse());
+                        }
+                        if(currentud.getNomEntreprise() != null) {
+                            intent.putExtra("udNomEntreprise", currentud.getNomEntreprise());
+                        }
+                    }
                     context.startActivity(intent);
                 }
             });

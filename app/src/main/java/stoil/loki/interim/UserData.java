@@ -2,7 +2,7 @@ package stoil.loki.interim;
 
 public class UserData {
 
-    private String nom, prenom, email, nat, tel, nomServDept, nomSousSD, siret, nom2, email2, tel2, adresse;
+    private String nom, prenom, email, nat, tel, nomServDept, nomSousSD, siret, nom2, email2, tel2, adresse, nomEntreprise;
 
     // Pour chercheur d'emploi
     public UserData(String nom, String prenom, String email, String nat, String tel) {
@@ -14,7 +14,7 @@ public class UserData {
     }
 
     // Pour employeur
-    public UserData(String nom, String email, String tel, String nomServDept, String nomSousSD, String siret, String nom2, String email2, String tel2, String adresse) {
+    public UserData(String nom, String email, String tel, String nomServDept, String nomSousSD, String siret, String nom2, String email2, String tel2, String adresse, String nomEntreprise) {
         this.nom = nom;
         this.email = email;
         this.tel = tel;
@@ -25,10 +25,11 @@ public class UserData {
         this.email2 = email2;
         this.tel2 = tel2;
         this.adresse = adresse;
+        this.nomEntreprise = nomEntreprise;
     }
 
     // Pour agence d'intérim
-    public UserData(String nom, String email, String tel, String siret, String nom2, String email2, String tel2, String adresse) {
+    public UserData(String nom, String email, String tel, String siret, String nom2, String email2, String tel2, String adresse, String nomEntreprise) {
         this.nom = nom;
         this.email = email;
         this.tel = tel;
@@ -37,6 +38,7 @@ public class UserData {
         this.email2 = email2;
         this.tel2 = tel2;
         this.adresse = adresse;
+        this.nomEntreprise = nomEntreprise;
     }
 
     public String getNom() {
@@ -133,5 +135,13 @@ public class UserData {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public String getNomEntreprise() {
+        return nomEntreprise;
+    }
+
+    public void setNomEntreprise(String nomEntreprise) {
+        this.nomEntreprise = nomEntreprise;
     }
 }

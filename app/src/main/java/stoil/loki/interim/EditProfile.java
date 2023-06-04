@@ -49,7 +49,21 @@ public class EditProfile extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String role = intent.getStringExtra("role");
+        EditText emailE = findViewById(R.id.editTextTextEmailAddress2);
+        emailE.setText(intent.getStringExtra("udEmail"));
+
+        EditText nomE = findViewById(R.id.editTextTextPersonName);
+        nomE.setText(intent.getStringExtra("udNom"));
+
+        EditText prenomE = findViewById(R.id.editTextTextPersonName2);
+        prenomE.setText(intent.getStringExtra("udPrenom"));
+
+        Spinner natE = findViewById(R.id.spinner);
+
+        EditText telephoneE = findViewById(R.id.editTextPhone);
+        telephoneE.setText(intent.getStringExtra("udTel"));
+
+        EditText cityE = findViewById(R.id.editTextTextPersonName4);
 
         try {
             InputStream inputStream = getAssets().open("nationalites.json");
@@ -73,6 +87,7 @@ public class EditProfile extends AppCompatActivity {
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nationalities);
             nat.setAdapter(adapter);
+            natE.setSelection(selectItemFromString(intent.getStringExtra("udNat"), nationalities));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -85,27 +100,11 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // recuperation de toutes les informations entrées
-
-                EditText emailE = findViewById(R.id.editTextTextEmailAddress2);
                 String email = emailE.getText().toString();
-
-                EditText nomE = findViewById(R.id.editTextTextPersonName);
                 String nom = nomE.getText().toString();
-
-                EditText prenomE = findViewById(R.id.editTextTextPersonName2);
                 String prenom = prenomE.getText().toString();
-
-                Spinner natE = findViewById(R.id.spinner);
                 String nat = natE.getSelectedItem().toString();
-
-                //EditText dateNai = findViewById(R.id.editTextDate);
-                //String dateString = dateNai.getText().toString();
-
-                EditText telephoneE = findViewById(R.id.editTextPhone);
                 String tel = telephoneE.getText().toString();
-
-                EditText cityE = findViewById(R.id.editTextTextPersonName4);
                 String city = cityE.getText().toString();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -120,12 +119,12 @@ public class EditProfile extends AppCompatActivity {
                         intent.putExtra("role", "chercheuremploi");
 
                         //intent.putExtra("dateNai", date);
-                        intent.putExtra("email", email);
-                        intent.putExtra("nom", nom);
-                        intent.putExtra("prenom", prenom);
-                        intent.putExtra("nat", nat);
-                        intent.putExtra("tel", tel);
-                        intent.putExtra("city", city);
+                        intent.putExtra("udEmail", email);
+                        intent.putExtra("udNom", nom);
+                        intent.putExtra("udPrenom", prenom);
+                        intent.putExtra("udNat", nat);
+                        intent.putExtra("udTel", tel);
+                        //intent.putExtra("udCity", city);
 
                         //view.getContext().startActivity(intent);
 
@@ -140,7 +139,6 @@ public class EditProfile extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Vos informations ont bien été modifiées!", Toast.LENGTH_SHORT).show();
                         Thread.sleep(300);
                         finish();
-
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();
@@ -203,11 +201,25 @@ public class EditProfile extends AppCompatActivity {
 
     }
 
+    public void onQueryResult() {
+        Toast.makeText(getApplicationContext(), "Vos informations ont bien été modifiées!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         BottomNavigationView menu = findViewById(R.id.navigation);
         menu.getMenu().findItem(R.id.profil).setChecked(true);
+    }
+
+    public int selectItemFromString(String string_item, List<String> nats) {
+        for(int i = 0; i < nats.size(); i++) {
+            if(nats.get(i).equals(string_item)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public ArrayList<String> getInfoToken() {
