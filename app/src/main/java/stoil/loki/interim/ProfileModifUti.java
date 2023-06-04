@@ -19,18 +19,18 @@ import java.util.ArrayList;
 
 public class ProfileModifUti extends AppCompatActivity {
 
-    private TextView fname = findViewById(R.id.nomView);
-    private TextView name = findViewById(R.id.nomServiceView);
-    private TextView bd = findViewById(R.id.nomSousServiceView);
-    private TextView nat = findViewById(R.id.siretView);
-    private TextView email = findViewById(R.id.name1);
-    private TextView city = findViewById(R.id.email_1);
-    private TextView phone = findViewById(R.id.phone1);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_data_uti);
+
+        TextView fname = findViewById(R.id.nomView);
+        TextView name = findViewById(R.id.nomServiceView);
+        TextView bd = findViewById(R.id.nomSousServiceView);
+        TextView nat = findViewById(R.id.siretView);
+        TextView email = findViewById(R.id.name1);
+        TextView city = findViewById(R.id.email_1);
+        TextView phone = findViewById(R.id.phone1);
 
         Button modif_profil = findViewById(R.id.modifProfil);
         Button modif_mdp = findViewById(R.id.modifMdp);

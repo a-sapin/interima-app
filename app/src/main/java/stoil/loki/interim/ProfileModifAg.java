@@ -35,7 +35,6 @@ public class ProfileModifAg extends AppCompatActivity {
         TextView email2 = findViewById(R.id.email2);
         TextView phone2 = findViewById(R.id.phone2);
         TextView adress = findViewById(R.id.adress);
-        TextView links = findViewById(R.id.links);
         TextView abo = findViewById(R.id.abo);
         TextView paiement = findViewById(R.id.paiement);
 
