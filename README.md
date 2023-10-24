@@ -1,6 +1,11 @@
 # Application Intérima
-ip = interima.ddns.net
-port = 3306
+**Authors** :
+  - [Arthur Sapin](https://github.com/a-sapin)
+  - [Lorenzo Puccio](https://gitlab.com/StOil-L)
+  - [Océane Ongaro](https://github.com/AlyssaShep)
+
+_ip = interima.ddns.net
+port = 3306_
 
 
 ## Description
