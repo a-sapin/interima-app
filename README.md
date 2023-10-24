@@ -11,6 +11,6 @@ La base de données distante était hébergée sur un nano-ordinateur *Raspberry
 
 
 ### Connectique
-_ip = interima.ddns.net
+_ip = interima.ddns.net_
 
-port = 3306_
+_port = 3306_
