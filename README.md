@@ -13,7 +13,7 @@ La base de données distante était hébergée sur un nano-ordinateur *Raspberry
 
 This project was carried out for academia at the University of Montpellier, during my first wear as a Software Engineering Masters Degree student.
 
-It was developed as part of an assignment for (hai811i)[https://mcc.umontpellier.fr/?q=node/63768].
+It was developed as part of an assignment for [hai811i](https://mcc.umontpellier.fr/?q=node/63768).
 Interima is an Android app built for the browsing, application and management of temping offers. Its backend is a MySQL image deployed on a Raspberry Pi 4 with Docker.
 
 ## Features
